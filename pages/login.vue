@@ -1,36 +1,24 @@
 <script setup lang="ts">
 import { ref, onBeforeMount } from "vue";
 import { useRouter } from "vue-router";
-import { useAuthStore } from "../store/auth";
 
-const { status, data, signIn, signOut } = useAuth();
-
-console.log(status.value, data.value);
+const { signIn, status, data } = useAuth();
 
 const router = useRouter();
-const authStore = useAuthStore();
-
-definePageMeta({
-  middleware: [
-    function (to, from) {
-      // Custom inline middleware
-    },
-    "auth",
-  ],
-});
 
 const form = ref({
-  email: "mala.ut.29@gmail.com",
+  username: "mala.ut.29@gmail.com",
   password: "password",
+  callbackUrl: "/",
 });
 
 const onSubmit = async () => {
   try {
-    // const token = await authStore.login(form.value);
     // localStorage.setItem("token", token);
-    // router.replace("/");
 
-    await signIn();
+    await signIn("credentials", form.value);
+
+    // await signOut();
   } catch (err) {
     console.error(err);
   }
@@ -60,7 +48,7 @@ const onSubmit = async () => {
                 autocomplete="email"
                 required
                 class="block w-full px-4 py-2 border border-black"
-                v-model="form.email"
+                v-model="form.username"
               />
             </div>
           </div>

@@ -16,4 +16,7 @@ export default defineNuxtConfig({
     plugins: ["~/server/index.ts"],
   },
   modules: ["@pinia/nuxt", "@sidebase/nuxt-auth"],
+  auth: {
+    globalAppMiddleware: true,
+  },
 });

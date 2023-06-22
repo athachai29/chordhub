@@ -2,40 +2,43 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { NuxtAuthHandler } from "#auth";
 
 export default NuxtAuthHandler({
+  pages: {
+    // Change the default behavior to use `/login` as the path for the sign-in page
+    signIn: "/login",
+  },
   // your authentication configuration here!
   secret: "your-secret-here",
   providers: [
     // @ts-ignore Import is exported on .default during SSR, so we need to call it this way. May be fixed via Vite at some point
     CredentialsProvider.default({
       // The name to display on the sign in form (e.g. 'Sign in with...')
-      name: "Credentials",
-      // The credentials is used to generate a suitable form on the sign in page.
-      // You can specify whatever fields you are expecting to be submitted.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
-      credentials: {
-        username: {
-          label: "Username",
-          type: "text",
-          placeholder: "(hint: jsmith)",
-        },
-        password: {
-          label: "Password",
-          type: "password",
-          placeholder: "(hint: hunter2)",
-        },
-      },
+      // name: "Credentials",
+      // // The credentials is used to generate a suitable form on the sign in page.
+      // // You can specify whatever fields you are expecting to be submitted.
+      // // e.g. domain, username, password, 2FA token, etc.
+      // // You can pass any HTML attribute to the <input> tag through the object.
+      // credentials: {
+      //   username: {
+      //     label: "Username",
+      //     type: "text",
+      //     placeholder: "(hint: jsmith)",
+      //   },
+      //   password: {
+      //     label: "Password",
+      //     type: "password",
+      //     placeholder: "(hint: hunter2)",
+      //   },
+      // },
       authorize(credentials: any) {
         // You need to provide your own logic here that takes the credentials
         // submitted and returns either a object representing a user or value
         // that is false/null if the credentials are invalid.
         // NOTE: THE BELOW LOGIC IS NOT SAFE OR PROPER FOR AUTHENTICATION!
-
         const user = {
           id: "1",
-          name: "J Smith",
-          username: "jsmith",
-          password: "hunter2",
+          name: "Athachai Mala-ut",
+          username: "mala.ut.29@gmail.com",
+          password: "password",
           image: "https://avatars.githubusercontent.com/u/25911230?v=4",
         };
 

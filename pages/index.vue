@@ -3,14 +3,7 @@ import { ref, onBeforeMount } from "vue";
 import { useRouter } from "vue-router";
 // import { useKeywordStore } from "../store/keyword";
 
-definePageMeta({
-  middleware: [
-    function (to, from) {
-      // Custom inline middleware
-    },
-    "auth",
-  ],
-});
+const { status, data, signOut } = useAuth();
 
 const router = useRouter();
 
@@ -71,12 +64,21 @@ const onGoToLoginPage = () => {
     <nav class="mb-60">
       <div class="flex justify-between">
         <div class="m-2 text-4xl"></div>
-        <div class="m-2">
+        <div class="flex m-2 items-center">
+          <div class="mr-4">{{ data?.user?.name }}</div>
           <button
+            v-if="status === 'unauthenticated'"
             class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
             @click="onGoToLoginPage"
           >
             Log in
+          </button>
+          <button
+            v-else
+            class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+            @click="signOut"
+          >
+            Log out
           </button>
         </div>
       </div>
