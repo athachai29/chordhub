@@ -83,7 +83,11 @@ const onSubmit = async () => {
               Log in
             </button>
           </div>
-          <p class="mt-10 text-center text-sm text-gray-900">or Log in with</p>
+          <div class="relative flex py-5 items-center">
+            <div class="flex-grow border-t"></div>
+            <span class="flex-shrink mx-4">or Log in with</span>
+            <div class="flex-grow border-t"></div>
+          </div>
           <div>
             <button
               type="submit"
