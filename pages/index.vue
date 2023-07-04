@@ -91,7 +91,7 @@ const onGoToLoginPage = () => {
         <input
           id="search-bar"
           type="text"
-          class="w-9/12 placeholder-svg bg-transparent px-4 py-2 border border-black"
+          class="md:w-1/2 placeholder-svg bg-transparent px-4 py-2 border border-black"
           placeholder="Search with Song or Artist"
           v-model="keyword"
         />
