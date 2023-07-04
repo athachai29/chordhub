@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-// import bcrypt from "mongoose-bcrypt";
-import bcrypt from "bcrypt";
+import * as bcrypt from "bcrypt";
 
 const schema = new mongoose.Schema(
   {
@@ -31,7 +30,11 @@ schema.pre("save", async function (next) {
   // only hash the password if it has been modified (or is new)
   if (!this.isModified("password")) return next();
 
-  this.password = await bcrypt.hash(this.password, 10);
+  if (this.password && this.password.length < 8) {
+    throw new Error("Password must be at least 8 characters");
+  }
+
+  this.password = await bcrypt.hash(this.password!, 10);
 });
 
 schema.methods.verifyPassword = async function (password: string) {
