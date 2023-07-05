@@ -52,4 +52,4 @@ const schema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Sheets", schema, "sheets");
+export default mongoose.model("Songs", schema, "songs");
