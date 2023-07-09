@@ -1,11 +1,7 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="flex flex-col h-screen">
     <Header></Header>
-    <main class="flex flex-col flex-grow">
-      <NuxtPage />
-    </main>
+    <slot></slot>
     <Footer></Footer>
   </div>
 </template>

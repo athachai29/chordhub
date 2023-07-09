@@ -1,0 +1,35 @@
+<script setup lang="ts">
+import { useRouter } from "vue-router";
+const { status, data, signOut } = useAuth();
+
+const router = useRouter();
+
+const onGoToLoginPage = () => {
+  router.push("/login");
+};
+</script>
+
+<template>
+  <nav>
+    <div class="flex justify-between">
+      <div class="m-2 text-4xl"></div>
+      <div class="flex m-2 items-center">
+        <div class="mr-4">{{ data?.user?.name }}</div>
+        <button
+          v-if="status === 'unauthenticated'"
+          class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+          @click="onGoToLoginPage"
+        >
+          Log in
+        </button>
+        <button
+          v-else
+          class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+          @click="() => signOut()"
+        >
+          Log out
+        </button>
+      </div>
+    </div>
+  </nav>
+</template>

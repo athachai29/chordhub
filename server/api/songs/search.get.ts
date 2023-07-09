@@ -1,14 +1,26 @@
-import songModal from "../../models/songs";
+import { songs as songModel } from "../../models";
 
 export default defineEventHandler(async (event) => {
-  const { query } = getQuery(event);
+  try {
+    const { query } = getQuery(event);
 
-  const sheet = await songModal.find({
-    active: true,
-    title: new RegExp(query, "i"),
-  });
-  return {
-    success: true,
-    data: sheet,
-  };
+    const sheet = await songModel
+      .find({
+        active: true,
+        title: new RegExp(query, "i"),
+      })
+      .populate("_artist", "thaiName engName");
+
+    return {
+      success: true,
+      data: sheet,
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
 });

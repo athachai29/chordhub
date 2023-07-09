@@ -1,12 +1,15 @@
 import mongoose from "mongoose";
 
+import artists from "./artists";
+
 const schema = new mongoose.Schema(
   {
-    artistId: {
+    _artist: {
       type: mongoose.Types.ObjectId,
       require: true,
+      ref: artists,
     },
-    songId: {
+    uid: {
       type: String,
       require: true,
       unique: true,
