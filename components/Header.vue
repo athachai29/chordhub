@@ -16,14 +16,20 @@ const onGoToLoginPage = () => {
       <div class="flex m-2 items-center">
         <div class="mr-4">{{ data?.user?.name }}</div>
         <button
-          v-if="status === 'unauthenticated'"
+          v-if="
+            status === 'unauthenticated' &&
+            router.currentRoute.value.path !== '/login'
+          "
           class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
           @click="onGoToLoginPage"
         >
           Log in
         </button>
         <button
-          v-else
+          v-else-if="
+            status === 'authenticated' &&
+            router.currentRoute.value.path !== '/login'
+          "
           class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
           @click="() => signOut()"
         >
