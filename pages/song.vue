@@ -62,7 +62,7 @@ const formatter = (sheet: [string]) => {
     </div>
     <div class="mt-2">Key: {{ result.params.key }}</div>
     <div v-if="result.params.capo !== 0">Capo: {{ result.params.capo }}</div>
-    <ul class="mt-6">
+    <ul class="mt-6 font-mono">
       <li v-for="(line, index) in result.sheet" :key="index">
         <div class="mb-4" v-html="line"></div>
       </li>
