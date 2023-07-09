@@ -110,7 +110,9 @@ const onGoToLoginPage = () => {
       </button> -->
       </div>
     </main>
-    <footer class="bg-gray-800 text-white p-6">Made with love</footer>
+    <footer class="bg-gray-800 text-white p-6">
+      Made with Love and Depression
+    </footer>
   </div>
   <!-- <div>
     <b-container fluid="sm">
