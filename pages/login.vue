@@ -27,13 +27,6 @@ const onSubmit = async () => {
 
 <template>
   <div class="flex flex-col h-screen">
-    <nav>
-      <div class="flex justify-between">
-        <div class="m-2 text-4xl font-bold">
-          <NuxtLink to="/">ChordHub</NuxtLink>
-        </div>
-      </div>
-    </nav>
     <main class="flex flex-col flex-grow justify-center px-6 py-12 lg:px-8">
       <h1 class="mt-10 text-center text-2xl">Log in to your account</h1>
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -108,7 +101,6 @@ const onSubmit = async () => {
         </p>
       </div>
     </main>
-    <footer class="bg-gray-800 text-white p-6">Made with love</footer>
   </div>
 </template>
 

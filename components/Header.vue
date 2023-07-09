@@ -10,32 +10,37 @@ const onGoToLoginPage = () => {
 </script>
 
 <template>
-  <nav>
-    <div class="flex justify-between">
-      <div class="m-2 text-4xl"></div>
-      <div class="flex m-2 items-center">
-        <div class="mr-4">{{ data?.user?.name }}</div>
-        <button
-          v-if="
-            status === 'unauthenticated' &&
-            router.currentRoute.value.path !== '/login'
-          "
-          class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
-          @click="onGoToLoginPage"
-        >
-          Log in
-        </button>
-        <button
-          v-else-if="
-            status === 'authenticated' &&
-            router.currentRoute.value.path !== '/login'
-          "
-          class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
-          @click="() => signOut()"
-        >
-          Log out
-        </button>
-      </div>
+  <nav class="flex justify-between">
+    <div class="m-2 text-4xl">
+      <NuxtLink
+        v-if="router.currentRoute.value.path !== '/'"
+        class="font-bold"
+        to="/"
+        >ChordHub</NuxtLink
+      >
+    </div>
+    <div class="flex m-2 items-center">
+      <div class="mr-4">{{ data?.user?.name }}</div>
+      <button
+        v-if="
+          status === 'unauthenticated' &&
+          router.currentRoute.value.path !== '/login'
+        "
+        class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+        @click="onGoToLoginPage"
+      >
+        Log in
+      </button>
+      <button
+        v-else-if="
+          status === 'authenticated' &&
+          router.currentRoute.value.path !== '/login'
+        "
+        class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+        @click="() => signOut()"
+      >
+        Log out
+      </button>
     </div>
   </nav>
 </template>
