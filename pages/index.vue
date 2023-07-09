@@ -22,31 +22,33 @@ const onSearch = () => {
 </script>
 
 <template>
-  <div class="flex justify-center mb-2 mt-60">
-    <h1 class="text-5xl">ChordHub</h1>
-  </div>
-  <div class="flex justify-center mb-4">
-    <input
-      id="search-bar"
-      type="text"
-      class="md:w-1/2 placeholder-svg bg-transparent px-4 py-2 border border-black"
-      placeholder="Search with Song or Artist"
-      v-model="keyword"
-    />
-  </div>
-  <div class="flex justify-center">
-    <button
-      class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
-      @click="onSearch"
-    >
-      Search
-    </button>
-    <button
-      class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black ml-2"
-    >
-      Trends
-    </button>
-  </div>
+  <form @submit.prevent="onSearch">
+    <div class="flex justify-center mb-2 mt-60">
+      <h1 class="text-5xl">ChordHub</h1>
+    </div>
+    <div class="flex justify-center mb-4">
+      <input
+        id="search-bar"
+        type="text"
+        class="md:w-1/2 placeholder-svg bg-transparent px-4 py-2 border border-black"
+        placeholder="Search with Song or Artist"
+        v-model="keyword"
+      />
+    </div>
+    <div class="flex justify-center">
+      <button
+        type="submit"
+        class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+      >
+        Search
+      </button>
+      <button
+        class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black ml-2"
+      >
+        Trends
+      </button>
+    </div>
+  </form>
 </template>
 
 <style scoped>
