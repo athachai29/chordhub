@@ -76,7 +76,7 @@ const onGoToLoginPage = () => {
           <button
             v-else
             class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
-            @click="signOut"
+            @click="() => signOut()"
           >
             Log out
           </button>
