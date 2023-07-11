@@ -25,9 +25,14 @@
 - [ ] parent song and child song for support vary of versions (including original)
 - [ ] update model ref field to \_(underscore) prefix
 - [ ] add admin page for approve edited version of sheets
+- [ ] dark mode
 
 ## Notes
 
 1. song id
 
 ตัวอย่าง video id ของ youtube [mvH9VE5O-1g, i5zQ7q0cMbs]
+
+2. use icon from https://heroicons.com/
+
+3. 1 บรรทัดต่อหนึ่งห้องดนตรี
