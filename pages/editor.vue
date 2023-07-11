@@ -16,9 +16,11 @@ type Song = {
 } | null;
 
 const route = useRoute();
+const router = useRouter();
 
 const result = ref(null as Song);
 const isPreview = ref(false);
+const draftSheet = ref("" as string | undefined);
 const previewSheet = ref([] as string[]);
 
 const onFetch = async () => {
@@ -26,6 +28,7 @@ const onFetch = async () => {
 
   const songJson = (await song.json()).data;
   result.value = songJson;
+  draftSheet.value = result.value?.sheet.join("\n");
 };
 
 onMounted(async () => {
@@ -33,11 +36,11 @@ onMounted(async () => {
 });
 
 const onPreview = () => {
-  previewSheet.value = formatter(result.value?.sheet as [string]);
+  previewSheet.value = formatter(draftSheet.value!.split("\n"));
   isPreview.value = !isPreview.value;
 };
 
-const formatter = (sheet: [string]) => {
+const formatter = (sheet: string[]) => {
   let newSheet = [] as string[];
 
   sheet.forEach((element) => {
@@ -57,6 +60,17 @@ const formatter = (sheet: [string]) => {
   });
 
   return newSheet;
+};
+
+const onSubmit = async () => {
+  await fetch(`/api/songs/${result.value?._id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      newSheet: draftSheet.value!.split("\n"),
+    }),
+  });
+
+  router.push({ name: "success" });
 };
 </script>
 
@@ -83,7 +97,7 @@ const formatter = (sheet: [string]) => {
       </button>
       <button
         class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
-        @click=""
+        @click="onSubmit"
       >
         Submit
       </button>
@@ -94,7 +108,7 @@ const formatter = (sheet: [string]) => {
       name="editor"
       id="editor"
       rows="20"
-      :value="result.sheet.join('\n')"
+      v-model="draftSheet"
     ></textarea>
     <ul v-else class="mt-6 font-mono">
       <li v-for="(line, index) in previewSheet" :key="index">
