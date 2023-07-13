@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ auth: false });
+
 type Song = {
   _id: string;
   title: string;

@@ -17,6 +17,6 @@ export default defineNuxtConfig({
   },
   modules: ["@pinia/nuxt", "@sidebase/nuxt-auth"],
   auth: {
-    globalAppMiddleware: true,
+    enableGlobalAppMiddleware: true,
   },
 });

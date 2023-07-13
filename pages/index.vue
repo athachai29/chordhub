@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ auth: false });
+
 import { useRouter } from "vue-router";
 
 const router = useRouter();

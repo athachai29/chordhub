@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { ref, onBeforeMount } from "vue";
-import { useRouter } from "vue-router";
-
 const { signIn, status, data } = useAuth();
 
-const router = useRouter();
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: "/",
+  },
+});
 
 const form = ref({
   username: "mala.ut.29@gmail.com",
@@ -17,8 +19,6 @@ const onSubmit = async () => {
     // localStorage.setItem("token", token);
 
     await signIn("credentials", form.value);
-
-    // await signOut();
   } catch (err) {
     console.error(err);
   }

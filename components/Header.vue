@@ -20,7 +20,9 @@ const onGoToLoginPage = () => {
       >
     </div>
     <div class="flex m-2 items-center">
-      <div class="mr-4">{{ data?.user?.name }}</div>
+      <NuxtLink to="/profile">
+        <div class="mr-4">{{ data?.user?.name }}</div>
+      </NuxtLink>
       <button
         v-if="
           status === 'unauthenticated' &&
