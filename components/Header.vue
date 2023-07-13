@@ -39,7 +39,7 @@ const onGoToLoginPage = () => {
           router.currentRoute.value.path !== '/login'
         "
         class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
-        @click="() => signOut()"
+        @click="() => signOut({ callbackUrl: '/' })"
       >
         Log out
       </button>

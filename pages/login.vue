@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { signIn, status, data } = useAuth();
+const router = useRouter();
 
 definePageMeta({
   auth: {
@@ -11,7 +12,7 @@ definePageMeta({
 const form = ref({
   username: "mala.ut.29@gmail.com",
   password: "password",
-  callbackUrl: "/",
+  callbackUrl: router.options.history.state.back as string,
 });
 
 const onSubmit = async () => {
