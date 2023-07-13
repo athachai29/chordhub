@@ -9,10 +9,11 @@ definePageMeta({
   },
 });
 
+console.log(router.options.history.state.back);
 const form = ref({
   username: "mala.ut.29@gmail.com",
   password: "password",
-  callbackUrl: router.options.history.state.back as string,
+  callbackUrl: (router.options.history.state.back as string) || "/",
 });
 
 const onSubmit = async () => {
