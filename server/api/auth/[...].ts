@@ -7,7 +7,7 @@ export default NuxtAuthHandler({
     signIn: "/login",
   },
   // your authentication configuration here!
-  secret: process.env.JWT_SECRET,
+  secret: process.env.AUTH_SECRET,
   providers: [
     // @ts-ignore Import is exported on .default during SSR, so we need to call it this way. May be fixed via Vite at some point
     CredentialsProvider.default({

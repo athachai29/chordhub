@@ -10,7 +10,6 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     mongoUrl: process.env.MONGODB_URI,
-    jwtSecret: process.env.JWT_SECRET,
   },
   nitro: {
     plugins: ["~/server/index.ts"],
@@ -18,5 +17,7 @@ export default defineNuxtConfig({
   modules: ["@pinia/nuxt", "@sidebase/nuxt-auth"],
   auth: {
     enableGlobalAppMiddleware: true,
+    origin: process.env.AUTH_ORIGIN,
+    basePath: "/api/auth",
   },
 });
