@@ -1,7 +1,7 @@
-import songModal from "../../models/songs";
+import songModel from "../../models/songs";
 
 export default defineEventHandler(async () => {
-  const sheets = await songModal.find({});
+  const sheets = await songModel.find({});
   return {
     success: true,
     total: sheets.length,
