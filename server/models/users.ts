@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import * as bcrypt from "bcrypt";
 
+import songs from "./songs";
+
 const schema = new mongoose.Schema(
   {
     email: {
@@ -22,6 +24,12 @@ const schema = new mongoose.Schema(
         default: false,
       },
     },
+    favorites: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: songs,
+      },
+    ],
   },
   { timestamps: true, strict: true, strictQuery: true }
 );
