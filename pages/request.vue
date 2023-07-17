@@ -36,7 +36,7 @@ const onSubmit = () => {
       <div>
         <label for="title">Title</label>
         <input
-          class="w-full px-4 py-2 border border-black"
+          class="w-full px-4 py-2 border border-black focus:outline-none"
           type="text"
           name="title"
           v-model="title"
@@ -46,7 +46,7 @@ const onSubmit = () => {
       <div>
         <label for="artist">Artist</label>
         <input
-          class="w-full px-4 py-2 border border-black"
+          class="w-full px-4 py-2 border border-black focus:outline-none"
           type="text"
           name="artist"
           v-model="artist"
@@ -56,7 +56,7 @@ const onSubmit = () => {
       <div>
         <label for="source">Source URL (eg. Youtube, Spotify)</label>
         <input
-          class="w-full px-4 py-2 border border-black"
+          class="w-full px-4 py-2 border border-black focus:outline-none"
           type="url"
           name="source"
           v-model="source"

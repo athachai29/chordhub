@@ -32,7 +32,7 @@ const onSearch = () => {
       <input
         id="search-bar"
         type="text"
-        class="md:w-1/2 placeholder-svg bg-transparent px-4 py-2 border border-black"
+        class="md:w-1/2 placeholder-svg bg-transparent px-4 py-2 border border-black focus:outline-none"
         placeholder="Search with Song or Artist"
         v-model="keyword"
       />

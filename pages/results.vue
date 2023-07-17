@@ -52,7 +52,7 @@ const onSelected = (song: Song) => {
         <input
           id="search-bar"
           type="text"
-          class="w-1/2 placeholder-svg bg-transparent px-4 py-2 border border-black mr-4"
+          class="w-1/2 placeholder-svg bg-transparent px-4 py-2 border border-black mr-4 focus:outline-none"
           placeholder="Search with Song or Artist"
           v-model="keyword"
         />

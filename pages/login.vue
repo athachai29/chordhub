@@ -41,7 +41,7 @@ const onSubmit = async () => {
                 type="email"
                 autocomplete="email"
                 required
-                class="block w-full px-4 py-2 border border-black"
+                class="block w-full px-4 py-2 border border-black focus:outline-none"
                 v-model="form.username"
               />
             </div>
@@ -64,7 +64,7 @@ const onSubmit = async () => {
                 type="password"
                 autocomplete="current-password"
                 required
-                class="block w-full px-4 py-2 border border-black"
+                class="block w-full px-4 py-2 border border-black focus:outline-none"
                 v-model="form.password"
               />
             </div>
