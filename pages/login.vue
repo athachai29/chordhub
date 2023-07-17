@@ -9,7 +9,6 @@ definePageMeta({
   },
 });
 
-console.log(router.options.history.state.back);
 const form = ref({
   username: "mala.ut.29@gmail.com",
   password: "password",
