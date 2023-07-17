@@ -64,14 +64,18 @@ const formatter = (sheet: [string]) => {
     </div>
     <div class="mt-2">Key: {{ result.params.key }}</div>
     <div v-if="result.params.capo !== 0">Capo: {{ result.params.capo }}</div>
-    <ul class="mt-6 font-mono">
+    <ul class="my-6 font-mono">
       <li v-for="(line, index) in result.sheet" :key="index">
         <div class="mb-4" v-html="line"></div>
       </li>
     </ul>
-    <NuxtLink :to="{ name: 'editor', query: { id: result._id } }"
-      >Found mistake?</NuxtLink
-    >
+    <span>
+      <NuxtLink
+        class="hover:underline"
+        :to="{ name: 'editor', query: { id: result._id } }"
+        >Found mistake?</NuxtLink
+      >
+    </span>
   </div>
 </template>
 
