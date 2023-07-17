@@ -74,7 +74,23 @@ const onSelected = (song: Song) => {
         <h1 v-if="results.length > 0" class="text-3xl">
           Found {{ results.length }} songs for "{{ resultForKeyword }}"
         </h1>
-        <h1 v-else class="text-3xl">No results for "{{ resultForKeyword }}"</h1>
+        <dev v-else>
+          <div class="text-3xl mb-4">
+            No results for "{{ resultForKeyword }}"
+          </div>
+          <div class="flex gap-4">
+            <NuxtLink
+              class="hover:underline"
+              :to="{ name: 'request', query: { title: resultForKeyword } }"
+              >Request this song</NuxtLink
+            >
+            <NuxtLink
+              class="hover:underline"
+              :to="{ name: 'submit', query: { title: resultForKeyword } }"
+              >Submit your version</NuxtLink
+            >
+          </div>
+        </dev>
       </div>
     </div>
     <ul>
