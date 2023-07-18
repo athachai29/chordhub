@@ -1,13 +1,15 @@
-import userModel from "../../../models/users";
+import { getToken } from "#auth";
+
+import userModel from "../../../../models/users";
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
-  const { userId, songId } = body;
+  const token = await getToken({ event });
+  const { id } = getRouterParams(event);
 
   const updatedResponse = await userModel.findByIdAndUpdate(
-    userId,
+    token!.id,
     {
-      $pull: { favorites: songId },
+      $pull: { favorites: id },
     },
     { new: true }
   );
