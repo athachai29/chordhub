@@ -5,5 +5,5 @@ export default defineEventHandler(() => {
   return {
     status: "ok",
     message: "Service is running",
-  };
-});
+  }
+})

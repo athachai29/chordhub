@@ -1,10 +1,10 @@
-import { getToken } from "#auth";
+import { getToken } from "#auth"
 
-import userModel from "../../../../models/users";
+import userModel from "../../../../models/users"
 
 export default defineEventHandler(async (event) => {
-  const token = await getToken({ event });
-  const { id } = getRouterParams(event);
+  const token = await getToken({ event })
+  const { id } = getRouterParams(event)
 
   const updatedResponse = await userModel.findByIdAndUpdate(
     token!.id,
@@ -12,9 +12,9 @@ export default defineEventHandler(async (event) => {
       $pull: { favorites: id },
     },
     { new: true }
-  );
+  )
   return {
     success: true,
     data: updatedResponse,
-  };
-});
+  }
+})

@@ -1,4 +1,4 @@
-import * as packageJson from "../../package.json";
+import * as packageJson from "../../package.json"
 
 export default defineEventHandler((event) => {
   return {
@@ -8,5 +8,5 @@ export default defineEventHandler((event) => {
       environment: process.env.NODE_ENV,
       version: packageJson.version,
     },
-  };
-});
+  }
+})

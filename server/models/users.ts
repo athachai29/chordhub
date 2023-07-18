@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
-import * as bcrypt from "bcrypt";
+import mongoose from "mongoose"
+import * as bcrypt from "bcrypt"
 
-import songs from "./songs";
+import songs from "./songs"
 
 const schema = new mongoose.Schema(
   {
@@ -32,21 +32,21 @@ const schema = new mongoose.Schema(
     ],
   },
   { timestamps: true, strict: true, strictQuery: true }
-);
+)
 
 schema.pre("save", async function (next) {
   // only hash the password if it has been modified (or is new)
-  if (!this.isModified("password")) return next();
+  if (!this.isModified("password")) return next()
 
   if (this.password && this.password.length < 8) {
-    throw new Error("Password must be at least 8 characters");
+    throw new Error("Password must be at least 8 characters")
   }
 
-  this.password = await bcrypt.hash(this.password!, 10);
-});
+  this.password = await bcrypt.hash(this.password!, 10)
+})
 
 schema.methods.verifyPassword = async function (password: string) {
-  return await bcrypt.compare(password, this.password);
-};
+  return await bcrypt.compare(password, this.password)
+}
 
-export default mongoose.model("Users", schema, "users");
+export default mongoose.model("Users", schema, "users")

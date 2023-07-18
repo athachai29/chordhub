@@ -1,22 +1,22 @@
 <script setup lang="ts">
-const route = useRoute();
-const router = useRouter();
+const route = useRoute()
+const router = useRouter()
 
-const title = ref(route.query.title as string);
-const artist = ref(route.query.artist as string);
-const source = ref(route.query.source as string);
-const note = ref(route.query.note as string);
-const isPreview = ref(false);
-const draftSheet = ref("" as string | undefined);
-const previewSheet = ref([] as string[]);
+const title = ref(route.query.title as string)
+const artist = ref(route.query.artist as string)
+const source = ref(route.query.source as string)
+const note = ref(route.query.note as string)
+const isPreview = ref(false)
+const draftSheet = ref("" as string | undefined)
+const previewSheet = ref([] as string[])
 
 const onPreview = () => {
-  previewSheet.value = formatter(draftSheet.value!.split("\n"));
-  isPreview.value = !isPreview.value;
-};
+  previewSheet.value = formatter(draftSheet.value!.split("\n"))
+  isPreview.value = !isPreview.value
+}
 
 const formatter = (sheet: string[]) => {
-  let newSheet = [] as string[];
+  let newSheet = [] as string[]
 
   sheet.forEach((element) => {
     if (
@@ -24,22 +24,22 @@ const formatter = (sheet: string[]) => {
       element.includes("INSTRUC") ||
       element.includes("INSTRU")
     ) {
-      element = element.replaceAll("[", "").replaceAll("]", "");
+      element = element.replaceAll("[", "").replaceAll("]", "")
     } else {
       element = element
         .replaceAll("][", "&nbsp;&nbsp;&nbsp;&nbsp;")
         .replaceAll("[", "<span class='chord'><span class='inner'>")
-        .replaceAll("]", "</span></span>");
+        .replaceAll("]", "</span></span>")
     }
-    newSheet.push(element);
-  });
+    newSheet.push(element)
+  })
 
-  return newSheet;
-};
+  return newSheet
+}
 
 const onSubmit = async () => {
-  router.push({ name: "success" });
-};
+  router.push({ name: "success" })
+}
 </script>
 
 <template>

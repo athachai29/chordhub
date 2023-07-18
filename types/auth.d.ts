@@ -1,5 +1,5 @@
 declare module "#auth" {
-  const getServerSession;
-  const getToken;
-  const NuxtAuthHandler;
+  const getServerSession
+  const getToken
+  const NuxtAuthHandler
 }

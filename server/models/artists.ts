@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const schema = new mongoose.Schema(
   {
@@ -17,6 +17,6 @@ const schema = new mongoose.Schema(
     strict: true,
     strictQuery: true,
   }
-);
+)
 
-export default mongoose.model("Artists", schema, "artists");
+export default mongoose.model("Artists", schema, "artists")

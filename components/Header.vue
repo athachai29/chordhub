@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-const { status, data, signOut } = useAuth();
+import { useRouter } from "vue-router"
+const { status, data, signOut } = useAuth()
 
-const router = useRouter();
+const router = useRouter()
 
 const onGoToLoginPage = () => {
-  router.push("/login");
-};
+  router.push("/login")
+}
 </script>
 
 <template>

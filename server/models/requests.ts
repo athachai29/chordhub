@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
-import users from "./users";
+import users from "./users"
 
 const schema = new mongoose.Schema(
   {
@@ -35,6 +35,6 @@ const schema = new mongoose.Schema(
     strict: true,
     strictQuery: true,
   }
-);
+)
 
-export default mongoose.model("Requests", schema, "requests");
+export default mongoose.model("Requests", schema, "requests")

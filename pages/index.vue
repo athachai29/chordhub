@@ -1,22 +1,22 @@
 <script setup lang="ts">
-definePageMeta({ auth: false });
+definePageMeta({ auth: false })
 
-import { useRouter } from "vue-router";
+import { useRouter } from "vue-router"
 
-const router = useRouter();
+const router = useRouter()
 
 // import { useKeywordStore } from "../store/keyword";
 
 // const keywordStore = useKeywordStore();
 
-const keyword = ref("");
+const keyword = ref("")
 // const keyword = ref(keywordStore.$state.keyword as string);
 
 const onSearch = () => {
-  if (keyword.value.trim() === "") return;
+  if (keyword.value.trim() === "") return
 
-  router.push({ name: "results", query: { search: keyword.value.trim() } });
-};
+  router.push({ name: "results", query: { search: keyword.value.trim() } })
+}
 
 // const onClaer = () => {
 //   keyword.value = "";

@@ -1,47 +1,47 @@
 <script setup lang="ts">
 type Song = {
-  _id: string;
-  title: string;
-  artist: string;
-  sheet: string[];
+  _id: string
+  title: string
+  artist: string
+  sheet: string[]
   _artist: {
-    thaiName: string;
-    engName: string;
-  };
+    thaiName: string
+    engName: string
+  }
   params: {
-    key: string;
-    ost: string;
-    capo: number;
-  };
-} | null;
+    key: string
+    ost: string
+    capo: number
+  }
+} | null
 
-const route = useRoute();
-const router = useRouter();
+const route = useRoute()
+const router = useRouter()
 
-const result = ref(null as Song);
-const isPreview = ref(false);
-const draftSheet = ref("" as string | undefined);
-const previewSheet = ref([] as string[]);
+const result = ref(null as Song)
+const isPreview = ref(false)
+const draftSheet = ref("" as string | undefined)
+const previewSheet = ref([] as string[])
 
 const onFetch = async () => {
-  const song = await fetch(`/api/songs/${route.query.id}`);
+  const song = await fetch(`/api/songs/${route.query.id}`)
 
-  const songJson = (await song.json()).data;
-  result.value = songJson;
-  draftSheet.value = result.value?.sheet.join("\n");
-};
+  const songJson = (await song.json()).data
+  result.value = songJson
+  draftSheet.value = result.value?.sheet.join("\n")
+}
 
 onMounted(async () => {
-  onFetch();
-});
+  onFetch()
+})
 
 const onPreview = () => {
-  previewSheet.value = formatter(draftSheet.value!.split("\n"));
-  isPreview.value = !isPreview.value;
-};
+  previewSheet.value = formatter(draftSheet.value!.split("\n"))
+  isPreview.value = !isPreview.value
+}
 
 const formatter = (sheet: string[]) => {
-  let newSheet = [] as string[];
+  let newSheet = [] as string[]
 
   sheet.forEach((element) => {
     if (
@@ -49,18 +49,18 @@ const formatter = (sheet: string[]) => {
       element.includes("INSTRUC") ||
       element.includes("INSTRU")
     ) {
-      element = element.replaceAll("[", "").replaceAll("]", "");
+      element = element.replaceAll("[", "").replaceAll("]", "")
     } else {
       element = element
         .replaceAll("][", "&nbsp;&nbsp;&nbsp;&nbsp;")
         .replaceAll("[", "<span class='chord'><span class='inner'>")
-        .replaceAll("]", "</span></span>");
+        .replaceAll("]", "</span></span>")
     }
-    newSheet.push(element);
-  });
+    newSheet.push(element)
+  })
 
-  return newSheet;
-};
+  return newSheet
+}
 
 const onSubmit = async () => {
   await fetch(`/api/songs/${result.value?._id}`, {
@@ -68,10 +68,10 @@ const onSubmit = async () => {
     body: JSON.stringify({
       newSheet: draftSheet.value!.split("\n"),
     }),
-  });
+  })
 
-  router.push({ name: "success" });
-};
+  router.push({ name: "success" })
+}
 </script>
 
 <template>

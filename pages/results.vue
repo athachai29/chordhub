@@ -1,47 +1,47 @@
 <script setup lang="ts">
-definePageMeta({ auth: false });
+definePageMeta({ auth: false })
 
 type Song = {
-  _id: string;
-  title: string;
-  artist: string;
-  sheet: string[];
+  _id: string
+  title: string
+  artist: string
+  sheet: string[]
   _artist: {
-    thaiName: string;
-    engName: string;
-  };
-};
+    thaiName: string
+    engName: string
+  }
+}
 
-const route = useRoute();
-const router = useRouter();
+const route = useRoute()
+const router = useRouter()
 
-const keyword = ref(route.query.search as string);
-const resultForKeyword = ref(route.query.search as string);
-const results = ref([] as Song[]);
-const isLoading = ref(false);
+const keyword = ref(route.query.search as string)
+const resultForKeyword = ref(route.query.search as string)
+const results = ref([] as Song[])
+const isLoading = ref(false)
 
 const onFetch = async () => {
-  isLoading.value = true;
-  const songs = await fetch(`/api/songs/search/?query=${keyword.value}`);
+  isLoading.value = true
+  const songs = await fetch(`/api/songs/search/?query=${keyword.value}`)
 
-  results.value = (await songs.json()).data;
-  isLoading.value = false;
-};
+  results.value = (await songs.json()).data
+  isLoading.value = false
+}
 
 onMounted(async () => {
-  onFetch();
-});
+  onFetch()
+})
 
 const onSearch = () => {
-  if (keyword.value.trim() === "") return;
+  if (keyword.value.trim() === "") return
 
-  onFetch();
-  router.push({ name: "results", query: { search: keyword.value.trim() } });
-};
+  onFetch()
+  router.push({ name: "results", query: { search: keyword.value.trim() } })
+}
 
 const onSelected = (song: Song) => {
-  router.push({ name: "song", query: { id: song._id } });
-};
+  router.push({ name: "song", query: { id: song._id } })
+}
 </script>
 
 <template>

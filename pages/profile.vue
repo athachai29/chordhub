@@ -1,14 +1,14 @@
 <script setup lang="ts">
-const { data } = useAuth();
+const { data } = useAuth()
 
-const totalRequest = ref(0);
+const totalRequest = ref(0)
 
 onMounted(async () => {
-  const response = await fetch(`/api/songs/requests/${data.value.uid}`);
-  const result = await response.json();
+  const response = await fetch(`/api/songs/requests/${data.value.uid}`)
+  const result = await response.json()
 
-  totalRequest.value = result.total;
-});
+  totalRequest.value = result.total
+})
 </script>
 
 <template>

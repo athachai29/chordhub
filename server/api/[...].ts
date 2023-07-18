@@ -1,3 +1,3 @@
 export default defineEventHandler((event) => {
-  setResponseStatus(event, 404);
-});
+  setResponseStatus(event, 404)
+})

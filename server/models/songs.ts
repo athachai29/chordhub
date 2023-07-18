@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
-import artists from "./artists";
+import artists from "./artists"
 
 const schema = new mongoose.Schema(
   {
@@ -53,6 +53,6 @@ const schema = new mongoose.Schema(
     strict: true,
     strictQuery: true,
   }
-);
+)
 
-export default mongoose.model("Songs", schema, "songs");
+export default mongoose.model("Songs", schema, "songs")

@@ -1,29 +1,29 @@
 <script setup lang="ts">
-const { signIn, status, data } = useAuth();
-const router = useRouter();
+const { signIn, status, data } = useAuth()
+const router = useRouter()
 
 definePageMeta({
   auth: {
     unauthenticatedOnly: true,
     navigateAuthenticatedTo: "/",
   },
-});
+})
 
 const form = ref({
   username: "mala.ut.29@gmail.com",
   password: "password",
   callbackUrl: (router.options.history.state.back as string) || "/",
-});
+})
 
 const onSubmit = async () => {
   try {
     // localStorage.setItem("token", token);
 
-    await signIn("credentials", form.value);
+    await signIn("credentials", form.value)
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
-};
+}
 </script>
 
 <template>

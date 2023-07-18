@@ -1,13 +1,13 @@
 <script setup lang="ts">
-const { data } = useAuth();
+const { data } = useAuth()
 
-const route = useRoute();
-const router = useRouter();
+const route = useRoute()
+const router = useRouter()
 
-const title = ref(route.query.title as string);
-const artist = ref("" as string);
-const source = ref("" as string);
-const note = ref("" as string);
+const title = ref(route.query.title as string)
+const artist = ref("" as string)
+const source = ref("" as string)
+const note = ref("" as string)
 
 const onSubmit = () => {
   fetch("/api/songs/request", {
@@ -23,10 +23,10 @@ const onSubmit = () => {
       note: note.value,
       type: "SONG_TITLE",
     }),
-  });
+  })
 
-  router.push({ name: "success" });
-};
+  router.push({ name: "success" })
+}
 </script>
 
 <template>

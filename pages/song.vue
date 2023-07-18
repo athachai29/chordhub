@@ -1,40 +1,40 @@
 <script setup lang="ts">
-definePageMeta({ auth: false });
+definePageMeta({ auth: false })
 
 type Song = {
-  _id: string;
-  title: string;
-  artist: string;
-  sheet: string[];
+  _id: string
+  title: string
+  artist: string
+  sheet: string[]
   _artist: {
-    thaiName: string;
-    engName: string;
-  };
+    thaiName: string
+    engName: string
+  }
   params: {
-    key: string;
-    ost: string;
-    capo: number;
-  };
-} | null;
+    key: string
+    ost: string
+    capo: number
+  }
+} | null
 
-const route = useRoute();
+const route = useRoute()
 
-const result = ref(null as Song);
+const result = ref(null as Song)
 
 const onFetch = async () => {
-  const song = await fetch(`/api/songs/${route.query.id}`);
+  const song = await fetch(`/api/songs/${route.query.id}`)
 
-  const songJson = (await song.json()).data;
-  result.value = songJson;
-  result.value!.sheet = formatter(songJson.sheet);
-};
+  const songJson = (await song.json()).data
+  result.value = songJson
+  result.value!.sheet = formatter(songJson.sheet)
+}
 
 onMounted(async () => {
-  onFetch();
-});
+  onFetch()
+})
 
 const formatter = (sheet: [string]) => {
-  let newSheet = [] as string[];
+  let newSheet = [] as string[]
 
   sheet.forEach((element) => {
     if (
@@ -42,18 +42,18 @@ const formatter = (sheet: [string]) => {
       element.includes("INSTRUC") ||
       element.includes("INSTRU")
     ) {
-      element = element.replaceAll("[", "").replaceAll("]", "");
+      element = element.replaceAll("[", "").replaceAll("]", "")
     } else {
       element = element
         .replaceAll("][", "&nbsp;&nbsp;&nbsp;&nbsp;")
         .replaceAll("[", "<span class='chord'><span class='inner'>")
-        .replaceAll("]", "</span></span>");
+        .replaceAll("]", "</span></span>")
     }
-    newSheet.push(element);
-  });
+    newSheet.push(element)
+  })
 
-  return newSheet;
-};
+  return newSheet
+}
 </script>
 
 <template>
