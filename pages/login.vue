@@ -1,6 +1,7 @@
 <script setup lang="ts">
-const { signIn, status, data } = useAuth()
+const { signIn } = useAuth()
 const router = useRouter()
+const route = useRoute()
 
 definePageMeta({
   auth: {
@@ -14,16 +15,6 @@ const form = ref({
   password: "password",
   callbackUrl: (router.options.history.state.back as string) || "/",
 })
-
-const onSubmit = async () => {
-  try {
-    // localStorage.setItem("token", token);
-
-    await signIn("credentials", form.value)
-  } catch (err) {
-    console.error(err)
-  }
-}
 </script>
 
 <template>
@@ -31,7 +22,7 @@ const onSubmit = async () => {
     <main class="flex flex-col flex-grow justify-center px-6 py-12 lg:px-8">
       <h1 class="mt-10 text-center text-2xl">Log in to your account</h1>
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" @submit.prevent="onSubmit">
+        <form class="space-y-6" @submit.prevent="signIn('credentials', form)">
           <div>
             <label for="email" class="block">Email</label>
             <div class="mt-2">
@@ -76,6 +67,9 @@ const onSubmit = async () => {
             >
               Log in
             </button>
+            <div v-if="route.query.error" class="text-red-600 text-right mt-2">
+              Username or password is incorrect
+            </div>
           </div>
           <div class="relative flex py-5 items-center">
             <div class="flex-grow border-t"></div>
