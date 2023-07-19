@@ -28,15 +28,13 @@ export default NuxtAuthHandler({
         const { username, password } = credentials
 
         const user = await userModel.findOne({ email: username })
+        if (!user) return null
+
         const validate = await user?.verifyPassword(password)
+        if (!validate) return null
 
-        if (validate) {
-          user!.id = user!._id
-
-          return user
-        } else {
-          return null
-        }
+        user!.id = user!._id
+        return user
       },
     }),
   ],
