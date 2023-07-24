@@ -46,7 +46,7 @@ const onSelected = (song: Song) => {
 
 <template>
   <!-- BEGIN: SEARCH BAR -->
-  <div class="px-16 mt-12">
+  <div class="px-8 md:px-16 mt-6 md:mt-12">
     <form @submit.prevent="onSearch">
       <div class="flex">
         <input
@@ -67,7 +67,7 @@ const onSelected = (song: Song) => {
   </div>
   <!-- END: SEARCH BAR -->
   <!-- BEGIN: RESULTS -->
-  <div class="flex flex-col px-16 my-12">
+  <div class="flex flex-col px-8 md:px-16 my-6 md:my-12">
     <div class="flex flex-row justify-between">
       <h1 v-if="isLoading" class="text-3xl">Searching...</h1>
       <div v-if="!isLoading">
