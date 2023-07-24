@@ -12,7 +12,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="px-16 mt-12 flex flex-col gap-4">
+  <div class="px-8 md:px-16 mt-6 md:mt-12 flex flex-col gap-4">
     <div class="text-2xl">Profile</div>
     <img class="w-24 mt-2" :src="data?.user?.image" />
     <div>{{ data?.user?.name }}</div>
