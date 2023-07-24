@@ -36,3 +36,10 @@
 2. use icon from https://heroicons.com/
 
 3. 1 บรรทัดต่อหนึ่งห้องดนตรี
+
+## Docker commands
+
+```shell
+docker build -t chordhub-dev .
+docker run --env-file=./.env -p 80:3000 --name chordhub-dev chordhub-dev
+```
