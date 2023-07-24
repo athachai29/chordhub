@@ -75,7 +75,7 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <div v-if="result" class="flex flex-col px-16 my-12">
+  <div v-if="result" class="flex flex-col px-8 md:px-16 my-6 md:my-12">
     <div class="text-2xl">{{ result.title }}</div>
     <div>
       {{ result._artist.thaiName || result._artist.engName }}
