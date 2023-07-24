@@ -3,7 +3,9 @@ definePageMeta({ auth: false })
 </script>
 
 <template>
-  <div class="flex flex-col px-16 my-12 text-2xl">
-    New sheet has been submited ❤️
+  <div class="flex flex-col px-4 md:px-16 my-6 md:my-12 pt-16 md:pt-8">
+    New sheet has been submited
+    <br />
+    Thank you for your time ❤️
   </div>
 </template>

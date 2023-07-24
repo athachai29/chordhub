@@ -46,7 +46,7 @@ const onSelected = (song: Song) => {
 
 <template>
   <!-- BEGIN: SEARCH BAR -->
-  <div class="px-16 mt-12">
+  <div class="flex flex-col px-4 md:px-16 my-6 md:my-12 pt-16 md:pt-8">
     <form @submit.prevent="onSearch">
       <div class="flex">
         <input
@@ -67,11 +67,11 @@ const onSelected = (song: Song) => {
   </div>
   <!-- END: SEARCH BAR -->
   <!-- BEGIN: RESULTS -->
-  <div class="flex flex-col px-16 my-12">
+  <div class="flex flex-col px-4 md:px-16 my-6 md:my-12">
     <div class="flex flex-row justify-between">
       <h1 v-if="isLoading" class="text-3xl">Searching...</h1>
       <div v-if="!isLoading">
-        <h1 v-if="results.length > 0" class="text-3xl">
+        <h1 v-if="results.length > 0">
           Found {{ results.length }} songs for "{{ resultForKeyword }}"
         </h1>
         <dev v-else>
@@ -101,8 +101,8 @@ const onSelected = (song: Song) => {
         @click="() => onSelected(result)"
       >
         <div class="flex flex-col">
-          <h2 class="text-2xl">{{ result.title }}</h2>
-          <h3 class="text-xl">
+          <h2 class="md:text-2xl">{{ result.title }}</h2>
+          <h3 class="md:text-xl">
             {{ result._artist.thaiName || result._artist.engName }}
           </h3>
         </div>

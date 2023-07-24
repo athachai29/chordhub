@@ -43,7 +43,7 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col px-16 my-12">
+  <div class="flex flex-col px-4 md:px-16 my-6 md:my-12 pt-16 md:pt-8">
     <div class="text-2xl">Submit new song</div>
     <form class="flex flex-col gap-4" @submit.prevent="onSubmit">
       <div>

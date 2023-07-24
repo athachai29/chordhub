@@ -3,8 +3,8 @@ import pkgJSON from "../package.json"
 </script>
 
 <template>
-  <footer class="bg-gray-800 text-white p-6 flex justify-between">
+  <footer class="text-black p-6 flex justify-between">
     <span>Made with Love and Depression</span>
-    <span>version {{ pkgJSON.version }}</span>
+    <span>v{{ pkgJSON.version }}</span>
   </footer>
 </template>

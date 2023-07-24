@@ -57,8 +57,11 @@ const formatter = (sheet: [string]) => {
 </script>
 
 <template>
-  <div v-if="result" class="flex flex-col px-16 my-12">
-    <div class="text-2xl">{{ result.title }}</div>
+  <div
+    v-if="result"
+    class="flex flex-col px-8 md:px-16 my-6 md:my-12 pt-16 md:pt-8"
+  >
+    <div class="text-xl md:text-2xl">{{ result.title }}</div>
     <div>
       {{ result._artist.thaiName || result._artist.engName }}
     </div>
@@ -71,7 +74,7 @@ const formatter = (sheet: [string]) => {
     </ul>
     <span>
       <NuxtLink
-        class="hover:underline"
+        class="underline"
         :to="{ name: 'editor', query: { id: result._id } }"
         >Found mistake?</NuxtLink
       >
