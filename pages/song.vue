@@ -54,6 +54,12 @@ const formatter = (sheet: [string]) => {
 
   return newSheet
 }
+
+/**
+ * Google Analytics
+ */
+const gtag = useGtag()
+gtag("set", "page_title", "Song")
 </script>
 
 <template>

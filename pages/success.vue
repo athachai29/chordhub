@@ -1,5 +1,11 @@
 <script setup lang="ts">
 definePageMeta({ auth: false })
+
+/**
+ * Google Analytics
+ */
+const gtag = useGtag()
+gtag("set", "page_title", "Success")
 </script>
 
 <template>

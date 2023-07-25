@@ -4,6 +4,7 @@ definePageMeta({ auth: false })
 import { useRouter } from "vue-router"
 
 const router = useRouter()
+const { data } = useAuth()
 
 // import { useKeywordStore } from "../store/keyword";
 
@@ -21,6 +22,24 @@ const onSearch = () => {
 // const onClaer = () => {
 //   keyword.value = "";
 // };
+
+/**
+ * Google Analytics
+ */
+const gtag = useGtag()
+gtag("set", "page_title", "Home")
+if (data.value?.user?.email) {
+  gtag("set", "user_id", data.value?.user?.email)
+}
+
+// gtag("event", "screen_view", {
+//   app_name: "ChordHub",
+//   screen_name: "Search",
+// })
+
+// useTrackEvent("login", {
+//   method: "Google",
+// })
 </script>
 
 <template>
@@ -32,7 +51,7 @@ const onSearch = () => {
       <input
         id="search-bar"
         type="text"
-        class="w-11/12 md:w-9/12 placeholder-svg bg-transparent px-4 py-2 border border-black focus:outline-none"
+        class="w-11/12 md:w-9/12 lg:w-1/2 placeholder-svg bg-transparent px-4 py-2 border border-black focus:outline-none"
         placeholder="Search with Song or Artist"
         v-model="keyword"
       />
