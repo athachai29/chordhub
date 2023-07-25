@@ -29,7 +29,6 @@ const onSearch = () => {
 const gtag = useGtag()
 gtag("set", "page_title", "Home")
 if (data.value?.user?.email) {
-  console.log(data.value?.user?.email)
   gtag("set", "user_id", data.value?.user?.email)
 }
 
