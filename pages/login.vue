@@ -15,6 +15,12 @@ const form = ref({
   password: "password",
   callbackUrl: (router.options.history.state.back as string) || "/",
 })
+
+/**
+ * Google Analytics
+ */
+const gtag = useGtag()
+gtag("set", "page_title", "Login")
 </script>
 
 <template>

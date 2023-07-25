@@ -14,10 +14,13 @@ export default defineNuxtConfig({
   nitro: {
     plugins: ["~/server/index.ts"],
   },
-  modules: ["@pinia/nuxt", "@sidebase/nuxt-auth"],
+  modules: ["@pinia/nuxt", "@sidebase/nuxt-auth", "nuxt-gtag"],
   auth: {
     enableGlobalAppMiddleware: true,
     origin: process.env.AUTH_ORIGIN,
     basePath: "/api/auth",
+  },
+  gtag: {
+    initialConsent: true,
   },
 })

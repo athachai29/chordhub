@@ -9,6 +9,12 @@ onMounted(async () => {
 
   totalRequest.value = result.total
 })
+
+/**
+ * Google Analytics
+ */
+const gtag = useGtag()
+gtag("set", "page_title", "Profile")
 </script>
 
 <template>

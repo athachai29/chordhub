@@ -40,6 +40,12 @@ const formatter = (sheet: string[]) => {
 const onSubmit = async () => {
   router.push({ name: "success" })
 }
+
+/**
+ * Google Analytics
+ */
+const gtag = useGtag()
+gtag("set", "page_title", "Submit")
 </script>
 
 <template>

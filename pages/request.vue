@@ -27,6 +27,12 @@ const onSubmit = () => {
 
   router.push({ name: "success" })
 }
+
+/**
+ * Google Analytics
+ */
+const gtag = useGtag()
+gtag("set", "page_title", "Request")
 </script>
 
 <template>

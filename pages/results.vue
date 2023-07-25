@@ -42,6 +42,15 @@ const onSearch = () => {
 const onSelected = (song: Song) => {
   router.push({ name: "song", query: { id: song._id } })
 }
+
+/**
+ * Google Analytics
+ */
+const gtag = useGtag()
+gtag("set", "page_title", "Results")
+gtag("event", "search", {
+  search_term: keyword.value,
+})
 </script>
 
 <template>
@@ -52,7 +61,7 @@ const onSelected = (song: Song) => {
         <input
           id="search-bar"
           type="text"
-          class="w-1/2 placeholder-svg bg-transparent px-4 py-2 border border-black mr-4 focus:outline-none"
+          class="w-1/2 lg:w-1/3 placeholder-svg bg-transparent px-4 py-2 border border-black mr-4 focus:outline-none"
           placeholder="Search with Song or Artist"
           v-model="keyword"
         />
@@ -97,7 +106,7 @@ const onSelected = (song: Song) => {
       <li
         v-for="(result, index) in results"
         :key="index"
-        class="flex flex-row justify-between mt-4 hover:bg-black p-4 hover:text-white border-2 border-black hover:cursor-pointer"
+        class="flex flex-row justify-between mt-4 hover:bg-black p-4 hover:text-white border-2 border-black hover:cursor-pointer lg:w-3/4"
         @click="() => onSelected(result)"
       >
         <div class="flex flex-col">
