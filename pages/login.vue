@@ -16,6 +16,15 @@ const form = ref({
   callbackUrl: (router.options.history.state.back as string) || "/",
 })
 
+const onLogin = async () => {
+  /**
+   * Google Analytics
+   */
+  gtag("event", "login", { method: "Credentials" })
+
+  await signIn("credentials", form.value)
+}
+
 /**
  * Google Analytics
  */
@@ -28,7 +37,7 @@ gtag("set", "page_title", "Login")
     <main class="flex flex-col flex-grow justify-center px-6 py-12 lg:px-8">
       <h1 class="mt-10 text-center text-2xl">Log in to your account</h1>
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" @submit.prevent="signIn('credentials', form)">
+        <form class="space-y-6" @submit.prevent="onLogin">
           <div>
             <label for="email" class="block">Email</label>
             <div class="mt-2">
