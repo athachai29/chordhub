@@ -10,6 +10,7 @@ type Song = {
     thaiName: string
     engName: string
   }
+  songId: string
 }
 
 const route = useRoute()
@@ -40,7 +41,7 @@ const onSearch = () => {
 }
 
 const onSelected = (song: Song) => {
-  router.push({ name: "song", query: { id: song._id } })
+  router.push({ name: "song", query: { id: song.songId } })
 }
 
 /**

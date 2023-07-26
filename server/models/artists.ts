@@ -2,6 +2,11 @@ import mongoose from "mongoose"
 
 const schema = new mongoose.Schema(
   {
+    artistId: {
+      type: String,
+      require: true,
+      unique: true,
+    },
     thaiName: {
       type: String,
       default: "",
