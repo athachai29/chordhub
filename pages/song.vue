@@ -15,6 +15,7 @@ type Song = {
     ost: string
     capo: number
   }
+  songId: string
 } | null
 
 const route = useRoute()
@@ -81,7 +82,7 @@ gtag("set", "page_title", "Song")
     <span>
       <NuxtLink
         class="underline"
-        :to="{ name: 'editor', query: { id: result._id } }"
+        :to="{ name: 'editor', query: { id: result.songId } }"
         >Found mistake?</NuxtLink
       >
     </span>
