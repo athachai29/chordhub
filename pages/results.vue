@@ -84,7 +84,7 @@ gtag("event", "search", {
         <h1 v-if="results.length > 0">
           Found {{ results.length }} results for "{{ resultForKeyword }}"
         </h1>
-        <dev v-else>
+        <div v-else>
           <div class="mb-4 text-3xl">
             No results for "{{ resultForKeyword }}"
           </div>
@@ -100,7 +100,7 @@ gtag("event", "search", {
               >Submit your version</NuxtLink
             >
           </div>
-        </dev>
+        </div>
       </div>
     </div>
     <ul class="flex flex-col gap-2">
