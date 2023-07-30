@@ -40,8 +40,12 @@ const onSearch = () => {
   router.push({ name: "results", query: { search: keyword.value.trim() } })
 }
 
-const onSelected = (song: Song) => {
+const onSelectedSong = (song: Song) => {
   router.push({ name: "song", query: { id: song.songId } })
+}
+
+const onSelectedArtist = (artist) => {
+  router.push({ name: "artist", query: { id: artist.artistId } })
 }
 
 /**
@@ -108,9 +112,11 @@ gtag("event", "search", {
         v-for="(result, index) in results"
         :key="index"
         class="border-2 border-black p-4 hover:cursor-pointer hover:bg-black hover:text-white"
-        @click="() => onSelected(result)"
       >
-        <div v-if="result.resultType === 'song'">
+        <div
+          v-if="result.resultType === 'song'"
+          @click="() => onSelectedSong(result)"
+        >
           <div class="flex justify-between">
             <div class="md:text-2xl">{{ result.title }}</div>
             <div class="text-xs">Song</div>
@@ -122,9 +128,10 @@ gtag("event", "search", {
         <div
           v-else-if="result.resultType === 'artist'"
           class="flex justify-between"
+          @click="() => onSelectedArtist(result)"
         >
           <div class="md:text-2xl">
-            {{ result.thaiName || result.engName }}
+            {{ result.engName || result.thaiName }}
           </div>
           <div class="text-xs">Artist</div>
         </div>
