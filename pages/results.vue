@@ -77,7 +77,7 @@ gtag("event", "search", {
   </div>
   <!-- END: SEARCH BAR -->
   <!-- BEGIN: RESULTS -->
-  <div class="my-6 flex flex-col px-4 md:my-12 md:px-16">
+  <div class="mb-6 flex flex-col px-4 md:mb-12 md:px-16">
     <div class="flex flex-row justify-between">
       <h1 v-if="isLoading" class="text-3xl">Searching...</h1>
       <div v-if="!isLoading">
