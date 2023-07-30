@@ -94,7 +94,7 @@ gtag("set", "page_title", "Editor")
       </div>
     </div>
     <div class="flex justify-between">
-      <div class="">
+      <div>
         <button
           class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black mr-2"
           @click="onPreview"
