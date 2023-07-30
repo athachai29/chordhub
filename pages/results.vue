@@ -82,7 +82,7 @@ gtag("event", "search", {
       <h1 v-if="isLoading" class="text-3xl">Searching...</h1>
       <div v-if="!isLoading">
         <h1 v-if="results.length > 0">
-          Found {{ results.length }} songs for "{{ resultForKeyword }}"
+          Found {{ results.length }} results for "{{ resultForKeyword }}"
         </h1>
         <dev v-else>
           <div class="text-3xl mb-4">
@@ -110,11 +110,16 @@ gtag("event", "search", {
         class="flex flex-row justify-between mt-4 hover:bg-black p-4 hover:text-white border-2 border-black hover:cursor-pointer lg:w-3/4"
         @click="() => onSelected(result)"
       >
-        <div class="flex flex-col">
+        <div v-if="result.resultType === 'song'" class="flex flex-col">
           <h2 class="md:text-2xl">{{ result.title }}</h2>
           <h3 class="md:text-xl">
             {{ result._artist.thaiName || result._artist.engName }}
           </h3>
+        </div>
+        <div v-else-if="result.resultType === 'artist'" class="flex flex-col">
+          <h2 class="md:text-2xl">
+            {{ result.thaiName || result.engName }}
+          </h2>
         </div>
       </li>
     </ul>
