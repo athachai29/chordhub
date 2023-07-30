@@ -5,7 +5,9 @@ import pkgJSON from "../package.json"
 <template>
   <footer class="flex justify-between p-6 text-black">
     <span class="flex items-center">
-      <span class="mr-2">Made with Love and Depression</span>
+      <span class="mr-2 text-xs md:text-base"
+        >Made with Love and Depression</span
+      >
       <span>
         <a href="https://www.buymeacoffee.com/athachai.m"
           ><img
