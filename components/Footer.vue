@@ -3,7 +3,7 @@ import pkgJSON from "../package.json"
 </script>
 
 <template>
-  <footer class="text-black p-6 flex justify-between">
+  <footer class="flex justify-between p-6 text-black">
     <span class="flex items-center">
       <span class="mr-2">Made with Love and Depression</span>
       <span>

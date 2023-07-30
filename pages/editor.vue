@@ -85,7 +85,7 @@ gtag("set", "page_title", "Editor")
 <template>
   <div
     v-if="result"
-    class="flex flex-col px-4 md:px-16 my-6 md:my-12 pt-16 md:pt-8"
+    class="my-6 flex flex-col px-4 pt-16 md:my-12 md:px-16 md:pt-8"
   >
     <div class="mb-4">
       <div class="text-2xl">{{ result.title }}</div>
@@ -96,7 +96,7 @@ gtag("set", "page_title", "Editor")
     <div class="flex justify-between">
       <div>
         <button
-          class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black mr-2"
+          class="mr-2 border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
           @click="onPreview"
         >
           Edit / Preview
@@ -104,13 +104,13 @@ gtag("set", "page_title", "Editor")
       </div>
       <div class="flex gap-2">
         <button
-          class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+          class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
           @click="onSubmit"
         >
           Save
         </button>
         <button
-          class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+          class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
           @click="onSubmit"
         >
           Submit
@@ -119,7 +119,7 @@ gtag("set", "page_title", "Editor")
     </div>
     <textarea
       v-if="!isPreview"
-      class="mt-2 p-4 border-2 border-black resize-none font-mono whitespace-nowrap"
+      class="mt-2 resize-none whitespace-nowrap border-2 border-black p-4 font-mono"
       name="editor"
       id="editor"
       rows="20"

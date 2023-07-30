@@ -18,9 +18,9 @@ gtag("set", "page_title", "Profile")
 </script>
 
 <template>
-  <div class="flex flex-col px-4 md:px-16 my-6 md:my-12 pt-16 md:pt-8">
+  <div class="my-6 flex flex-col px-4 pt-16 md:my-12 md:px-16 md:pt-8">
     <div class="text-2xl">Profile</div>
-    <img class="w-24 mt-2" :src="data?.user?.image" />
+    <img class="mt-2 w-24" :src="data?.user?.image" />
     <div>{{ data?.user?.name }}</div>
     <div>Total request: {{ totalRequest }}</div>
   </div>

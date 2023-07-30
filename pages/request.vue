@@ -36,13 +36,13 @@ gtag("set", "page_title", "Request")
 </script>
 
 <template>
-  <div class="flex flex-col px-4 md:px-16 my-6 md:my-12 pt-16 md:pt-8">
+  <div class="my-6 flex flex-col px-4 pt-16 md:my-12 md:px-16 md:pt-8">
     <div class="text-2xl">Request new song</div>
     <form class="flex flex-col gap-4" @submit.prevent="onSubmit">
       <div>
         <label for="title">Title</label>
         <input
-          class="w-full px-4 py-2 border border-black focus:outline-none"
+          class="w-full border border-black px-4 py-2 focus:outline-none"
           type="text"
           name="title"
           v-model="title"
@@ -52,7 +52,7 @@ gtag("set", "page_title", "Request")
       <div>
         <label for="artist">Artist</label>
         <input
-          class="w-full px-4 py-2 border border-black focus:outline-none"
+          class="w-full border border-black px-4 py-2 focus:outline-none"
           type="text"
           name="artist"
           v-model="artist"
@@ -62,7 +62,7 @@ gtag("set", "page_title", "Request")
       <div>
         <label for="source">Source URL (eg. Youtube, Spotify)</label>
         <input
-          class="w-full px-4 py-2 border border-black focus:outline-none"
+          class="w-full border border-black px-4 py-2 focus:outline-none"
           type="url"
           name="source"
           v-model="source"
@@ -71,7 +71,7 @@ gtag("set", "page_title", "Request")
       <div>
         <label for="note">Note</label>
         <textarea
-          class="w-full px-4 py-2 border border-black resize-none"
+          class="w-full resize-none border border-black px-4 py-2"
           name="note"
           rows="2"
           v-model="note"
@@ -80,7 +80,7 @@ gtag("set", "page_title", "Request")
       <div class="text-right">
         <button
           type="submit"
-          class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+          class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
         >
           Submit Request
         </button>

@@ -66,7 +66,7 @@ gtag("set", "page_title", "Song")
 <template>
   <div
     v-if="result"
-    class="flex flex-col px-8 md:px-16 my-6 md:my-12 pt-16 md:pt-8"
+    class="my-6 flex flex-col px-8 pt-16 md:my-12 md:px-16 md:pt-8"
   >
     <div class="text-xl md:text-2xl">{{ result.title }}</div>
     <div>

@@ -33,8 +33,8 @@ gtag("set", "page_title", "Login")
 </script>
 
 <template>
-  <div class="flex flex-col h-screen">
-    <main class="flex flex-col flex-grow justify-center px-6 py-12 lg:px-8">
+  <div class="flex h-screen flex-col">
+    <main class="flex flex-grow flex-col justify-center px-6 py-12 lg:px-8">
       <h1 class="mt-10 text-center text-2xl">Log in to your account</h1>
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" @submit.prevent="onLogin">
@@ -47,7 +47,7 @@ gtag("set", "page_title", "Login")
                 type="email"
                 autocomplete="email"
                 required
-                class="block w-full px-4 py-2 border border-black focus:outline-none"
+                class="block w-full border border-black px-4 py-2 focus:outline-none"
                 v-model="form.username"
               />
             </div>
@@ -70,7 +70,7 @@ gtag("set", "page_title", "Login")
                 type="password"
                 autocomplete="current-password"
                 required
-                class="block w-full px-4 py-2 border border-black focus:outline-none"
+                class="block w-full border border-black px-4 py-2 focus:outline-none"
                 v-model="form.password"
               />
             </div>
@@ -78,29 +78,29 @@ gtag("set", "page_title", "Login")
           <div>
             <button
               type="submit"
-              class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black w-full"
+              class="w-full border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
             >
               Log in
             </button>
-            <div v-if="route.query.error" class="text-red-600 text-right mt-2">
+            <div v-if="route.query.error" class="mt-2 text-right text-red-600">
               Username or password is incorrect
             </div>
           </div>
-          <div class="relative flex py-5 items-center">
+          <div class="relative flex items-center py-5">
             <div class="flex-grow border-t"></div>
-            <span class="flex-shrink mx-4">or Log in with</span>
+            <span class="mx-4 flex-shrink">or Log in with</span>
             <div class="flex-grow border-t"></div>
           </div>
           <div>
             <button
               type="submit"
-              class="px-4 py-2 hover:bg-[#3b5998] hover:text-white border-2 border-black w-full mt-2"
+              class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#3b5998] hover:text-white"
             >
               Facebook
             </button>
             <button
               type="submit"
-              class="px-4 py-2 hover:bg-[#dd4b39] hover:text-white border-2 border-black w-full mt-2"
+              class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#dd4b39] hover:text-white"
             >
               Google
             </button>
