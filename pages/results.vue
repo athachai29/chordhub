@@ -37,6 +37,7 @@ const onSearch = () => {
   if (keyword.value.trim() === "") return
 
   onFetch()
+  resultForKeyword.value = keyword.value.trim()
   router.push({ name: "results", query: { search: keyword.value.trim() } })
 }
 
