@@ -15,10 +15,10 @@ export default NuxtAuthHandler({
     async signIn({ user, account, profile, email, credentials }) {
       try {
         if (account.provider === "credentials") {
-          console.log("signIn", { user, account, profile, email, credentials })
+          // console.log("signIn", { user, account, profile, email, credentials })
         }
         if (account.provider === "google") {
-          console.log({ account, profile })
+          // console.log({ account, profile })
         }
         return true
       } catch (err) {
@@ -30,11 +30,11 @@ export default NuxtAuthHandler({
       return baseUrl
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      console.log("jwt", { token, user, account, profile, isNewUser })
+      // console.log("jwt", { token, user, account, profile, isNewUser })
       return token
     },
     async session({ session, user, token }) {
-      console.log("session", { session, user, token })
+      // console.log("session", { session, user, token })
       return session
     },
   },
