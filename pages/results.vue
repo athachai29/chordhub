@@ -107,7 +107,7 @@ gtag("event", "search", {
         </div>
       </div>
     </div>
-    <ul class="flex flex-col gap-2">
+    <ul class="flex w-3/5 flex-col gap-2">
       <li
         v-for="(result, index) in results"
         :key="index"
