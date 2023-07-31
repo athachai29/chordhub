@@ -31,10 +31,20 @@ export default NuxtAuthHandler({
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       // console.log("jwt", { token, user, account, profile, isNewUser })
+      if (user) {
+        token.id = user.id
+        token.role = user.role
+      }
+
       return token
     },
     async session({ session, user, token }) {
       // console.log("session", { session, user, token })
+      if (token) {
+        session.user.id = token.id
+        session.user.role = token.role
+      }
+
       return session
     },
   },
@@ -51,6 +61,7 @@ export default NuxtAuthHandler({
         if (!validate) return null
 
         user!.id = user!._id
+        user!.role = user!.role || "FREE_USER"
         return user
       },
     }),
