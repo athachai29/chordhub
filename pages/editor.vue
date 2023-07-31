@@ -36,7 +36,9 @@ onMounted(async () => {
 })
 
 const onPreview = () => {
-  previewSheet.value = formatter(draftSheet.value!.split("\n"))
+  if (!isPreview.value) {
+    previewSheet.value = formatter(draftSheet.value!.split("\n"))
+  }
   isPreview.value = !isPreview.value
 }
 
@@ -83,37 +85,41 @@ gtag("set", "page_title", "Editor")
 <template>
   <div
     v-if="result"
-    class="flex flex-col px-4 md:px-16 my-6 md:my-12 pt-16 md:pt-8"
+    class="my-6 flex flex-col px-4 pt-16 md:my-12 md:px-16 md:pt-8"
   >
-    <div class="text-2xl">{{ result.title }}</div>
-    <div>
-      {{ result._artist.thaiName || result._artist.engName }}
+    <div class="mb-4">
+      <div class="text-2xl">{{ result.title }}</div>
+      <div>
+        {{ result._artist.thaiName || result._artist.engName }}
+      </div>
     </div>
-    <div class="mt-2 text-right">
-      <button
-        v-if="!isPreview"
-        class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black mr-2"
-        @click="onPreview"
-      >
-        Preview
-      </button>
-      <button
-        v-else
-        class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black mr-2"
-        @click="() => (isPreview = !isPreview)"
-      >
-        Edit
-      </button>
-      <button
-        class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
-        @click="onSubmit"
-      >
-        Submit
-      </button>
+    <div class="flex justify-between">
+      <div>
+        <button
+          class="mr-2 border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
+          @click="onPreview"
+        >
+          Edit / Preview
+        </button>
+      </div>
+      <div class="flex gap-2">
+        <button
+          class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
+          @click="onSubmit"
+        >
+          Save
+        </button>
+        <button
+          class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
+          @click="onSubmit"
+        >
+          Submit
+        </button>
+      </div>
     </div>
     <textarea
       v-if="!isPreview"
-      class="mt-2 p-4 border-2 border-black resize-none font-mono whitespace-nowrap"
+      class="mt-2 resize-none whitespace-nowrap border-2 border-black p-4 font-mono"
       name="editor"
       id="editor"
       rows="20"

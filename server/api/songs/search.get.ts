@@ -1,19 +1,87 @@
-import { songs as songModel } from "../../models"
+import { songs as songModel, artists as artistModel } from "../../models"
 
 export default defineEventHandler(async (event) => {
   try {
     const { query } = getQuery(event)
 
-    const sheet = await songModel
-      .find({
-        active: true,
-        title: new RegExp(query, "i"),
-      })
-      .populate("_artist", "thaiName engName")
+    /**
+     * Full text search
+     */
+    const songPipeline = [
+      {
+        $search: {
+          index: "songIndex",
+          text: {
+            query: query,
+            path: ["title", "sheet", "params.ost"],
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: "artists",
+          localField: "_artist",
+          foreignField: "_id",
+          as: "_artist",
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          title: 1,
+          songId: 1,
+          _artist: 1,
+        },
+      },
+      {
+        $addFields: {
+          _artist: {
+            $arrayElemAt: ["$_artist", 0],
+          },
+          textScore: { $meta: "searchScore" },
+          resultType: "song",
+        },
+      },
+      {
+        $limit: 5,
+      },
+    ]
+
+    const artistPipeline = [
+      {
+        $search: {
+          index: "artistIndex",
+          text: {
+            query: query,
+            path: ["thaiName", "engName"],
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          thaiName: 1,
+          engName: 1,
+          artistId: 1,
+        },
+      },
+      {
+        $addFields: {
+          textScore: { $meta: "searchScore" },
+          resultType: "artist",
+        },
+      },
+      {
+        $limit: 5,
+      },
+    ]
+
+    const songs = await songModel.aggregate(songPipeline)
+    const artist = await artistModel.aggregate(artistPipeline)
 
     return {
       success: true,
-      data: sheet,
+      data: [...songs, ...artist].sort((a, b) => b.textScore - a.textScore),
     }
   } catch (error) {
     console.error(error)

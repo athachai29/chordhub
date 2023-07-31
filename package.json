@@ -1,7 +1,7 @@
 {
   "name": "chordhub",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -25,6 +25,8 @@
     "nuxt-gtag": "^0.5.7",
     "pinia": "^2.1.4",
     "postcss": "^8.4.24",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.4.1",
     "tailwindcss": "^3.3.2"
   }
 }

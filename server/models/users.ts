@@ -30,8 +30,12 @@ const schema = new mongoose.Schema(
         ref: songs,
       },
     ],
+    role: {
+      type: String,
+      enum: ["ADMIN", "FREE_USER", "SUBSCRIBER"],
+    },
   },
-  { timestamps: true, strict: true, strictQuery: true }
+  { timestamps: true, strict: true, strictQuery: true },
 )
 
 schema.pre("save", async function (next) {

@@ -44,14 +44,14 @@ if (data.value?.user?.email) {
 
 <template>
   <form @submit.prevent="onSearch">
-    <div class="flex justify-center mb-2 mt-60">
+    <div class="mb-2 mt-60 flex justify-center">
       <h1 class="text-5xl">ChordHub</h1>
     </div>
-    <div class="flex justify-center mb-4">
+    <div class="mb-4 flex justify-center">
       <input
         id="search-bar"
         type="text"
-        class="w-11/12 md:w-9/12 lg:w-1/2 placeholder-svg bg-transparent px-4 py-2 border border-black focus:outline-none"
+        class="placeholder-svg w-11/12 border border-black bg-transparent px-4 py-2 focus:outline-none md:w-9/12 lg:w-1/2"
         placeholder="Search with Song or Artist"
         v-model="keyword"
       />
@@ -59,12 +59,12 @@ if (data.value?.user?.email) {
     <div class="flex justify-center">
       <button
         type="submit"
-        class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+        class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
       >
         Search
       </button>
       <button
-        class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black ml-2"
+        class="ml-2 border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
       >
         Trends
       </button>

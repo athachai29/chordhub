@@ -9,7 +9,7 @@ const schema = new mongoose.Schema(
       require: true,
       ref: artists,
     },
-    uid: {
+    songId: {
       type: String,
       require: true,
       unique: true,
@@ -47,6 +47,18 @@ const schema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    sources: [
+      {
+        name: {
+          type: String,
+          default: null,
+        },
+        url: {
+          type: String,
+          default: null,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

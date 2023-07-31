@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router"
-
 const { status, data, signOut } = useAuth()
 
 const router = useRouter()
@@ -14,10 +12,10 @@ const onGoToLoginPage = () => {
 
 <template>
   <nav
-    class="bg-black fixed w-full z-10 top-0 left-0 flex justify-between text-white"
+    class="fixed left-0 top-0 z-10 flex w-full justify-between bg-black text-white"
   >
     <div class="p-4 text-4xl">
-      <NuxtLink class="text-2xl font-semibold flex" to="/">
+      <NuxtLink class="flex text-2xl font-semibold" to="/">
         <!-- <img
           src="https://flowbite.com/docs/images/logo.svg"
           class="h-8 mr-3"
@@ -26,7 +24,7 @@ const onGoToLoginPage = () => {
         <span>ChordHub</span>
       </NuxtLink>
     </div>
-    <div class="flex m-2 items-center">
+    <div class="m-2 flex items-center">
       <!-- <NuxtLink to="/profile">
         <div>{{ data?.user?.name }}</div>
       </NuxtLink> -->
@@ -36,7 +34,7 @@ const onGoToLoginPage = () => {
           status === 'unauthenticated' &&
           router.currentRoute.value.path !== '/login'
         "
-        class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+        class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
         @click="onGoToLoginPage"
       >
         Log in
@@ -46,7 +44,7 @@ const onGoToLoginPage = () => {
           status === 'authenticated' &&
           router.currentRoute.value.path !== '/login'
         "
-        class="px-4 py-2 hover:bg-black hover:text-white border-2 border-black"
+        class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
         @click="() => signOut({ callbackUrl: '/' })"
       >
         Log out
