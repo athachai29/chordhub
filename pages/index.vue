@@ -44,7 +44,7 @@ if (data.value?.user?.email) {
 
 <template>
   <form @submit.prevent="onSearch">
-    <div class="mb-2 mt-60 flex justify-center">
+    <div class="mb-2 mt-80 flex justify-center">
       <h1 class="text-5xl">ChordHub</h1>
     </div>
     <div class="mb-4 flex justify-center">
