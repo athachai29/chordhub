@@ -1,21 +1,14 @@
-<script setup lang="ts">
-import pkgJSON from "../package.json"
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <footer class="flex justify-between p-6 text-black">
-    <span class="flex items-center">
-      <span class="mr-2 text-xs md:text-base"
-        >Made with Love and Depression</span
-      >
-      <span>
-        <a href="https://www.buymeacoffee.com/athachai.m"
-          ><img
-            src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png"
-            width="128px"
-        /></a>
-      </span>
-    </span>
-    <span>v{{ pkgJSON.version }}</span>
+  <footer class="flex items-center p-6 text-black">
+    <div class="mr-2 text-xs md:text-base">With Love and Depression</div>
+    <div>
+      <a :href="useRuntimeConfig().buyMeACoffeeUrl" target="_blank"
+        ><img
+          src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png"
+          width="128px"
+      /></a>
+    </div>
   </footer>
 </template>

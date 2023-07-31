@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     mongoUrl: process.env.MONGODB_URI,
+    buyMeACoffeeUrl: process.env.BUY_ME_A_COFFEE_URL,
   },
   nitro: {
     plugins: ["~/server/index.ts"],
