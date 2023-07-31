@@ -22,6 +22,7 @@ const onLogin = async () => {
   gtag("event", "login", { method: "Credentials" })
 
   await useAuth().signIn("credentials", form.value)
+  onLoading.value = false
 }
 
 const onLoginWithGoogle = async () => {
@@ -33,6 +34,19 @@ const onLoginWithGoogle = async () => {
   gtag("event", "login", { method: "Google" })
 
   await useAuth().signIn("google")
+  onLoading.value = false
+}
+
+const onLoginWithFacebook = async () => {
+  onLoading.value = true
+
+  /**
+   * Google Analytics
+   */
+  gtag("event", "login", { method: "Facebook" })
+
+  await useAuth().signIn("facebook")
+  onLoading.value = false
 }
 
 /**
@@ -109,8 +123,10 @@ gtag("set", "page_title", "Login")
             <!-- <button
               type="submit"
               class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#3b5998] hover:text-white"
+              @click="() => onLoginWithFacebook()"
+              :disabled="onLoading"
             >
-              Facebook
+              {{ onLoading ? "Logging in..." : "Facebook" }}
             </button> -->
             <button
               class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#dd4b39] hover:text-white"

@@ -1,5 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
+import FacebookProvider from "next-auth/providers/facebook"
 import { NuxtAuthHandler } from "#auth"
 import Users from "../../models/users"
 
@@ -68,6 +69,10 @@ export default NuxtAuthHandler({
     GoogleProvider.default({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+    FacebookProvider.default({
+      clientId: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
     }),
   ],
   session: {
