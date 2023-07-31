@@ -7,8 +7,8 @@ definePageMeta({
 })
 
 const form = ref({
-  username: "mala.ut.29@gmail.com",
-  password: "password",
+  username: "",
+  password: "",
   callbackUrl: (useRouter().options.history.state.back as string) || "/",
 })
 const onLoading = ref(false)
