@@ -37,6 +37,7 @@ const onSearch = () => {
   if (keyword.value.trim() === "") return
 
   onFetch()
+  resultForKeyword.value = keyword.value.trim()
   router.push({ name: "results", query: { search: keyword.value.trim() } })
 }
 
@@ -107,7 +108,7 @@ gtag("event", "search", {
         </div>
       </div>
     </div>
-    <ul class="flex flex-col gap-2">
+    <ul class="flex w-3/5 flex-col gap-2">
       <li
         v-for="(result, index) in results"
         :key="index"
