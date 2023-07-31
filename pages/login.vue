@@ -1,8 +1,4 @@
 <script setup lang="ts">
-const { signIn } = useAuth()
-const router = useRouter()
-const route = useRoute()
-
 definePageMeta({
   auth: {
     unauthenticatedOnly: true,
@@ -13,25 +9,30 @@ definePageMeta({
 const form = ref({
   username: "mala.ut.29@gmail.com",
   password: "password",
-  callbackUrl: (router.options.history.state.back as string) || "/",
+  callbackUrl: (useRouter().options.history.state.back as string) || "/",
 })
+const onLoading = ref(false)
 
 const onLogin = async () => {
+  onLoading.value = true
+
   /**
    * Google Analytics
    */
   gtag("event", "login", { method: "Credentials" })
 
-  await signIn("credentials", form.value)
+  await useAuth().signIn("credentials", form.value)
 }
 
 const onLoginWithGoogle = async () => {
+  onLoading.value = true
+
   /**
    * Google Analytics
    */
   gtag("event", "login", { method: "Google" })
 
-  await signIn("google")
+  await useAuth().signIn("google")
 }
 
 /**
@@ -88,10 +89,14 @@ gtag("set", "page_title", "Login")
             <button
               type="submit"
               class="w-full border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
+              :disabled="onLoading"
             >
-              Log in
+              {{ onLoading ? "Logging in..." : "Log in" }}
             </button>
-            <div v-if="route.query.error" class="mt-2 text-right text-red-600">
+            <div
+              v-if="useRoute().query.error"
+              class="mt-2 text-right text-red-600"
+            >
               Username or password is incorrect
             </div>
           </div>
@@ -110,8 +115,9 @@ gtag("set", "page_title", "Login")
             <button
               class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#dd4b39] hover:text-white"
               @click="() => onLoginWithGoogle()"
+              :disabled="onLoading"
             >
-              Google
+              {{ onLoading ? "Logging in..." : "Google" }}
             </button>
           </div>
         </form>
