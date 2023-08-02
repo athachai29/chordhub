@@ -1,11 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const layout = "default"
+</script>
 
 <template>
-  <div class="flex flex-col h-screen">
-    <Header></Header>
-    <main class="flex flex-col flex-grow">
-      <NuxtPage />
-    </main>
-    <Footer></Footer>
-  </div>
+  <NuxtLayout :name="layout">
+    <NuxtPage />
+  </NuxtLayout>
 </template>

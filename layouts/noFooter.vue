@@ -4,6 +4,5 @@
     <main class="flex flex-grow flex-col">
       <slot></slot>
     </main>
-    <Footer></Footer>
   </div>
 </template>
