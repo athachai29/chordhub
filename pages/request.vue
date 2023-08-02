@@ -1,4 +1,9 @@
 <script setup lang="ts">
+useHead({
+  title: "Request - ChordHub",
+  meta: [{ name: "description", content: "Any song you can play." }],
+})
+
 const { data } = useAuth()
 
 const route = useRoute()

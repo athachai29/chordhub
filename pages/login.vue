@@ -1,4 +1,9 @@
 <script setup lang="ts">
+useHead({
+  title: "Login - ChordHub",
+  meta: [{ name: "description", content: "Any song you can play." }],
+})
+
 definePageMeta({
   auth: {
     unauthenticatedOnly: true,

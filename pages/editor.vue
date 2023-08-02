@@ -1,4 +1,9 @@
 <script setup lang="ts">
+useHead({
+  title: "Editor - ChordHub",
+  meta: [{ name: "description", content: "Any song you can play." }],
+})
+
 type Song = {
   _id: string
   title: string
