@@ -26,7 +26,7 @@ const schema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["SONG_TITLE", "SONG_SUBMIT"],
+      enum: ["NEW_SONG", "ERROR_SONG", "BUG_REPORT"],
       require: true,
     },
   },
@@ -34,7 +34,7 @@ const schema = new mongoose.Schema(
     timestamps: true,
     strict: true,
     strictQuery: true,
-  }
+  },
 )
 
 export default mongoose.model("Requests", schema, "requests")
