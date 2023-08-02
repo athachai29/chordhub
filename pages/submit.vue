@@ -1,4 +1,9 @@
 <script setup lang="ts">
+useHead({
+  title: "Submit - ChordHub",
+  meta: [{ name: "description", content: "Any song you can play." }],
+})
+
 const route = useRoute()
 const router = useRouter()
 

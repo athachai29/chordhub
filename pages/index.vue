@@ -1,4 +1,9 @@
 <script setup lang="ts">
+useHead({
+  title: "ChordHub",
+  meta: [{ name: "description", content: "Any song you can play." }],
+})
+
 definePageMeta({ auth: false })
 
 import { useRouter } from "vue-router"

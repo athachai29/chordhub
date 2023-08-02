@@ -1,4 +1,9 @@
 <script setup lang="ts">
+useHead({
+  title: "Results - ChordHub",
+  meta: [{ name: "description", content: "Any song you can play." }],
+})
+
 definePageMeta({ auth: false })
 
 type Song = {

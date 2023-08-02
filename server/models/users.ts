@@ -34,6 +34,10 @@ const schema = new mongoose.Schema(
       type: String,
       enum: ["ADMIN", "FREE_USER", "SUBSCRIBER"],
     },
+    avatar: {
+      type: String,
+      default: null,
+    },
   },
   { timestamps: true, strict: true, strictQuery: true },
 )
