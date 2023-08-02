@@ -83,13 +83,17 @@ gtag("set", "page_title", "Song")
         <div class="mb-4" v-html="line"></div>
       </li>
     </ul>
-    <span>
-      <NuxtLink
-        class="underline"
-        :to="{ name: 'editor', query: { id: result.songId } }"
-        >Found mistake?</NuxtLink
-      >
-    </span>
+    <NuxtLink
+      class="underline"
+      :to="{ name: 'editor', query: { id: result.songId } }"
+      >Found mistake?</NuxtLink
+    >
+    <button class="flex gap-2 underline">
+      <div>Add to favorites</div>
+      <div>
+        <img class="h-6 w-6" src="~/assets/icons/heart.svg" alt="" />
+      </div>
+    </button>
   </div>
 </template>
 
