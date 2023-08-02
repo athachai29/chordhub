@@ -21,9 +21,10 @@ type Song = {
 const results = ref([] as Song[])
 
 const onFetch = async () => {
-  const song = await fetch(`/api/songs/${useRoute().query.id}/artists`)
-  const songJson = (await song.json()).data
-  results.value = songJson
+  const { data }: any = await useFetch(
+    `/api/songs/${useRoute().query.id}/artists`,
+  )
+  results.value = data.value.data
 }
 
 onMounted(async () => {

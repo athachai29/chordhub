@@ -9,8 +9,8 @@ const { data } = useAuth()
 const totalRequest = ref(0)
 
 onMounted(async () => {
-  const response = await fetch(`/api/songs/requests/${data.value.uid}`)
-  const result = await response.json()
+  const { data }: any = await useFetch(`/api/songs/requests/${data.value.uid}`)
+  const result = data.value.data
 
   totalRequest.value = result.total
 })

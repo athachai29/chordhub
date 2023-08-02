@@ -23,7 +23,7 @@ const onRegisterWithCredentials = async () => {
    */
   gtag("event", "register", { method: "Credentials" })
 
-  await fetch("/api/auth/register", {
+  await useFetch("/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(form.value),

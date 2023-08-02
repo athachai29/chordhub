@@ -28,11 +28,10 @@ const route = useRoute()
 const result = ref(null as Song)
 
 const onFetch = async () => {
-  const song = await fetch(`/api/songs/${route.query.id}`)
+  const { data }: any = await useFetch(`/api/songs/${route.query.id}`)
 
-  const songJson = (await song.json()).data
-  result.value = songJson
-  result.value!.sheet = formatter(songJson.sheet)
+  result.value = data.value.data
+  result.value!.sheet = formatter(data.value.data.sheet)
 }
 
 onMounted(async () => {
