@@ -14,8 +14,8 @@ const artist = ref("" as string)
 const source = ref("" as string)
 const note = ref("" as string)
 
-const onSubmit = () => {
-  fetch("/api/songs/request", {
+const onSubmit = async () => {
+  await useFetch("/api/songs/request", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
