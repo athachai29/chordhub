@@ -59,12 +59,30 @@ const schema = new mongoose.Schema(
         },
       },
     ],
+    stats: {
+      views: {
+        type: Number,
+        default: 0,
+      },
+      likes: {
+        type: Number,
+        default: 0,
+      },
+      downloads: {
+        type: Number,
+        default: 0,
+      },
+      shares: {
+        type: Number,
+        default: 0,
+      },
+    },
   },
   {
     timestamps: true,
     strict: true,
     strictQuery: true,
-  }
+  },
 )
 
 export default mongoose.model("Songs", schema, "songs")
