@@ -36,9 +36,7 @@ const onFetch = async () => {
   isLoading.value = false
 }
 
-onMounted(async () => {
-  onFetch()
-})
+onFetch()
 
 const onSearch = () => {
   if (keyword.value.trim() === "") return

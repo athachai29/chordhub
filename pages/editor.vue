@@ -35,9 +35,7 @@ const onFetch = async () => {
   draftSheet.value = result.value?.sheet.join("\n")
 }
 
-onMounted(async () => {
-  onFetch()
-})
+onFetch()
 
 const onPreview = () => {
   if (!isPreview.value) {

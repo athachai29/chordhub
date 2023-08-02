@@ -34,9 +34,7 @@ const onFetch = async () => {
   result.value!.sheet = formatter(data.value.data.sheet)
 }
 
-onMounted(async () => {
-  onFetch()
-})
+onFetch()
 
 const formatter = (sheet: [string]) => {
   let newSheet = [] as string[]

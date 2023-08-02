@@ -27,9 +27,7 @@ const onFetch = async () => {
   results.value = data.value.data
 }
 
-onMounted(async () => {
-  onFetch()
-})
+onFetch()
 
 const onSelectedSong = (song: Song) => {
   useRouter().push({ name: "song", query: { id: song.songId } })
