@@ -21,13 +21,26 @@ const schema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    sheet: {
+      type: Array,
+      default: [],
+    },
     note: {
       type: String,
     },
     type: {
       type: String,
-      enum: ["NEW_SONG", "ERROR_SONG", "BUG_REPORT"],
+      enum: ["NEW_SONG", "EDIT_SONG"],
       require: true,
+    },
+    status: {
+      type: String,
+      enum: ["PENDING", "ACCEPTED", "REJECTED"],
+      default: "PENDING",
+    },
+    reason: {
+      type: String,
+      default: null,
     },
   },
   {
