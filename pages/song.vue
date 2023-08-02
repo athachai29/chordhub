@@ -28,16 +28,13 @@ const route = useRoute()
 const result = ref(null as Song)
 
 const onFetch = async () => {
-  const song = await fetch(`/api/songs/${route.query.id}`)
+  const { data }: any = await useFetch(`/api/songs/${route.query.id}`)
 
-  const songJson = (await song.json()).data
-  result.value = songJson
-  result.value!.sheet = formatter(songJson.sheet)
+  result.value = data.value.data
+  result.value!.sheet = formatter(data.value.data.sheet)
 }
 
-onMounted(async () => {
-  onFetch()
-})
+onFetch()
 
 const formatter = (sheet: [string]) => {
   let newSheet = [] as string[]
@@ -84,13 +81,17 @@ gtag("set", "page_title", "Song")
         <div class="mb-4" v-html="line"></div>
       </li>
     </ul>
-    <span>
-      <NuxtLink
-        class="underline"
-        :to="{ name: 'editor', query: { id: result.songId } }"
-        >Found mistake?</NuxtLink
-      >
-    </span>
+    <NuxtLink
+      class="underline"
+      :to="{ name: 'editor', query: { id: result.songId } }"
+      >Found mistake?</NuxtLink
+    >
+    <button class="flex gap-2 underline">
+      <div>Add to favorites</div>
+      <div>
+        <img class="h-6 w-6" src="~/assets/icons/heart.svg" alt="" />
+      </div>
+    </button>
   </div>
 </template>
 

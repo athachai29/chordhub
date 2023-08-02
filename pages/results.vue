@@ -28,15 +28,15 @@ const isLoading = ref(false)
 
 const onFetch = async () => {
   isLoading.value = true
-  const songs = await fetch(`/api/songs/search/?query=${keyword.value}`)
+  const { data }: any = await useFetch(
+    `/api/songs/search/?query=${keyword.value}`,
+  )
 
-  results.value = (await songs.json()).data
+  results.value = data.value.data
   isLoading.value = false
 }
 
-onMounted(async () => {
-  onFetch()
-})
+onFetch()
 
 const onSearch = () => {
   if (keyword.value.trim() === "") return
@@ -72,7 +72,7 @@ gtag("event", "search", {
         <input
           id="search-bar"
           type="text"
-          class="placeholder-svg mr-4 w-1/2 border border-black bg-transparent px-4 py-2 focus:outline-none lg:w-1/3"
+          class="placeholder-svg mr-4 w-1/2 rounded-none border border-black bg-transparent px-4 py-2 focus:outline-none lg:w-1/3"
           placeholder="Search with Song or Artist"
           v-model="keyword"
         />

@@ -29,16 +29,13 @@ const draftSheet = ref("" as string | undefined)
 const previewSheet = ref([] as string[])
 
 const onFetch = async () => {
-  const song = await fetch(`/api/songs/${route.query.id}`)
+  const { data }: any = await useFetch(`/api/songs/${route.query.id}`)
 
-  const songJson = (await song.json()).data
-  result.value = songJson
+  result.value = data.value.data
   draftSheet.value = result.value?.sheet.join("\n")
 }
 
-onMounted(async () => {
-  onFetch()
-})
+onFetch()
 
 const onPreview = () => {
   if (!isPreview.value) {
@@ -70,7 +67,7 @@ const formatter = (sheet: string[]) => {
 }
 
 const onSubmit = async () => {
-  await fetch(`/api/songs/${result.value?._id}`, {
+  await useFetch(`/api/songs/${result.value?._id}`, {
     method: "PUT",
     body: JSON.stringify({
       newSheet: draftSheet.value!.split("\n"),
