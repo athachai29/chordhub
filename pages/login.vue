@@ -76,7 +76,7 @@ gtag("set", "page_title", "Login")
                 type="email"
                 autocomplete="email"
                 required
-                class="block w-full border border-black px-4 py-2 focus:outline-none"
+                class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
                 v-model="form.username"
               />
             </div>
@@ -99,7 +99,7 @@ gtag("set", "page_title", "Login")
                 type="password"
                 autocomplete="current-password"
                 required
-                class="block w-full border border-black px-4 py-2 focus:outline-none"
+                class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
                 v-model="form.password"
               />
             </div>

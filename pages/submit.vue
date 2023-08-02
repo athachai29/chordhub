@@ -60,7 +60,7 @@ gtag("set", "page_title", "Submit")
       <div>
         <label for="title">Title</label>
         <input
-          class="w-full border border-black px-4 py-2 focus:outline-none"
+          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="text"
           name="title"
           v-model="title"
@@ -70,7 +70,7 @@ gtag("set", "page_title", "Submit")
       <div>
         <label for="artist">Artist</label>
         <input
-          class="w-full border border-black px-4 py-2 focus:outline-none"
+          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="text"
           name="artist"
           v-model="artist"
@@ -80,7 +80,7 @@ gtag("set", "page_title", "Submit")
       <div>
         <label for="source">Source URL (eg. Youtube, Spotify)</label>
         <input
-          class="w-full border border-black px-4 py-2 focus:outline-none"
+          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="url"
           name="source"
           v-model="source"
