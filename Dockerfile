@@ -12,7 +12,4 @@ EXPOSE 3000
 
 RUN yarn build
 
-# RUN node .output/server/index.mjs
-# RUN yarn preview
-# ENTRYPOINT ["node", ".output/server/index.mjs"]
 CMD ["node", ".output/server/index.mjs"]
