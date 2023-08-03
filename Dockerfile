@@ -10,4 +10,5 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["yarn", "dev"]
+RUN yarn build
+RUN node .output/server/index.mjs
