@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: process.env.NODE_ENV === "development" },
+  devtools: { enabled: true },
   css: ["~/assets/css/app.css"],
   postcss: {
     plugins: {
@@ -12,6 +12,12 @@ export default defineNuxtConfig({
     mongoUrl: process.env.MONGODB_URI,
     buyMeACoffeeUrl: process.env.BUY_ME_A_COFFEE_URL,
     authSecret: process.env.AUTH_SECRET,
+    nextAuthUrl: process.env.NEXTAUTH_URL,
+    authOrigin: process.env.AUTH_ORIGIN,
+    googleClientId: process.env.GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    facebookClientId: process.env.FACEBOOK_CLIENT_ID,
+    facebookClientSecret: process.env.FACEBOOK_CLIENT_SECRET,
   },
   nitro: {
     plugins: ["~/server/index.ts"],

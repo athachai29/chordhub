@@ -1,9 +1,7 @@
 import mongoose from "mongoose"
 
-const config = useRuntimeConfig()
-
 export default async function connect() {
-  const { connection } = await mongoose.connect(config.mongoUrl, {
+  const { connection } = await mongoose.connect(useRuntimeConfig().mongoUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // useFindAndModify: false,

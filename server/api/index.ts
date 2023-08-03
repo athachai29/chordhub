@@ -5,7 +5,7 @@ export default defineEventHandler((event) => {
     success: true,
     data: {
       message: "CHORDHUB API SERVICE",
-      environment: process.env.NODE_ENV,
+      environment: useRuntimeConfig().environment,
       version: packageJson.version,
     },
   }

@@ -4,8 +4,6 @@ import FacebookProvider from "next-auth/providers/facebook"
 import { NuxtAuthHandler } from "#auth"
 import Users from "../../models/users"
 
-const config = useRuntimeConfig()
-
 export default NuxtAuthHandler({
   pages: {
     signIn: "/login",
@@ -51,7 +49,7 @@ export default NuxtAuthHandler({
       return session
     },
   },
-  secret: config.authSecret,
+  secret: useRuntimeConfig().authSecret,
   providers: [
     CredentialsProvider.default({
       async authorize(credentials: any, req: any) {
@@ -69,12 +67,12 @@ export default NuxtAuthHandler({
       },
     }),
     GoogleProvider.default({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: useRuntimeConfig().googleClientId,
+      clientSecret: useRuntimeConfig().googleClientSecret,
     }),
     FacebookProvider.default({
-      clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      clientId: useRuntimeConfig().facebookClientId,
+      clientSecret: useRuntimeConfig().facebookClientSecret,
     }),
   ],
   session: {
