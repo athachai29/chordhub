@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     mongoUrl: process.env.MONGODB_URI,
     buyMeACoffeeUrl: process.env.BUY_ME_A_COFFEE_URL,
+    authSecret: process.env.AUTH_SECRET,
   },
   nitro: {
     plugins: ["~/server/index.ts"],

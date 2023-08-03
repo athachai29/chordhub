@@ -4,6 +4,8 @@ import FacebookProvider from "next-auth/providers/facebook"
 import { NuxtAuthHandler } from "#auth"
 import Users from "../../models/users"
 
+const config = useRuntimeConfig()
+
 export default NuxtAuthHandler({
   pages: {
     signIn: "/login",
@@ -49,7 +51,7 @@ export default NuxtAuthHandler({
       return session
     },
   },
-  secret: process.env.AUTH_SECRET,
+  secret: config.authSecret,
   providers: [
     CredentialsProvider.default({
       async authorize(credentials: any, req: any) {
