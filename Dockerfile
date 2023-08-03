@@ -11,4 +11,5 @@ COPY . .
 EXPOSE 3000
 
 RUN yarn build
-RUN node .output/server/index.mjs
+# RUN node .output/server/index.mjs
+RUN yarn start

@@ -1,13 +1,13 @@
 import mongoose from "mongoose"
 
-import artists from "./artists"
+import artistModel from "./artists"
 
 const schema = new mongoose.Schema(
   {
     _artist: {
       type: mongoose.Types.ObjectId,
       require: true,
-      ref: artists,
+      ref: artistModel,
     },
     songId: {
       type: String,
@@ -42,6 +42,10 @@ const schema = new mongoose.Schema(
         enum: ["ACTIVE", "INACTIVE"],
         default: "INACTIVE",
       },
+      isPrivate: {
+        type: Boolean,
+        default: false,
+      },
     },
     formatter: {
       type: String,
@@ -68,6 +72,7 @@ const schema = new mongoose.Schema(
         type: Number,
         default: 0,
       },
+      // PDF, PNG Version
       downloads: {
         type: Number,
         default: 0,
@@ -76,6 +81,14 @@ const schema = new mongoose.Schema(
         type: Number,
         default: 0,
       },
+    },
+    parent: {
+      type: mongoose.Types.ObjectId, // _song
+      default: null,
+    },
+    owner: {
+      type: mongoose.Types.ObjectId, // _user
+      default: null,
     },
   },
   {
