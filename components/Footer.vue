@@ -14,7 +14,7 @@
       <a href="https://www.reddit.com/r/chordhub/">Reddit</a>
     </div>
     <div>
-      <a :href="useRuntimeConfig().buyMeACoffeeUrl" target="_blank"
+      <a :href="useRuntimeConfig().public.buyMeACoffeeUrl" target="_blank"
         ><img
           src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png"
           width="128px"
