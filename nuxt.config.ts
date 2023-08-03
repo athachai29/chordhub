@@ -11,10 +11,8 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    mongoUrl: process.env.NUXT_MONGODB_URI,
+    dbUrl: process.env.NUXT_DB_URL,
     authSecret: process.env.NUXT_AUTH_SECRET,
-    // nextAuthUrl: process.env.NUXT_NEXTAUTH_URL,
-    // authOrigin: process.env.AUTH_ORIGIN,
     googleClientId: process.env.NUXT_GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.NUXT_GOOGLE_CLIENT_SECRET,
     facebookClientId: process.env.NUXT_FACEBOOK_CLIENT_ID,
