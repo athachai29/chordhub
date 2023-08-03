@@ -8,13 +8,10 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "typecheck": "nuxt typecheck",
-    "devtools": "nuxt devtools",
-    "start": "nuxt start"
+    "typecheck": "nuxt typecheck"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxt/devtools-wizard": "^0.7.4",
     "@pinia/nuxt": "^0.4.11",
     "@sidebase/nuxt-auth": "0.5.0",
     "@types/bcrypt": "^5.0.0",
