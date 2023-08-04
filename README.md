@@ -45,7 +45,7 @@ We are grateful to the contributors and libraries that have inspired and support
 
 ## Contact
 
-If you have any questions, suggestions, or just want to say hi, feel free to reach out to us at athachai.m@gmail.com.
+If you have any questions, suggestions, or just want to say hi, feel free to reach out to us at [r/chordhub](https://www.reddit.com/r/chordhub).
 
 Thank you for being a part of ChordHub. Let's build something awesome together!
 
