@@ -1,6 +1,6 @@
 # CHORDHUB
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) <a href="https://www.buymeacoffee.com/athachai.m"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" height="20px"></a>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Introduction
 
@@ -48,3 +48,7 @@ We are grateful to the contributors and libraries that have inspired and support
 If you have any questions, suggestions, or just want to say hi, feel free to reach out to us at athachai.m@gmail.com.
 
 Thank you for being a part of ChordHub. Let's build something awesome together!
+
+## Support
+
+<a href="https://www.buymeacoffee.com/athachai.m"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" height="32px"></a>
