@@ -8,7 +8,7 @@ RUN yarn install
 
 COPY . .
 
-EXPOSE 3000
+# EXPOSE 3000
 
 RUN yarn build
 
