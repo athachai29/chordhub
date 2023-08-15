@@ -18,12 +18,12 @@ const schema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    flags: {
-      isEmailConfirmed: {
-        type: Boolean,
-        default: false,
-      },
-    },
+    // flags: {
+    //   isEmailConfirmed: {
+    //     type: Boolean,
+    //     default: false,
+    //   },
+    // },
     favorites: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -34,7 +34,7 @@ const schema = new mongoose.Schema(
       type: String,
       enum: ["ADMIN", "FREE_USER", "SUBSCRIBER"],
     },
-    avatar: {
+    image: {
       type: String,
       default: null,
     },

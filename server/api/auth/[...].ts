@@ -3,14 +3,18 @@ import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
 import { NuxtAuthHandler } from "#auth"
 import Users from "../../models/users"
+import CustomAdapter from "../../models/nextauth/customAdapter"
+import dbConnect from "../../db"
+import Accounts from "../../models/accounts"
 
 export default NuxtAuthHandler({
+  adapter: CustomAdapter(dbConnect, { Accounts, Users }),
   pages: {
     signIn: "/login",
     signOut: "/logout",
     error: "/auth/error", // Error code passed in query string as ?error=
     verifyRequest: "/auth/verify-request", // (used for check email message)
-    newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
+    // newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
@@ -21,32 +25,46 @@ export default NuxtAuthHandler({
         if (account.provider === "google") {
           // console.log({ account, profile })
         }
+
         return true
       } catch (err) {
-        console.log(err)
+        console.error(err)
         return false
       }
     },
     async redirect({ url, baseUrl }) {
-      return baseUrl
+      try {
+        return baseUrl
+      } catch (err) {
+        console.error(err)
+        return baseUrl
+      }
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      // console.log("jwt", { token, user, account, profile, isNewUser })
-      if (user) {
-        token.id = user.id
-        token.role = user.role
-      }
+      try {
+        if (user) {
+          token.id = user.id
+          token.role = user.role
+        }
 
-      return token
+        return token
+      } catch (err) {
+        console.error(err)
+        return token
+      }
     },
     async session({ session, user, token }) {
-      // console.log("session", { session, user, token })
-      if (token) {
-        session.user.id = token.id
-        session.user.role = token.role
-      }
+      try {
+        if (token) {
+          session.user.id = token.id
+          session.user.role = token.role
+        }
 
-      return session
+        return session
+      } catch (err) {
+        console.error(err)
+        return session
+      }
     },
   },
   secret: useRuntimeConfig().authSecret,
@@ -61,8 +79,8 @@ export default NuxtAuthHandler({
         const validate = await user?.verifyPassword(password)
         if (!validate) return null
 
-        user!.id = user!._id
-        user!.role = user!.role || "FREE_USER"
+        user.id = user._id
+        user.role = user.role || "FREE_USER"
         return user
       },
     }),
