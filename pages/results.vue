@@ -74,7 +74,7 @@ gtag("event", "search", {
           type="text"
           class="placeholder-svg mr-4 w-1/2 rounded-none border border-black bg-transparent px-4 py-2 focus:outline-none lg:w-1/3"
           placeholder="Search with Song or Artist"
-          v-model="keyword"
+          v-model.trim="keyword"
         />
         <button
           type="submit"

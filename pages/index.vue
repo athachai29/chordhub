@@ -58,7 +58,7 @@ if (data.value?.user?.email) {
         type="text"
         class="placeholder-svg w-11/12 rounded-none border border-black bg-transparent px-4 py-2 focus:outline-none md:w-9/12 lg:w-1/2"
         placeholder="Search with Song or Artist"
-        v-model="keyword"
+        v-model.trim="keyword"
       />
     </div>
     <div class="flex justify-center">
