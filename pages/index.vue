@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router"
-import ogImage from "~/public/og-image.webp"
+import ogImage from "/og-image.webp"
 
 useHead({
   title: "ChordHub",
