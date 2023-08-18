@@ -1,12 +1,19 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router"
+import ogImage from "~/public/og-image.png"
+
 useHead({
   title: "ChordHub",
-  meta: [{ name: "description", content: "Any song you can play." }],
+  meta: [
+    { name: "description", content: "Any song you can play." },
+    {
+      property: "og:image",
+      content: ogImage,
+    },
+  ],
 })
 
 definePageMeta({ auth: false })
-
-import { useRouter } from "vue-router"
 
 const router = useRouter()
 const { data } = useAuth()
@@ -58,7 +65,7 @@ if (data.value?.user?.email) {
         type="text"
         class="placeholder-svg w-11/12 rounded-none border border-black bg-transparent px-4 py-2 focus:outline-none md:w-9/12 lg:w-1/2"
         placeholder="Search with Song or Artist"
-        v-model="keyword"
+        v-model.trim="keyword"
       />
     </div>
     <div class="flex justify-center">

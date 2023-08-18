@@ -1,7 +1,15 @@
 <script setup lang="ts">
+import ogImage from "~/public/og-image.png"
+
 useHead({
   title: "Submit - ChordHub",
-  meta: [{ name: "description", content: "Any song you can play." }],
+  meta: [
+    { name: "description", content: "Any song you can play." },
+    {
+      property: "og:image",
+      content: ogImage,
+    },
+  ],
 })
 
 const route = useRoute()
@@ -63,7 +71,7 @@ gtag("set", "page_title", "Submit")
           class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="text"
           name="title"
-          v-model="title"
+          v-model.trim="title"
           required
         />
       </div>
@@ -73,7 +81,7 @@ gtag("set", "page_title", "Submit")
           class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="text"
           name="artist"
-          v-model="artist"
+          v-model.trim="artist"
           required
         />
       </div>
@@ -83,7 +91,7 @@ gtag("set", "page_title", "Submit")
           class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="url"
           name="source"
-          v-model="source"
+          v-model.trim="source"
         />
       </div>
       <div>

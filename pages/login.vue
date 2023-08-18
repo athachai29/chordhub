@@ -1,7 +1,15 @@
 <script setup lang="ts">
+import ogImage from "~/public/og-image.png"
+
 useHead({
   title: "Login - ChordHub",
-  meta: [{ name: "description", content: "Any song you can play." }],
+  meta: [
+    { name: "description", content: "Any song you can play." },
+    {
+      property: "og:image",
+      content: ogImage,
+    },
+  ],
 })
 
 definePageMeta({
@@ -77,7 +85,7 @@ gtag("set", "page_title", "Login")
                 autocomplete="email"
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-                v-model="form.username"
+                v-model.trim="form.username"
               />
             </div>
           </div>
@@ -100,7 +108,7 @@ gtag("set", "page_title", "Login")
                 autocomplete="current-password"
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-                v-model="form.password"
+                v-model.trim="form.password"
               />
             </div>
           </div>

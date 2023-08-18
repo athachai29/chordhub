@@ -1,7 +1,15 @@
 <script setup lang="ts">
+import ogImage from "~/public/og-image.png"
+
 useHead({
   title: "Profile - ChordHub",
-  meta: [{ name: "description", content: "Any song you can play." }],
+  meta: [
+    { name: "description", content: "Any song you can play." },
+    {
+      property: "og:image",
+      content: ogImage,
+    },
+  ],
 })
 
 const { data } = useAuth()
