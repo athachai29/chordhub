@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ogImage from "~/public/og-image.jpg"
+import ogImage from "~/public/og-image.webp"
 
 useHead({
   title: "Artist - ChordHub",
