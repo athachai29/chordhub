@@ -1,12 +1,19 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router"
+import ogImage from "~/public/og-image.png"
+
 useHead({
   title: "ChordHub",
-  meta: [{ name: "description", content: "Any song you can play." }],
+  meta: [
+    { name: "description", content: "Any song you can play." },
+    {
+      property: "og:image",
+      content: ogImage,
+    },
+  ],
 })
 
 definePageMeta({ auth: false })
-
-import { useRouter } from "vue-router"
 
 const router = useRouter()
 const { data } = useAuth()
