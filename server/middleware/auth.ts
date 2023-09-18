@@ -6,20 +6,23 @@ export default defineEventHandler(async (event) => {
    */
   const cookies = parseCookies(event)
   event.node.req.headers.authorization = `Bearer ${cookies["next-auth.session-token"]}`
-
   const user = await getToken({
     req: event.node.req,
     secret: useRuntimeConfig().authSecret,
     logger: console,
   })
 
-  if (!user) {
-    return {
-      status: 401,
-      success: false,
-      message: "Unauthorized",
-    }
-  }
+  /**
+   * If the user is not authenticated, return early
+   * Disable this for now, because it's causing issues with the API
+   */
+  // if (!user) {
+  //   return {
+  //     status: 401,
+  //     success: false,
+  //     message: "Unauthorized",
+  //   }
+  // }
 
   /**
    * Add the user to the event context, for use in the API route
