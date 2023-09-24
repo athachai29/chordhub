@@ -99,7 +99,7 @@ gtag("event", "search", {
     <div class="flex flex-row justify-between">
       <h1 v-if="isLoading" class="text-3xl">Searching...</h1>
       <div v-if="!isLoading">
-        <h1 v-if="results.length > 0">
+        <h1 v-if="results?.length > 0">
           Found {{ results.length }} results for "{{ resultForKeyword }}"
         </h1>
         <div v-else>
