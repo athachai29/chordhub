@@ -31,15 +31,22 @@ type Song = {
   songId: string
 } | null
 
+type UserProps = {
+  isFav: boolean
+} | null
+
 const route = useRoute()
 
 const result = ref(null as Song)
+const userProps = ref(null as UserProps)
 
 const onFetch = async () => {
   const { data }: any = await useFetch(`/api/songs/${route.query.id}`)
 
   result.value = data.value.data
   result.value!.sheet = formatter(data.value.data.sheet)
+
+  userProps.value = data.value.userProps
 }
 
 onFetch()
@@ -64,6 +71,22 @@ const formatter = (sheet: [string]) => {
   })
 
   return newSheet
+}
+
+const onAddToFav = async () => {
+  await useFetch(`/api/users/favorites/${result.value?._id}`, {
+    method: "PUT",
+  })
+
+  onFetch()
+}
+
+const onRemoveFromFav = async () => {
+  await useFetch(`/api/users/favorites/${result.value?._id}`, {
+    method: "DELETE",
+  })
+
+  onFetch()
 }
 
 /**
@@ -94,8 +117,18 @@ gtag("set", "page_title", "Song")
       :to="{ name: 'editor', query: { id: result.songId } }"
       >Found mistake?</NuxtLink
     >
-    <button class="flex gap-2 underline">
+    <button
+      v-if="!userProps!.isFav"
+      @click="onAddToFav"
+      class="flex gap-2 underline"
+    >
       <div>Add to favorites</div>
+      <div>
+        <img class="h-6 w-6" src="~/assets/icons/heart.svg" alt="" />
+      </div>
+    </button>
+    <button v-else @click="onRemoveFromFav" class="flex gap-2 underline">
+      <div>Remove from favorites</div>
       <div>
         <img class="h-6 w-6" src="~/assets/icons/heart.svg" alt="" />
       </div>
