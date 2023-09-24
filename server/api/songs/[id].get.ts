@@ -1,8 +1,11 @@
 import mongoose from "mongoose"
 
 import songModel from "../../models/songs"
+import userModel from "../../models/users"
 
 export default defineEventHandler(async (event) => {
+  const { sub: userId } = event.context.auth
+
   const { id } = getRouterParams(event)
 
   const session = await mongoose.startSession()
@@ -24,8 +27,16 @@ export default defineEventHandler(async (event) => {
     }
   }
 
+  /**
+   * Check out this song as a favorite of this user.
+   */
+  const isFav = (await userModel.exists({ _id: userId, favorites: song!.id }))
+    ? true
+    : false
+
   return {
     success: true,
+    userProps: { isFav },
     data: song,
   }
 })
