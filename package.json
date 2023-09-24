@@ -11,6 +11,7 @@
     "typecheck": "nuxt typecheck"
   },
   "devDependencies": {
+    "@heroicons/vue": "^2.0.18",
     "@nuxt/devtools": "latest",
     "@pinia/nuxt": "^0.4.11",
     "@sidebase/nuxt-auth": "0.5.0",

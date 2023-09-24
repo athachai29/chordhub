@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ogImage from "/og-image.webp"
+import { HeartIcon } from "@heroicons/vue/24/outline"
 
 useHead({
   title: "Song - ChordHub",
@@ -124,13 +125,13 @@ gtag("set", "page_title", "Song")
     >
       <div>Add to favorites</div>
       <div>
-        <img class="h-6 w-6" src="~/assets/icons/heart.svg" alt="" />
+        <HeartIcon class="h-6 w-6" />
       </div>
     </button>
     <button v-else @click="onRemoveFromFav" class="flex gap-2 underline">
       <div>Remove from favorites</div>
       <div>
-        <img class="h-6 w-6" src="~/assets/icons/heart.svg" alt="" />
+        <HeartIcon class="h-6 w-6 fill-current text-black" />
       </div>
     </button>
   </div>
