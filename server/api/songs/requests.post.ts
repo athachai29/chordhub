@@ -1,9 +1,9 @@
-import requestModel from "~/server/models/requests"
+import Requests from "~/server/models/requests"
 
 export default defineEventHandler(async (event) => {
   const { title, artist, source, note, type, userId } = await readBody(event)
 
-  const request = await requestModel.create({
+  const request = await Requests.create({
     title,
     artist,
     source,

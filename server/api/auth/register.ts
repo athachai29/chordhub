@@ -1,10 +1,10 @@
-import userModel from "~/server/models/users"
+import Users from "~/server/models/users"
 
 export default eventHandler(async (event) => {
   try {
     const { username, password } = await readBody(event)
 
-    await userModel.create({ email: username, password })
+    await Users.create({ email: username, password })
 
     return {
       success: true,

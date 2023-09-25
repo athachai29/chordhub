@@ -1,12 +1,12 @@
 import { getToken } from "#auth"
 
-import userModel from "~/server/models/users"
+import Users from "~/server/models/users"
 
 export default defineEventHandler(async (event) => {
   const token = await getToken({ event })
   const { id } = getRouterParams(event)
 
-  const updatedResponse = await userModel.findByIdAndUpdate(
+  const updatedResponse = await Users.findByIdAndUpdate(
     token!.id,
     {
       $pull: { favorites: id },
