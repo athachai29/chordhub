@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 
-import songModel from "../../models/songs"
-import userModel from "../../models/users"
+import songModel from "~/server/models/songs"
+import userModel from "~/server/models/users"
 
 export default defineEventHandler(async (event) => {
   const { sub: userId } = event.context.auth ?? {}

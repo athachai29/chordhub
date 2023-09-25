@@ -1,4 +1,4 @@
-import requestModel from "../../../models/requests"
+import requestModel from "~/server/models/requests"
 
 export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event)

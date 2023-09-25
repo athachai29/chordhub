@@ -1,4 +1,4 @@
-import { songs as songModel, artists as artistModel } from "../../models"
+import { songs as songModel, artists as artistModel } from "~/server/models"
 
 export default defineEventHandler(async (event) => {
   try {

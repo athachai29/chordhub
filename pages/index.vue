@@ -86,7 +86,7 @@ if (data.value?.user?.email) {
 
 <style scoped>
 .placeholder-svg::placeholder {
-  background-image: url("../assets/icons/search.svg");
+  background-image: url("~/assets/icons/search.svg");
   background-repeat: no-repeat;
   background-position: right center;
   padding-right: 2.5rem;

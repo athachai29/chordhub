@@ -1,6 +1,6 @@
 import { getToken } from "#auth"
 
-import userModel from "../../../../models/users"
+import userModel from "~/server/models/users"
 
 export default defineEventHandler(async (event) => {
   const token = await getToken({ event })
@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
     {
       $addToSet: { favorites: id },
     },
-    { new: true }
+    { new: true },
   )
   return {
     success: true,
