@@ -2,7 +2,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
 import { NuxtAuthHandler } from "#auth"
-import dbConnect from "~/server/db"
+import dbConnect from "~/server/utils/db"
 import { users as Users, accounts as Accounts } from "~/server/models"
 import CustomAdapter from "~/server/models/nextauth/customAdapter"
 
