@@ -4,7 +4,7 @@ import songModel from "../../models/songs"
 import userModel from "../../models/users"
 
 export default defineEventHandler(async (event) => {
-  const { sub: userId } = event.context.auth
+  const { sub: userId } = event.context.auth ?? {}
 
   const { id } = getRouterParams(event)
 
