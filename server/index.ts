@@ -1,4 +1,4 @@
-import db from "./db"
+import db from "~/server/db"
 
 export default async () => {
   try {
