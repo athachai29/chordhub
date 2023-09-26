@@ -45,34 +45,12 @@ const onFetch = async () => {
   const { data }: any = await useFetch(`/api/songs/${route.query.id}`)
 
   result.value = data.value.data
-  result.value!.sheet = formatter(data.value.data.sheet)
+  result.value!.sheet = data.value.data.sheet
 
   userProps.value = data.value.userProps
 }
 
 onFetch()
-
-const formatter = (sheet: [string]) => {
-  let newSheet = [] as string[]
-
-  sheet.forEach((element) => {
-    if (
-      element.includes("INTRO") ||
-      element.includes("INSTRUC") ||
-      element.includes("INSTRU")
-    ) {
-      element = element.replaceAll("[", "").replaceAll("]", "")
-    } else {
-      element = element
-        .replaceAll("][", "&nbsp;&nbsp;&nbsp;&nbsp;")
-        .replaceAll("[", "<span class='chord'><span class='inner'>")
-        .replaceAll("]", "</span></span>")
-    }
-    newSheet.push(element)
-  })
-
-  return newSheet
-}
 
 const onAddToFav = async () => {
   await useFetch(`/api/users/favorites/${result.value?._id}`, {
@@ -108,11 +86,7 @@ gtag("set", "page_title", "Song")
     </div>
     <div class="mt-2">Key: {{ result.params.key }}</div>
     <div v-if="result.params.capo !== 0">Capo: {{ result.params.capo }}</div>
-    <ul class="my-6 font-mono">
-      <li v-for="(line, index) in result.sheet" :key="index">
-        <div class="mb-4" v-html="line"></div>
-      </li>
-    </ul>
+    <Sheet :rawSheet="result.sheet" />
     <NuxtLink
       class="underline"
       :to="{ name: 'editor', query: { id: result.songId } }"
@@ -136,15 +110,3 @@ gtag("set", "page_title", "Song")
     </button>
   </div>
 </template>
-
-<style>
-.chord {
-  position: absolute;
-}
-
-.chord .inner {
-  position: relative;
-  top: -1.25em;
-  font-family: "Roboto Mono", monospace;
-}
-</style>
