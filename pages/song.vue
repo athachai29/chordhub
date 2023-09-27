@@ -36,13 +36,11 @@ type UserProps = {
   isFav: boolean
 } | null
 
-const route = useRoute()
-
 const result = ref(null as Song)
 const userProps = ref(null as UserProps)
 
 const onFetch = async () => {
-  const { data }: any = await useFetch(`/api/songs/${route.query.id}`)
+  const { data }: any = await useFetch(`/api/songs/${useRoute().query.id}`)
 
   result.value = data.value.data
   result.value!.sheet = data.value.data.sheet

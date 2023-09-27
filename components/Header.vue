@@ -1,10 +1,8 @@
 <script setup lang="ts">
 const { status, data, signOut } = useAuth()
 
-const router = useRouter()
-
 const onGoToLoginPage = () => {
-  router.push("/login")
+  useRouter().push("/login")
 }
 
 // const menu = ref(null)

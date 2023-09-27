@@ -26,11 +26,8 @@ type Song = {
   songId: string
 }
 
-const route = useRoute()
-const router = useRouter()
-
-const keyword = ref(route.query.search as string)
-const resultForKeyword = ref(route.query.search as string)
+const keyword = ref(useRoute().query.search as string)
+const resultForKeyword = ref(useRoute().query.search as string)
 const results = ref([] as Song[])
 const isLoading = ref(false)
 
@@ -51,15 +48,15 @@ const onSearch = () => {
 
   onFetch()
   resultForKeyword.value = keyword.value.trim()
-  router.push({ name: "results", query: { search: keyword.value.trim() } })
+  useRouter().push({ name: "results", query: { search: keyword.value.trim() } })
 }
 
 const onSelectedSong = (song: Song) => {
-  router.push({ name: "song", query: { id: song.songId } })
+  useRouter().push({ name: "song", query: { id: song.songId } })
 }
 
 const onSelectedArtist = (artist) => {
-  router.push({ name: "artist", query: { id: artist.artistId } })
+  useRouter().push({ name: "artist", query: { id: artist.artistId } })
 }
 
 /**

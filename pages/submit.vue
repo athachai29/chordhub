@@ -12,13 +12,10 @@ useHead({
   ],
 })
 
-const route = useRoute()
-const router = useRouter()
-
-const title = ref(route.query.title as string)
-const artist = ref(route.query.artist as string)
-const source = ref(route.query.source as string)
-const note = ref(route.query.note as string)
+const title = ref(useRoute().query.title as string)
+const artist = ref(useRoute().query.artist as string)
+const source = ref(useRoute().query.source as string)
+const note = ref(useRoute().query.note as string)
 const isPreview = ref(false)
 const draftSheet = ref("" as string | undefined)
 const previewSheet = ref([] as string[])
@@ -51,7 +48,7 @@ const formatter = (sheet: string[]) => {
 }
 
 const onSubmit = async () => {
-  router.push({ name: "success" })
+  useRouter().push({ name: "success" })
 }
 
 /**

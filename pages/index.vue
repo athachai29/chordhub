@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router"
 import ogImage from "/og-image.webp"
 
 useHead({
@@ -15,7 +14,6 @@ useHead({
 
 definePageMeta({ auth: false })
 
-const router = useRouter()
 const { data } = useAuth()
 
 // import { useKeywordStore } from "../store/keyword";
@@ -28,7 +26,7 @@ const keyword = ref("")
 const onSearch = () => {
   if (keyword.value.trim() === "") return
 
-  router.push({ name: "results", query: { search: keyword.value.trim() } })
+  useRouter().push({ name: "results", query: { search: keyword.value.trim() } })
 }
 
 // const onClaer = () => {

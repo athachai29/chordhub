@@ -14,10 +14,7 @@ useHead({
 
 const { data } = useAuth()
 
-const route = useRoute()
-const router = useRouter()
-
-const title = ref(route.query.title as string)
+const title = ref(useRoute().query.title as string)
 const artist = ref("" as string)
 const source = ref("" as string)
 const note = ref("" as string)
@@ -38,7 +35,7 @@ const onSubmit = async () => {
     }),
   })
 
-  router.push({ name: "success" })
+  useRouter().push({ name: "success" })
 }
 
 /**
