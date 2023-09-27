@@ -1,10 +1,8 @@
 import SheetFormatter from "./SheetFormatter"
 
 class IFormat extends SheetFormatter {
-  format(sheet: string[]): string[] {
-    const newSheet = super.parser(sheet)
-
-    return newSheet
+  public format(sheet: string[]): string[] {
+    return super.parser(sheet)
   }
 }
 

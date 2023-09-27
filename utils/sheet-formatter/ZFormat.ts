@@ -1,7 +1,7 @@
 import SheetFormatter from "./SheetFormatter"
 
 class ZFormat extends SheetFormatter {
-  format(sheet: string[]): string[] {
+  public format(sheet: string[]): string[] {
     const newSheet = super.parser(sheet)
 
     // TODO: Combine some lyric parts to make it wider.
