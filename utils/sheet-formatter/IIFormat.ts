@@ -2,8 +2,11 @@ import SheetFormatter from "./SheetFormatter"
 
 class IIFormat extends SheetFormatter {
   format(sheet: string[]): string[] {
-    // TODO: Implement formatting process here
-    return sheet
+    const newSheet = super.parser(sheet)
+
+    // TODO: Combine some lyric parts to make it wider.
+
+    return newSheet
   }
 }
 
