@@ -30,7 +30,7 @@ const onGoToLoginPage = () => {
       <button
         v-if="
           status === 'unauthenticated' &&
-          router.currentRoute.value.path !== '/login'
+          useRouter().currentRoute.value.path !== '/login'
         "
         class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
         @click="onGoToLoginPage"
@@ -40,7 +40,7 @@ const onGoToLoginPage = () => {
       <button
         v-else-if="
           status === 'authenticated' &&
-          router.currentRoute.value.path !== '/login'
+          useRouter().currentRoute.value.path !== '/login'
         "
         class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
         @click="() => signOut({ callbackUrl: '/' })"
