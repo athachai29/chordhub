@@ -76,7 +76,6 @@ gtag("set", "page_title", "Login")
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" @submit.prevent="onLogin">
           <div>
-            <label for="email" class="block">Email</label>
             <div class="mt-2">
               <input
                 id="email"
@@ -86,21 +85,13 @@ gtag("set", "page_title", "Login")
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
                 v-model.trim="form.username"
+                placeholder="Email"
               />
             </div>
           </div>
           <div>
-            <div class="flex items-center justify-between">
-              <label
-                for="password"
-                class="block text-sm font-medium leading-6 text-gray-900"
-                >Password</label
-              >
-              <div class="text-sm">
-                <a href="#" class="font-semibold">Forgot password?</a>
-              </div>
-            </div>
-            <div class="mt-2">
+            <div class="flex items-center justify-between"></div>
+            <div>
               <input
                 id="password"
                 name="password"
@@ -109,7 +100,11 @@ gtag("set", "page_title", "Login")
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
                 v-model.trim="form.password"
+                placeholder="Password"
               />
+            </div>
+            <div class="mt-1 text-right text-sm">
+              <a href="#" class="font-semibold">Forgot password?</a>
             </div>
           </div>
           <div>
@@ -133,6 +128,7 @@ gtag("set", "page_title", "Login")
             <div class="flex-grow border-t"></div>
           </div>
           <div>
+            <!-- Disabled facebook button for now -->
             <!-- <button
               type="submit"
               class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#3b5998] hover:text-white"
