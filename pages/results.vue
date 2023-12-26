@@ -105,12 +105,14 @@ gtag("event", "search", {
           </div>
           <div class="flex gap-4">
             <NuxtLink
-              class="hover:underline"
+              class="text-blue-600 hover:underline"
               :to="{ name: 'request', query: { title: resultForKeyword } }"
-              >Request this song</NuxtLink
             >
+              Request this song
+            </NuxtLink>
+            or
             <NuxtLink
-              class="hover:underline"
+              class="text-blue-600 hover:underline"
               :to="{ name: 'submit', query: { title: resultForKeyword } }"
               >Submit your version</NuxtLink
             >
