@@ -2,23 +2,40 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
 import { NuxtAuthHandler } from "#auth"
-import Users from "../../models/users"
-import CustomAdapter from "../../models/nextauth/customAdapter"
-import dbConnect from "../../db"
-import Accounts from "../../models/accounts"
+import dbConnect from "~/server/utils/db"
+import { users as Users, accounts as Accounts } from "~/server/models"
+import CustomAdapter from "~/server/models/nextauth/customAdapter"
 
+/**
+ * @see https://next-auth.js.org/configuration/options#options
+ */
 export default NuxtAuthHandler({
   adapter: CustomAdapter(dbConnect, { Accounts, Users }),
   pages: {
     signIn: "/login",
     signOut: "/logout",
-    error: "/auth/error", // Error code passed in query string as ?error=
-    verifyRequest: "/auth/verify-request", // (used for check email message)
+    // error: "/auth/error", // Error code passed in query string as ?error=
+    // verifyRequest: "/auth/verify-request", // (used for check email message)
     // newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({
+      user,
+      account,
+      profile,
+      email,
+      credentials,
+    }: {
+      user: any
+      account: {
+        provider: string
+      }
+      profile: any
+      email: any
+      credentials: any
+    }) {
       try {
+        // TODO: Should do something for collecting user data here?
         if (account.provider === "credentials") {
           // console.log("signIn", { user, account, profile, email, credentials })
         }
@@ -32,7 +49,7 @@ export default NuxtAuthHandler({
         return false
       }
     },
-    async redirect({ url, baseUrl }) {
+    async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
       try {
         return baseUrl
       } catch (err) {
@@ -40,7 +57,22 @@ export default NuxtAuthHandler({
         return baseUrl
       }
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({
+      token,
+      user,
+      account,
+      profile,
+      isNewUser,
+    }: {
+      token: {
+        id: string
+        role: string
+      }
+      user: any
+      account: any
+      profile: any
+      isNewUser: boolean
+    }) {
       try {
         if (user) {
           token.id = user.id
@@ -53,7 +85,20 @@ export default NuxtAuthHandler({
         return token
       }
     },
-    async session({ session, user, token }) {
+    async session({
+      session,
+      user,
+      token,
+    }: {
+      session: {
+        user: {
+          id: string
+          role: string
+        }
+      }
+      user: any
+      token: any
+    }) {
       try {
         if (token) {
           session.user.id = token.id
@@ -74,9 +119,12 @@ export default NuxtAuthHandler({
         const { username, password } = credentials
 
         const user = await Users.findOne({ email: username })
+        // TODO: Add error handling
         if (!user) return null
 
-        const validate = await user?.verifyPassword(password)
+        const validate = await user.verifyPassword(password)
+        // const validate = await user.schema.methods.verifyPassword(password)
+        // TODO: Add error handling
         if (!validate) return null
 
         user.id = user._id

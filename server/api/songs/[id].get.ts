@@ -1,7 +1,6 @@
 import mongoose from "mongoose"
 
-import songModel from "../../models/songs"
-import userModel from "../../models/users"
+import { users as Users, songs as Songs } from "~/server/models"
 
 export default defineEventHandler(async (event) => {
   const { sub: userId } = event.context.auth ?? {}
@@ -9,11 +8,10 @@ export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event)
 
   const session = await mongoose.startSession()
-  const song = await songModel
-    .findOne({ songId: id })
+  const song = await Songs.findOne({ songId: id })
     .populate("_artist")
     .session(session)
-  await songModel.updateOne(
+  await Songs.updateOne(
     { songId: id },
     { $inc: { "stats.views": 1 } },
     { session },
@@ -30,7 +28,7 @@ export default defineEventHandler(async (event) => {
   /**
    * Check out this song as a favorite of this user.
    */
-  const isFav = (await userModel.exists({ _id: userId, favorites: song!.id }))
+  const isFav = (await Users.exists({ _id: userId, favorites: song!.id }))
     ? true
     : false
 

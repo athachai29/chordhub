@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ogImage from "/og-image.webp"
+import { HeartIcon } from "@heroicons/vue/24/outline"
 
 useHead({
   title: "Song - ChordHub",
@@ -35,43 +36,19 @@ type UserProps = {
   isFav: boolean
 } | null
 
-const route = useRoute()
-
 const result = ref(null as Song)
 const userProps = ref(null as UserProps)
 
 const onFetch = async () => {
-  const { data }: any = await useFetch(`/api/songs/${route.query.id}`)
+  const { data }: any = await useFetch(`/api/songs/${useRoute().query.id}`)
 
   result.value = data.value.data
-  result.value!.sheet = formatter(data.value.data.sheet)
+  result.value!.sheet = data.value.data.sheet
 
   userProps.value = data.value.userProps
 }
 
 onFetch()
-
-const formatter = (sheet: [string]) => {
-  let newSheet = [] as string[]
-
-  sheet.forEach((element) => {
-    if (
-      element.includes("INTRO") ||
-      element.includes("INSTRUC") ||
-      element.includes("INSTRU")
-    ) {
-      element = element.replaceAll("[", "").replaceAll("]", "")
-    } else {
-      element = element
-        .replaceAll("][", "&nbsp;&nbsp;&nbsp;&nbsp;")
-        .replaceAll("[", "<span class='chord'><span class='inner'>")
-        .replaceAll("]", "</span></span>")
-    }
-    newSheet.push(element)
-  })
-
-  return newSheet
-}
 
 const onAddToFav = async () => {
   await useFetch(`/api/users/favorites/${result.value?._id}`, {
@@ -107,11 +84,7 @@ gtag("set", "page_title", "Song")
     </div>
     <div class="mt-2">Key: {{ result.params.key }}</div>
     <div v-if="result.params.capo !== 0">Capo: {{ result.params.capo }}</div>
-    <ul class="my-6 font-mono">
-      <li v-for="(line, index) in result.sheet" :key="index">
-        <div class="mb-4" v-html="line"></div>
-      </li>
-    </ul>
+    <Sheet :rawSheet="result.sheet" />
     <NuxtLink
       class="underline"
       :to="{ name: 'editor', query: { id: result.songId } }"
@@ -124,26 +97,14 @@ gtag("set", "page_title", "Song")
     >
       <div>Add to favorites</div>
       <div>
-        <img class="h-6 w-6" src="~/assets/icons/heart.svg" alt="" />
+        <HeartIcon class="h-6 w-6" />
       </div>
     </button>
     <button v-else @click="onRemoveFromFav" class="flex gap-2 underline">
       <div>Remove from favorites</div>
       <div>
-        <img class="h-6 w-6" src="~/assets/icons/heart.svg" alt="" />
+        <HeartIcon class="h-6 w-6 fill-current text-black" />
       </div>
     </button>
   </div>
 </template>
-
-<style>
-.chord {
-  position: absolute;
-}
-
-.chord .inner {
-  position: relative;
-  top: -1.25em;
-  font-family: "Roboto Mono", monospace;
-}
-</style>

@@ -1,12 +1,11 @@
-import songModel from "~/server/models/songs"
-import artistModel from "~/server/models/artists"
+import { songs as Songs, artists as Artists } from "~/server/models"
 
 export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event)
 
-  const artist = await artistModel.findOne({ artistId: id })
+  const artist = await Artists.findOne({ artistId: id })
 
-  const song = await songModel.find({ _artist: artist._id }).populate("_artist")
+  const song = await Songs.find({ _artist: artist._id }).populate("_artist")
 
   if (!song) {
     return {

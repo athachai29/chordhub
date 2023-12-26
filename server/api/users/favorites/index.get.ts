@@ -1,9 +1,9 @@
-import userModel from "../../../models/users"
+import Users from "~/server/models/users"
 
 export default defineEventHandler(async (event) => {
   const { sub: userId } = event.context.auth
 
-  const user = await userModel.findById(userId, "favorites").populate({
+  const user = await Users.findById(userId, "favorites").populate({
     path: "favorites",
     select: "title thaiName engName",
   })

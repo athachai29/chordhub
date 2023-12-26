@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router"
 import ogImage from "/og-image.webp"
 
 useHead({
@@ -15,7 +14,6 @@ useHead({
 
 definePageMeta({ auth: false })
 
-const router = useRouter()
 const { data } = useAuth()
 
 // import { useKeywordStore } from "../store/keyword";
@@ -28,7 +26,7 @@ const keyword = ref("")
 const onSearch = () => {
   if (keyword.value.trim() === "") return
 
-  router.push({ name: "results", query: { search: keyword.value.trim() } })
+  useRouter().push({ name: "results", query: { search: keyword.value.trim() } })
 }
 
 // const onClaer = () => {
@@ -57,7 +55,7 @@ if (data.value?.user?.email) {
 <template>
   <form @submit.prevent="onSearch">
     <div class="mb-2 mt-80 flex justify-center">
-      <h1 class="text-5xl">ChordHub</h1>
+      <div class="select-none text-5xl">ChordHub</div>
     </div>
     <div class="mb-4 flex justify-center">
       <input
@@ -86,7 +84,7 @@ if (data.value?.user?.email) {
 
 <style scoped>
 .placeholder-svg::placeholder {
-  background-image: url("../assets/icons/search.svg");
+  background-image: url("~/assets/icons/search.svg");
   background-repeat: no-repeat;
   background-position: right center;
   padding-right: 2.5rem;

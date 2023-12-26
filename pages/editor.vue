@@ -28,16 +28,13 @@ type Song = {
   }
 } | null
 
-const route = useRoute()
-const router = useRouter()
-
 const result = ref(null as Song)
 const isPreview = ref(false)
 const draftSheet = ref("" as string | undefined)
 const previewSheet = ref([] as string[])
 
 const onFetch = async () => {
-  const { data }: any = await useFetch(`/api/songs/${route.query.id}`)
+  const { data }: any = await useFetch(`/api/songs/${useRoute().query.id}`)
 
   result.value = data.value.data
   draftSheet.value = result.value?.sheet.join("\n")
@@ -82,7 +79,7 @@ const onSubmit = async () => {
     }),
   })
 
-  router.push({ name: "success" })
+  useRouter().push({ name: "success" })
 }
 
 /**

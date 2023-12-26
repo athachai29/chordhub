@@ -12,13 +12,15 @@ useHead({
   ],
 })
 
-const route = useRoute()
-const router = useRouter()
+type Query = {
+  title: string
+  artist: string
+  source: string
+  note: string
+}
 
-const title = ref(route.query.title as string)
-const artist = ref(route.query.artist as string)
-const source = ref(route.query.source as string)
-const note = ref(route.query.note as string)
+const query = ref(useRoute().query as Query)
+
 const isPreview = ref(false)
 const draftSheet = ref("" as string | undefined)
 const previewSheet = ref([] as string[])
@@ -51,7 +53,7 @@ const formatter = (sheet: string[]) => {
 }
 
 const onSubmit = async () => {
-  router.push({ name: "success" })
+  useRouter().push({ name: "success" })
 }
 
 /**
@@ -71,7 +73,7 @@ gtag("set", "page_title", "Submit")
           class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="text"
           name="title"
-          v-model.trim="title"
+          v-model.trim="query.title"
           required
         />
       </div>
@@ -81,7 +83,7 @@ gtag("set", "page_title", "Submit")
           class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="text"
           name="artist"
-          v-model.trim="artist"
+          v-model.trim="query.artist"
           required
         />
       </div>
@@ -91,7 +93,7 @@ gtag("set", "page_title", "Submit")
           class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="url"
           name="source"
-          v-model.trim="source"
+          v-model.trim="query.source"
         />
       </div>
       <div>
@@ -100,7 +102,7 @@ gtag("set", "page_title", "Submit")
           class="w-full resize-none border border-black px-4 py-2 focus:outline-none"
           name="note"
           rows="2"
-          v-model="note"
+          v-model="query.note"
         ></textarea>
       </div>
       <textarea
