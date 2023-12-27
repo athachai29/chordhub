@@ -15,20 +15,27 @@ useHead({
 definePageMeta({ auth: false })
 
 type Song = {
-  _id: string
   title: string
-  artist: string
-  sheet: string[]
   _artist: {
     thaiName: string
     engName: string
   }
   songId: string
+  resultType: string
 }
+
+type Artist = {
+  thaiName: string
+  engName: string
+  artistId: string
+  resultType: string
+}
+
+type Result = Song | Artist
 
 const keyword = ref(useRoute().query.search as string)
 const resultForKeyword = ref(useRoute().query.search as string)
-const results = ref([] as Song[])
+const results = ref<Result[]>([])
 const isLoading = ref(false)
 
 const onFetch = async () => {
@@ -51,12 +58,16 @@ const onSearch = () => {
   useRouter().push({ name: "results", query: { search: keyword.value.trim() } })
 }
 
-const onSelectedSong = (song: Song) => {
-  useRouter().push({ name: "song", query: { id: song.songId } })
+const onSelectedSong = (song: Result) => {
+  useRouter().push({ name: "song", query: { id: (song as Song).songId } })
 }
 
-const onSelectedArtist = (artist) => {
-  useRouter().push({ name: "artist", query: { id: artist.artistId } })
+const onSelectedArtist = (artist: Result) => {
+  console.log("artist", artist)
+  useRouter().push({
+    name: "artist",
+    query: { id: (artist as Artist).artistId },
+  })
 }
 
 /**
@@ -122,7 +133,7 @@ gtag("event", "search", {
     </div>
     <ul class="flex w-3/5 flex-col gap-2">
       <li
-        v-for="(result, index) in results"
+        v-for="(result, index) in results || []"
         :key="index"
         class="border-2 border-black p-4 hover:cursor-pointer hover:bg-black hover:text-white"
       >
@@ -131,11 +142,14 @@ gtag("event", "search", {
           @click="() => onSelectedSong(result)"
         >
           <div class="flex justify-between">
-            <div class="md:text-2xl">{{ result.title }}</div>
+            <!-- eslint-disable-next-line vue/no-parsing-error -->
+            <div class="md:text-2xl">{{ (result as Song).title }}</div>
             <div class="text-xs">Song</div>
           </div>
+          <!-- prettier-ignore -->
           <div class="md:text-xl">
-            {{ result._artist.thaiName || result._artist.engName }}
+            <!-- eslint-disable-next-line vue/no-parsing-error -->
+            {{ (result as Song)._artist.thaiName || (result as Song)._artist.engName }}
           </div>
         </div>
         <div
@@ -144,7 +158,8 @@ gtag("event", "search", {
           @click="() => onSelectedArtist(result)"
         >
           <div class="md:text-2xl">
-            {{ result.engName || result.thaiName }}
+            <!-- eslint-disable-next-line vue/no-parsing-error -->
+            {{ (result as Artist).engName || (result as Artist).thaiName }}
           </div>
           <div class="text-xs">Artist</div>
         </div>
