@@ -22,7 +22,15 @@ definePageMeta({
 const form = ref({
   username: "",
   password: "",
+  confirmPassword: "",
   callbackUrl: (useRouter().options.history.state.back as string) || "/",
+})
+
+const onConfirmPassword = computed(() => {
+  return form.value.password !== form.value.confirmPassword &&
+    form.value.confirmPassword
+    ? "Passwords do not match"
+    : ""
 })
 
 const onRegisterWithCredentials = async () => {
@@ -30,6 +38,8 @@ const onRegisterWithCredentials = async () => {
    * Google Analytics
    */
   gtag("event", "register", { method: "Credentials" })
+
+  delete (form.value as { confirmPassword?: string }).confirmPassword
 
   await useFetch("/api/auth/register", {
     method: "POST",
@@ -114,9 +124,12 @@ gtag("set", "page_title", "Login")
                 autocomplete="current-password"
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-                v-model.trim="form.password"
+                v-model.trim="form.confirmPassword"
                 placeholder="Confirm your entered password"
               />
+            </div>
+            <div class="text-right text-xs text-red-600">
+              {{ onConfirmPassword }}
             </div>
           </div>
           <div>
