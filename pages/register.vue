@@ -82,9 +82,9 @@ const onRegisterWithCredentials = async () => {
     body: JSON.stringify(credentials),
   })
 
-  // await useAuth().signIn("credentials", credentials)
+  await useAuth().signIn("credentials", credentials)
 
-  // useRouter().push("/")
+  useRouter().push("/")
 }
 
 const onRegisterWithGoogle = async () => {
