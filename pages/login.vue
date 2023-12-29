@@ -119,7 +119,7 @@ gtag("set", "page_title", "Login")
               v-if="useRoute().query.error"
               class="mt-2 text-right text-red-600"
             >
-              Username or password is incorrect
+              Email or password is incorrect
             </div>
           </div>
           <div class="relative flex items-center py-5">

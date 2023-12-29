@@ -142,14 +142,14 @@ gtag("event", "search", {
           @click="() => onSelectedSong(result)"
         >
           <div class="flex justify-between">
-            <!-- eslint-disable-next-line vue/no-parsing-error -->
             <div class="md:text-2xl">{{ (result as Song).title }}</div>
             <div class="text-xs">Song</div>
           </div>
-          <!-- prettier-ignore -->
           <div class="md:text-xl">
-            <!-- eslint-disable-next-line vue/no-parsing-error -->
-            {{ (result as Song)._artist.thaiName || (result as Song)._artist.engName }}
+            {{
+              (result as Song)._artist.thaiName ||
+              (result as Song)._artist.engName
+            }}
           </div>
         </div>
         <div
@@ -158,7 +158,6 @@ gtag("event", "search", {
           @click="() => onSelectedArtist(result)"
         >
           <div class="md:text-2xl">
-            <!-- eslint-disable-next-line vue/no-parsing-error -->
             {{ (result as Artist).engName || (result as Artist).thaiName }}
           </div>
           <div class="text-xs">Artist</div>

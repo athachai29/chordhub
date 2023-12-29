@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ogImage from "/og-image.webp"
+import { isEmailValid, isPasswordValid } from "@/utils/validators"
 
 useHead({
   title: "Register - ChordHub",
@@ -20,26 +21,70 @@ definePageMeta({
 })
 
 const form = ref({
-  username: "",
+  email: "",
   password: "",
-  callbackUrl: (useRouter().options.history.state.back as string) || "/",
+  confirmPassword: "",
+  isEmailExist: false,
+})
+
+const onValidateEmail = computed(() => {
+  return form.value.email && !isEmailValid(form.value.email)
+    ? "Please enter a valid email address"
+    : ""
+})
+
+const onEmailChecking = async () => {
+  const res = await useFetch("/api/auth/check-email", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: form.value.email }),
+  })
+
+  form.value.isEmailExist = res.data.value?.data?.exists || false
+}
+
+const onValidatePassword = computed(() => {
+  return form.value.password && !isPasswordValid(form.value.password)
+    ? "Password must be at least 8 characters"
+    : ""
+})
+
+const onConfirmPassword = computed(() => {
+  return form.value.password !== form.value.confirmPassword &&
+    form.value.confirmPassword
+    ? "Passwords does not match"
+    : ""
 })
 
 const onRegisterWithCredentials = async () => {
+  if (
+    !isEmailValid(form.value.email) ||
+    !isPasswordValid(form.value.password) ||
+    form.value.password !== form.value.confirmPassword
+  ) {
+    return
+  }
+
   /**
    * Google Analytics
    */
   gtag("event", "register", { method: "Credentials" })
 
+  const credentials = {
+    email: form.value.email,
+    password: form.value.password,
+    callbackUrl: (useRouter().options.history.state.back as string) || "/",
+  }
+
   await useFetch("/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(form.value),
+    body: JSON.stringify(credentials),
   })
 
-  await useAuth().signIn("credentials", form.value)
+  // await useAuth().signIn("credentials", credentials)
 
-  useRouter().push("/")
+  // useRouter().push("/")
 }
 
 const onRegisterWithGoogle = async () => {
@@ -63,8 +108,7 @@ gtag("set", "page_title", "Login")
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" @submit.prevent="onRegisterWithCredentials">
           <div>
-            <label for="email" class="block">Email</label>
-            <div class="mt-2">
+            <div>
               <input
                 id="email"
                 name="email"
@@ -72,20 +116,19 @@ gtag("set", "page_title", "Login")
                 autocomplete="email"
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-                v-model.trim="form.username"
-                placeholder="Enter email"
+                v-model.trim="form.email"
+                placeholder="Email"
+                @blur="() => onEmailChecking()"
               />
+            </div>
+            <div class="text-right text-xs text-red-600">
+              {{ onValidateEmail }}
+              {{ form.isEmailExist ? "Email already exists" : "" }}
             </div>
           </div>
           <div>
-            <div class="flex items-center justify-between">
-              <label
-                for="password"
-                class="block text-sm font-medium leading-6 text-gray-900"
-                >Password</label
-              >
-            </div>
-            <div class="mt-2">
+            <div class="flex items-center justify-between"></div>
+            <div>
               <input
                 id="password"
                 name="password"
@@ -94,29 +137,29 @@ gtag("set", "page_title", "Login")
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
                 v-model.trim="form.password"
-                placeholder="Enter password"
+                placeholder="Password"
               />
+            </div>
+            <div class="text-right text-xs text-red-600">
+              {{ onValidatePassword }}
             </div>
           </div>
           <div>
-            <div class="flex items-center justify-between">
-              <label
-                for="password"
-                class="block text-sm font-medium leading-6 text-gray-900"
-                >Confirm Password</label
-              >
-            </div>
-            <div class="mt-2">
+            <div class="flex items-center justify-between"></div>
+            <div>
               <input
-                id="password"
+                id="confirmPassword"
                 name="password"
                 type="password"
                 autocomplete="current-password"
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-                v-model.trim="form.password"
-                placeholder="Confirm your entered password"
+                v-model.trim="form.confirmPassword"
+                placeholder="Confirm password"
               />
+            </div>
+            <div class="text-right text-xs text-red-600">
+              {{ onConfirmPassword }}
             </div>
           </div>
           <div>
@@ -130,7 +173,7 @@ gtag("set", "page_title", "Login")
               v-if="useRoute().query.error"
               class="mt-2 text-right text-red-600"
             >
-              Username or password is incorrect
+              {{ useRoute().query.error }}
             </div>
           </div>
           <div class="relative flex items-center py-5">

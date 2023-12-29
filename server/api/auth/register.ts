@@ -2,15 +2,15 @@ import Users from "~/server/models/users"
 
 export default eventHandler(async (event) => {
   try {
-    const { username, password } = await readBody(event)
+    const { email, password } = await readBody(event)
 
-    await Users.create({ email: username, password })
+    await Users.create({ email, password })
 
     return {
       success: true,
       body: { message: "User created" },
     }
-  } catch (err) {
+  } catch (err: any) {
     return {
       success: false,
       body: { message: err.message },
