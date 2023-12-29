@@ -116,9 +116,9 @@ export default NuxtAuthHandler({
   providers: [
     CredentialsProvider.default({
       async authorize(credentials: any, req: any) {
-        const { username, password } = credentials
+        const { email, password } = credentials
 
-        const user = await Users.findOne({ email: username })
+        const user = await Users.findOne({ email: email })
         // TODO: Add error handling
         if (!user) return null
 

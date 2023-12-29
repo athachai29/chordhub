@@ -20,9 +20,8 @@ definePageMeta({
 })
 
 const form = ref({
-  username: "",
+  email: "",
   password: "",
-  callbackUrl: (useRouter().options.history.state.back as string) || "/",
 })
 const onLoading = ref(false)
 
@@ -34,7 +33,13 @@ const onLogin = async () => {
    */
   gtag("event", "login", { method: "Credentials" })
 
-  await useAuth().signIn("credentials", form.value)
+  const credentials = {
+    email: form.value.email,
+    password: form.value.password,
+    callbackUrl: (useRouter().options.history.state.back as string) || "/",
+  }
+
+  await useAuth().signIn("credentials", credentials)
   onLoading.value = false
 }
 
@@ -84,7 +89,7 @@ gtag("set", "page_title", "Login")
                 autocomplete="email"
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-                v-model.trim="form.username"
+                v-model.trim="form.email"
                 placeholder="Email"
               />
             </div>
