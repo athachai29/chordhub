@@ -49,6 +49,10 @@ const onPreview = () => {
   isPreview.value = !isPreview.value
 }
 
+const onSaveDraft = async () => {
+  // TODO: Save the user draft to the database
+}
+
 const onSubmit = async () => {
   // TODO: Send the request to an admin and wait for approval
 
@@ -92,9 +96,9 @@ gtag("set", "page_title", "Editor")
       <div class="flex gap-2">
         <button
           class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-          @click="onSubmit"
+          @click="onSaveDraft"
         >
-          Save
+          Save Draft
         </button>
         <button
           class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
