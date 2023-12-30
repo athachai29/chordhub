@@ -3,7 +3,14 @@ import ogImage from "/og-image.webp"
 import { HeartIcon } from "@heroicons/vue/24/outline"
 
 useHead({
-  title: "Song - ChordHub",
+  // FIXME: It's still not dynamic when redirect from results page
+  titleTemplate() {
+    if (result.value) {
+      return `${result.value.title} - ChordHub`
+    }
+
+    return `Song - ChordHub`
+  },
   meta: [
     { name: "description", content: "Any song you can play." },
     {
@@ -90,6 +97,7 @@ gtag("set", "page_title", "Song")
       :to="{ name: 'editor', query: { id: result.songId } }"
       >Found mistake?</NuxtLink
     >
+    <!-- Begin: Favorite Section -->
     <button
       v-if="!userProps!.isFav"
       @click="onAddToFav"
@@ -106,5 +114,7 @@ gtag("set", "page_title", "Song")
         <HeartIcon class="h-6 w-6 fill-current text-black" />
       </div>
     </button>
+    <!-- End: Favorite Section -->
   </div>
+  <!-- FIXME: Fix wanring in browser console (Hydration node mismatch) -->
 </template>
