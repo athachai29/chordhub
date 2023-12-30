@@ -81,7 +81,7 @@ gtag("set", "page_title", "Request")
       <div>
         <label for="note">Note</label>
         <textarea
-          class="w-full resize-none border border-black px-4 py-2"
+          class="w-full resize-none rounded-none border border-black px-4 py-2 focus:outline-none"
           name="note"
           rows="2"
           v-model.trim="note"
