@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import ogImage from "/og-image.webp"
 
+// TODO: Add description in title for display google search result
+
 useHead({
   title: "ChordHub",
   meta: [
@@ -26,7 +28,10 @@ const keyword = ref("")
 const onSearch = () => {
   if (keyword.value.trim() === "") return
 
-  useRouter().push({ name: "results", query: { search: keyword.value.trim() } })
+  navigateTo({
+    path: "/results",
+    query: { search: keyword.value.trim() },
+  })
 }
 
 // const onClaer = () => {
