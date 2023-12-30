@@ -20,18 +20,19 @@ const source = ref("" as string)
 const note = ref("" as string)
 
 const onSubmit = async () => {
-  await useFetch("/api/songs/request", {
+  await useFetch("/api/songs/requests", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      userId: data.value.uid,
+      // @ts-ignore: It's an error from the next-auth package
+      userId: data?.value?.id,
       title: title.value,
       artist: artist.value,
       source: source.value,
       note: note.value,
-      type: "SONG_TITLE",
+      type: "NEW_SONG",
     }),
   })
 
