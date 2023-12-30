@@ -55,17 +55,22 @@ const onSearch = () => {
 
   onFetch()
   resultForKeyword.value = keyword.value.trim()
-  useRouter().push({ name: "results", query: { search: keyword.value.trim() } })
+  navigateTo({
+    path: "/results",
+    query: { search: keyword.value.trim() },
+  })
 }
 
 const onSelectedSong = (song: Result) => {
-  useRouter().push({ name: "song", query: { id: (song as Song).songId } })
+  navigateTo({
+    path: "/song",
+    query: { id: (song as Song).songId },
+  })
 }
 
 const onSelectedArtist = (artist: Result) => {
-  console.log("artist", artist)
-  useRouter().push({
-    name: "artist",
+  navigateTo({
+    path: "/artist",
     query: { id: (artist as Artist).artistId },
   })
 }
