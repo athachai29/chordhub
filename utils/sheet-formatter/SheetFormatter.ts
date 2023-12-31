@@ -1,8 +1,8 @@
 abstract class SheetFormatter {
-  private notLyricKeywords = ["INTRO", "INSTRUC", "INSTRU"]
+  private notLyricKeywords = ["INTRO", "INSTRUC", "INSTRU", "|"]
 
   private removeSquareBrackets(part: string) {
-    return part.replaceAll("[\\[\\]]", "")
+    return part.replaceAll("[", "").replaceAll("]", " ").replaceAll("|", "| ")
   }
 
   private applyChordStyling(part: string) {
