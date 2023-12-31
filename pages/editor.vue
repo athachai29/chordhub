@@ -44,34 +44,18 @@ onFetch()
 
 const onPreview = () => {
   if (!isPreview.value) {
-    previewSheet.value = formatter(draftSheet.value!.split("\n"))
+    previewSheet.value = draftSheet.value!.split("\n")
   }
   isPreview.value = !isPreview.value
 }
 
-const formatter = (sheet: string[]) => {
-  let newSheet = [] as string[]
-
-  sheet.forEach((element) => {
-    if (
-      element.includes("INTRO") ||
-      element.includes("INSTRUC") ||
-      element.includes("INSTRU")
-    ) {
-      element = element.replaceAll("[", "").replaceAll("]", "")
-    } else {
-      element = element
-        .replaceAll("][", "&nbsp;&nbsp;&nbsp;&nbsp;")
-        .replaceAll("[", "<span class='chord'><span class='inner'>")
-        .replaceAll("]", "</span></span>")
-    }
-    newSheet.push(element)
-  })
-
-  return newSheet
+const onSaveDraft = async () => {
+  // TODO: Save the user draft to the database
 }
 
 const onSubmit = async () => {
+  // TODO: Send the request to an admin and wait for approval
+
   await useFetch(`/api/songs/${result.value?._id}`, {
     method: "PUT",
     body: JSON.stringify({
@@ -112,9 +96,9 @@ gtag("set", "page_title", "Editor")
       <div class="flex gap-2">
         <button
           class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-          @click="onSubmit"
+          @click="onSaveDraft"
         >
-          Save
+          Save Draft
         </button>
         <button
           class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
@@ -132,22 +116,8 @@ gtag("set", "page_title", "Editor")
       rows="20"
       v-model="draftSheet"
     ></textarea>
-    <ul v-else class="mt-6 font-mono">
-      <li v-for="(line, index) in previewSheet" :key="index">
-        <div class="mb-4" v-html="line"></div>
-      </li>
-    </ul>
+    <Sheet v-else :rawSheet="previewSheet" />
   </div>
 </template>
 
-<style>
-.chord {
-  position: absolute;
-}
-
-.chord .inner {
-  position: relative;
-  top: -1.25em;
-  font-family: "Roboto Mono", monospace;
-}
-</style>
+<style scoped></style>

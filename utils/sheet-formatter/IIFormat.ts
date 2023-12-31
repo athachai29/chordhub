@@ -2,11 +2,19 @@ import SheetFormatter from "./SheetFormatter"
 
 class IIFormat extends SheetFormatter {
   public format(sheet: string[]): string[] {
-    const newSheet = super.parser(sheet)
+    const parsedSheet = super.parser(sheet)
 
-    // TODO: Combine some lyric parts to make it wider.
+    let formattedSheet: string[] = []
 
-    return newSheet
+    parsedSheet.forEach((item, index) => {
+      if (index % 2 === 0) {
+        formattedSheet.push(item)
+      } else {
+        formattedSheet[formattedSheet.length - 1] += ` ${item}`
+      }
+    })
+
+    return formattedSheet
   }
 }
 
