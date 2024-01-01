@@ -101,29 +101,37 @@ gtag("set", "page_title", "Song")
     <div class="mt-2">Key: {{ result.params.key }}</div>
     <div v-if="result.params.capo !== 0">Capo: {{ result.params.capo }}</div>
     <Sheet :rawSheet="result.sheet" />
-    <NuxtLink
-      class="underline"
-      :to="{ name: 'editor', query: { id: result.songId } }"
-      >Found mistake?</NuxtLink
-    >
-    <!-- Begin: Favorite Section -->
-    <button
-      v-if="!userProps!.isFav"
-      @click="onAddToFav"
-      class="flex gap-2 underline"
-    >
-      <div>Add to favorites</div>
+    <div class="flex flex-row gap-4">
+      <!-- Begin: Favorite Section -->
       <div>
-        <HeartIcon class="h-6 w-6" />
+        <button
+          v-if="!userProps!.isFav"
+          @click="onAddToFav"
+          class="flex flex-row hover:underline"
+        >
+          <div>Add to favorites</div>
+          <div>
+            <HeartIcon class="h-6 w-6" />
+          </div>
+        </button>
+        <button
+          v-else
+          @click="onRemoveFromFav"
+          class="flex flex-row hover:underline"
+        >
+          <div>Remove from favorites</div>
+          <div>
+            <HeartIcon class="h-6 w-6 fill-current text-black" />
+          </div>
+        </button>
       </div>
-    </button>
-    <button v-else @click="onRemoveFromFav" class="flex gap-2 underline">
-      <div>Remove from favorites</div>
-      <div>
-        <HeartIcon class="h-6 w-6 fill-current text-black" />
-      </div>
-    </button>
-    <!-- End: Favorite Section -->
+      <!-- End: Favorite Section -->
+      <NuxtLink
+        class="hover:underline"
+        :to="{ name: 'editor', query: { id: result.songId } }"
+        >Found mistake?</NuxtLink
+      >
+    </div>
   </div>
   <!-- FIXME: Fix wanring in browser console (Hydration node mismatch) -->
 </template>
