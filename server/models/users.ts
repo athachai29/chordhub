@@ -53,8 +53,11 @@ schema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password!, 10)
 })
 
-schema.methods.verifyPassword = async function (password: string) {
-  return await bcrypt.compare(password, this.password)
+schema.methods.verifyPassword = async function (
+  password: string,
+  hash: string,
+) {
+  return await bcrypt.compare(password, hash)
 }
 
 export default mongoose.model("Users", schema, "users")
