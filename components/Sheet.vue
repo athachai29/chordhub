@@ -11,9 +11,13 @@ const formatter = (sheet: string[], format: any) => {
   return format.format(sheet)
 }
 
-// TODO: Select format from device screen
-// const sheet = ref(formatter(props.rawSheet, iFormat))
-const sheet = ref(formatter(props.rawSheet, iiFormat))
+const sheet = ref(formatter(props.rawSheet, iFormat))
+
+onMounted(() => {
+  if (window.innerWidth >= 768) {
+    sheet.value = formatter(props.rawSheet, iiFormat)
+  }
+})
 </script>
 
 <template>
