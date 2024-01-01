@@ -12,7 +12,16 @@ useHead({
   ],
 })
 
-definePageMeta({ auth: false })
+definePageMeta({
+  auth: false,
+  validate: (route) => {
+    if (!route.query.id) {
+      return false
+    }
+
+    return true
+  },
+})
 
 type Song = {
   _id: string

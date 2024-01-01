@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     public: {
       buyMeACoffeeUrl: process.env.BUY_ME_A_COFFEE_URL,
     },
+    dicebearApiUrl: process.env.NUXT_DICEBEAR_API,
   },
   nitro: {
     plugins: ["~/server/index.ts"],

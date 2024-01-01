@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useAvatar } from "@/stores/avatar"
+
 const { status, data, signOut } = useAuth()
 
 const onGoToLoginPage = () => {
@@ -14,6 +16,7 @@ const onGoToLoginPage = () => {
   >
     <div class="p-4 text-4xl">
       <NuxtLink class="flex text-2xl font-semibold" to="/">
+        <!-- TODO: Add the ChordHub logos here -->
         <!-- <img
           src="https://flowbite.com/docs/images/logo.svg"
           class="h-8 mr-3"
@@ -23,10 +26,19 @@ const onGoToLoginPage = () => {
       </NuxtLink>
     </div>
     <div class="m-2 flex items-center">
-      <!-- <NuxtLink to="/profile">
-        <div>{{ data?.user?.name }}</div>
-      </NuxtLink> -->
-      <div class="underline">{{ data?.user?.name }}</div>
+      <NuxtLink
+        v-if="status !== 'unauthenticated'"
+        class="flex gap-2"
+        to="/profile"
+      >
+        {{ data?.user?.name }}
+        <img
+          class="inline-block h-6 w-6 rounded-full bg-white"
+          :src="useAvatar().url"
+          alt="user avatars"
+        />
+      </NuxtLink>
+      <!-- <div class="underline">{{ data?.user?.name }}</div> -->
       <button
         v-if="
           status === 'unauthenticated' &&
