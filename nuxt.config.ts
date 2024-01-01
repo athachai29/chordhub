@@ -18,9 +18,9 @@ export default defineNuxtConfig({
     facebookClientId: process.env.NUXT_FACEBOOK_CLIENT_ID,
     facebookClientSecret: process.env.NUXT_FACEBOOK_CLIENT_SECRET,
     public: {
-      buyMeACoffeeUrl: process.env.BUY_ME_A_COFFEE_URL,
+      buyMeACoffeeUrl: process.env.NUXT_PUBLIC_BUY_ME_A_COFFEE_URL,
+      dicebearApiUrl: process.env.NUXT_PUBLIC_DICEBEAR_API,
     },
-    dicebearApiUrl: process.env.NUXT_DICEBEAR_API,
   },
   nitro: {
     plugins: ["~/server/index.ts"],
