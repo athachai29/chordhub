@@ -10,16 +10,19 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  // Not have to specify the key in the runtimeConfig. It can be overriden by env variables.
   runtimeConfig: {
-    dbUrl: process.env.NUXT_DB_URL,
-    authSecret: process.env.NUXT_AUTH_SECRET,
-    googleClientId: process.env.NUXT_GOOGLE_CLIENT_ID,
-    googleClientSecret: process.env.NUXT_GOOGLE_CLIENT_SECRET,
-    facebookClientId: process.env.NUXT_FACEBOOK_CLIENT_ID,
-    facebookClientSecret: process.env.NUXT_FACEBOOK_CLIENT_SECRET,
+    // The private keys which are only available within server-side
+    dbUrl: "",
+    authSecret: "",
+    googleClientId: "",
+    googleClientSecret: "",
+    facebookClientId: "",
+    facebookClientSecret: "",
+    // Keys within public, will be also exposed to the client-side
     public: {
-      buyMeACoffeeUrl: process.env.NUXT_PUBLIC_BUY_ME_A_COFFEE_URL,
-      dicebearApiUrl: process.env.NUXT_PUBLIC_DICEBEAR_API_URL,
+      buyMeACoffeeUrl: "",
+      dicebearApiUrl: "",
     },
   },
   nitro: {

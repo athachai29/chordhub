@@ -116,20 +116,22 @@ export default NuxtAuthHandler({
   providers: [
     CredentialsProvider.default({
       async authorize(credentials: any, req: any) {
-        const { email, password } = credentials
+        try {
+          const { email, password } = credentials
 
-        const user = await Users.findOne({ email: email })
-        // TODO: Add error handling
-        if (!user) return null
+          const user = await Users.findOne({ email: email })
+          if (!user || !user.password) return null
 
-        const validate = await user.verifyPassword(password)
-        // const validate = await user.schema.methods.verifyPassword(password)
-        // TODO: Add error handling
-        if (!validate) return null
+          const validate = await user.verifyPassword(password, user.password)
+          if (!validate) return null
 
-        user.id = user._id
-        user.role = user.role || "FREE_USER"
-        return user
+          user.id = user._id
+          user.role = user.role || "FREE_USER"
+          return user
+        } catch (err) {
+          console.error(err)
+          return null
+        }
       },
     }),
     GoogleProvider.default({

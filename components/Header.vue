@@ -31,7 +31,7 @@ const onGoToLoginPage = () => {
         class="flex gap-2"
         to="/profile"
       >
-        {{ data?.user?.name }}
+        {{ data?.user?.name || data?.user?.email }}
         <img
           class="inline-block h-6 w-6 rounded-full bg-white"
           :src="useAvatar().url"
