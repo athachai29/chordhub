@@ -63,8 +63,7 @@ const onSearch = () => {
 
 const onSelectedSong = (song: Result) => {
   navigateTo({
-    path: "/song",
-    query: { id: (song as Song).songId },
+    path: `/song/${(song as Song).songId}`,
   })
 }
 
@@ -137,6 +136,7 @@ gtag("event", "search", {
       </div>
     </div>
     <ul class="flex w-3/5 flex-col gap-2">
+      <!-- TODO: Full wider in small screen -->
       <li
         v-for="(result, index) in results || []"
         :key="index"

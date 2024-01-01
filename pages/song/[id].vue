@@ -20,7 +20,16 @@ useHead({
   ],
 })
 
-definePageMeta({ auth: false })
+definePageMeta({
+  auth: false,
+  validate: (route) => {
+    if (!route.params.id) {
+      return false
+    }
+
+    return true
+  },
+})
 
 type Song = {
   _id: string
@@ -47,7 +56,7 @@ const result = ref(null as Song)
 const userProps = ref(null as UserProps)
 
 const onFetch = async () => {
-  const { data }: any = await useFetch(`/api/songs/${useRoute().query.id}`)
+  const { data }: any = await useFetch(`/api/songs/${useRoute().params.id}`)
 
   result.value = data.value.data
   result.value!.sheet = data.value.data.sheet
