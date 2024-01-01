@@ -135,8 +135,7 @@ gtag("event", "search", {
         </div>
       </div>
     </div>
-    <ul class="flex w-3/5 flex-col gap-2">
-      <!-- TODO: Full wider in small screen -->
+    <ul class="flex flex-col gap-2 lg:w-3/5">
       <li
         v-for="(result, index) in results || []"
         :key="index"
