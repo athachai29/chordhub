@@ -26,7 +26,11 @@ const onGoToLoginPage = () => {
       </NuxtLink>
     </div>
     <div class="m-2 flex items-center">
-      <NuxtLink class="flex gap-2" to="/profile">
+      <NuxtLink
+        v-if="status !== 'unauthenticated'"
+        class="flex gap-2"
+        to="/profile"
+      >
         {{ data?.user?.name }}
         <img
           class="inline-block h-6 w-6 rounded-full bg-white"
