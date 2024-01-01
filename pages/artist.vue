@@ -47,7 +47,9 @@ const onFetch = async () => {
 onFetch()
 
 const onSelectedSong = (song: Song) => {
-  useRouter().push({ name: "song", query: { id: song.songId } })
+  navigateTo({
+    path: `/song/${(song as Song).songId}`,
+  })
 }
 
 /**
