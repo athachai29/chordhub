@@ -66,7 +66,13 @@ const onFetch = async () => {
 
 onFetch()
 
+// BEGIN: Favorite Button Section
 const onAddToFav = async () => {
+  if (useAuth().status.value === "unauthenticated") {
+    navigateTo("/login")
+    return
+  }
+
   await useFetch(`/api/users/favorites/${result.value?._id}`, {
     method: "PUT",
   })
@@ -81,6 +87,7 @@ const onRemoveFromFav = async () => {
 
   onFetch()
 }
+// END: Favorite Button Section
 
 /**
  * Google Analytics

@@ -50,12 +50,11 @@ export default NuxtAuthHandler({
       }
     },
     async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
-      try {
-        return baseUrl
-      } catch (err) {
-        console.error(err)
-        return baseUrl
-      }
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
     },
     async jwt({
       token,
@@ -117,12 +116,15 @@ export default NuxtAuthHandler({
     CredentialsProvider.default({
       async authorize(credentials: any, req: any) {
         try {
-          const { email, password } = credentials
+          const { email, password, callbackUrl } = credentials
 
           const user = await Users.findOne({ email: email })
           if (!user || !user.password) return null
 
-          const validate = await user.verifyPassword(password, user.password)
+          const validate = await user.schema.methods.verifyPassword(
+            password,
+            user.password,
+          )
           if (!validate) return null
 
           user.id = user._id

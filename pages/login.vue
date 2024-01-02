@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ogImage from "/og-image.webp"
+import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline"
 
 useHead({
   title: "Login - ChordHub",
@@ -19,14 +20,30 @@ definePageMeta({
   },
 })
 
+// BEGIN: Password masking logic
+const isPasswordMasked = ref(true)
+
+const onToggleMaskChange = () => {
+  const passwordInput = document.getElementById("password") as HTMLInputElement
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text"
+    isPasswordMasked.value = false
+  } else {
+    passwordInput.type = "password"
+    isPasswordMasked.value = true
+  }
+}
+// END: Password masking logic
+
+// BEGIN: Login logic
 const form = ref({
   email: "",
   password: "",
 })
-const onLoading = ref(false)
 
+const onLoginLoading = ref(false)
 const onLogin = async () => {
-  onLoading.value = true
+  onLoginLoading.value = true
 
   /**
    * Google Analytics
@@ -40,23 +57,29 @@ const onLogin = async () => {
   }
 
   await useAuth().signIn("credentials", credentials)
-  onLoading.value = false
+  onLoginLoading.value = false
 }
 
+const onGoogleLoginLoading = ref(false)
 const onLoginWithGoogle = async () => {
-  onLoading.value = true
+  onGoogleLoginLoading.value = true
 
   /**
    * Google Analytics
    */
   gtag("event", "login", { method: "Google" })
 
-  await useAuth().signIn("google")
-  onLoading.value = false
+  const credentials = {
+    callbackUrl: (useRouter().options.history.state.back as string) || "/",
+  }
+
+  await useAuth().signIn("google", credentials)
+  onGoogleLoginLoading.value = false
 }
 
+const onFacebookLoginLoading = ref(false)
 const onLoginWithFacebook = async () => {
-  onLoading.value = true
+  onFacebookLoginLoading.value = true
 
   /**
    * Google Analytics
@@ -64,8 +87,9 @@ const onLoginWithFacebook = async () => {
   gtag("event", "login", { method: "Facebook" })
 
   await useAuth().signIn("facebook")
-  onLoading.value = false
+  onFacebookLoginLoading.value = false
 }
+// END: Login logic
 
 /**
  * Google Analytics
@@ -96,7 +120,7 @@ gtag("set", "page_title", "Login")
           </div>
           <div>
             <div class="flex items-center justify-between"></div>
-            <div>
+            <div class="relative">
               <input
                 id="password"
                 name="password"
@@ -107,6 +131,13 @@ gtag("set", "page_title", "Login")
                 v-model.trim="form.password"
                 placeholder="Password"
               />
+              <div
+                class="absolute inset-y-0 right-0 flex items-center hover:cursor-pointer"
+                @click="onToggleMaskChange"
+              >
+                <EyeIcon v-if="isPasswordMasked" class="mr-2 h-6 w-6" />
+                <EyeSlashIcon v-else class="mr-2 h-6 w-6" />
+              </div>
             </div>
             <div class="mt-1 text-right text-sm">
               <a href="#" class="font-semibold">Forgot password?</a>
@@ -114,14 +145,15 @@ gtag("set", "page_title", "Login")
           </div>
           <div>
             <button
+              id="login-button"
               type="submit"
               class="w-full border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-              :disabled="onLoading"
+              :disabled="onLoginLoading"
             >
-              {{ onLoading ? "Logging in..." : "Log in" }}
+              {{ onLoginLoading ? "Logging in..." : "Log in" }}
             </button>
             <div
-              v-if="useRoute().query.error"
+              v-if="useRoute().query.error === 'CredentialsSignin'"
               class="mt-2 text-right text-red-600"
             >
               Email or password is incorrect
@@ -138,21 +170,22 @@ gtag("set", "page_title", "Login")
               type="submit"
               class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#3b5998] hover:text-white"
               @click="() => onLoginWithFacebook()"
-              :disabled="onLoading"
+              :disabled="onFacebookLoginLoading"
             >
-              {{ onLoading ? "Logging in..." : "Facebook" }}
+              {{ onFacebookLoginLoading ? "Logging in..." : "Facebook" }}
             </button> -->
             <button
+              id="login-google-button"
               class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#dd4b39] hover:text-white"
               @click="() => onLoginWithGoogle()"
-              :disabled="onLoading"
+              :disabled="onGoogleLoginLoading"
             >
-              {{ onLoading ? "Logging in..." : "Google" }}
+              {{ onGoogleLoginLoading ? "Logging in..." : "Google" }}
             </button>
           </div>
         </form>
         <div class="mt-10 text-center text-sm text-gray-500">
-          <NuxtLink to="/register"> Not have an account? </NuxtLink>
+          <NuxtLink to="/register">Not have an account?</NuxtLink>
         </div>
       </div>
     </main>
