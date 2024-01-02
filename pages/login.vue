@@ -69,7 +69,11 @@ const onLoginWithGoogle = async () => {
    */
   gtag("event", "login", { method: "Google" })
 
-  await useAuth().signIn("google")
+  const credentials = {
+    callbackUrl: (useRouter().options.history.state.back as string) || "/",
+  }
+
+  await useAuth().signIn("google", credentials)
   onGoogleLoginLoading.value = false
 }
 

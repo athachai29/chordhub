@@ -50,7 +50,14 @@ const onGoToLoginPage = () => {
         </button>
         <button
           v-else-if="status === 'authenticated' && path !== '/login'"
-          @click="() => signOut({ callbackUrl: '/' })"
+          @click="
+            () =>
+              signOut({
+                callbackUrl: `${
+                  (useRouter().options.history.state.current as string) || '/'
+                }`,
+              })
+          "
         >
           Log out
         </button>

@@ -2,6 +2,8 @@
 import ogImage from "/og-image.webp"
 import { HeartIcon } from "@heroicons/vue/24/outline"
 
+const { status } = useAuth()
+
 useHead({
   // FIXME: It's still not dynamic when redirect from results page
   titleTemplate() {
@@ -66,7 +68,14 @@ const onFetch = async () => {
 
 onFetch()
 
+// BEGIN: Favorite Button Section
 const onAddToFav = async () => {
+  if (status.value === "unauthenticated") {
+    // console.log(useRouter())
+    navigateTo("/login")
+    return
+  }
+
   await useFetch(`/api/users/favorites/${result.value?._id}`, {
     method: "PUT",
   })
@@ -81,6 +90,7 @@ const onRemoveFromFav = async () => {
 
   onFetch()
 }
+// END: Favorite Button Section
 
 /**
  * Google Analytics
