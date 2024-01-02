@@ -40,10 +40,10 @@ const form = ref({
   email: "",
   password: "",
 })
-const onLoading = ref(false)
 
+const onLoginLoading = ref(false)
 const onLogin = async () => {
-  onLoading.value = true
+  onLoginLoading.value = true
 
   /**
    * Google Analytics
@@ -57,11 +57,12 @@ const onLogin = async () => {
   }
 
   await useAuth().signIn("credentials", credentials)
-  onLoading.value = false
+  onLoginLoading.value = false
 }
 
+const onGoogleLoginLoading = ref(false)
 const onLoginWithGoogle = async () => {
-  onLoading.value = true
+  onGoogleLoginLoading.value = true
 
   /**
    * Google Analytics
@@ -69,11 +70,12 @@ const onLoginWithGoogle = async () => {
   gtag("event", "login", { method: "Google" })
 
   await useAuth().signIn("google")
-  onLoading.value = false
+  onGoogleLoginLoading.value = false
 }
 
+const onFacebookLoginLoading = ref(false)
 const onLoginWithFacebook = async () => {
-  onLoading.value = true
+  onFacebookLoginLoading.value = true
 
   /**
    * Google Analytics
@@ -81,7 +83,7 @@ const onLoginWithFacebook = async () => {
   gtag("event", "login", { method: "Facebook" })
 
   await useAuth().signIn("facebook")
-  onLoading.value = false
+  onFacebookLoginLoading.value = false
 }
 // END: Login logic
 
@@ -139,11 +141,12 @@ gtag("set", "page_title", "Login")
           </div>
           <div>
             <button
+              id="login-button"
               type="submit"
               class="w-full border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-              :disabled="onLoading"
+              :disabled="onLoginLoading"
             >
-              {{ onLoading ? "Logging in..." : "Log in" }}
+              {{ onLoginLoading ? "Logging in..." : "Log in" }}
             </button>
             <div
               v-if="useRoute().query.error"
@@ -163,16 +166,17 @@ gtag("set", "page_title", "Login")
               type="submit"
               class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#3b5998] hover:text-white"
               @click="() => onLoginWithFacebook()"
-              :disabled="onLoading"
+              :disabled="onFacebookLoginLoading"
             >
-              {{ onLoading ? "Logging in..." : "Facebook" }}
+              {{ onFacebookLoginLoading ? "Logging in..." : "Facebook" }}
             </button> -->
             <button
+              id="login-google-button"
               class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#dd4b39] hover:text-white"
               @click="() => onLoginWithGoogle()"
-              :disabled="onLoading"
+              :disabled="onGoogleLoginLoading"
             >
-              {{ onLoading ? "Logging in..." : "Google" }}
+              {{ onGoogleLoginLoading ? "Logging in..." : "Google" }}
             </button>
           </div>
         </form>
