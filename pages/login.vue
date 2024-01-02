@@ -153,7 +153,7 @@ gtag("set", "page_title", "Login")
               {{ onLoginLoading ? "Logging in..." : "Log in" }}
             </button>
             <div
-              v-if="useRoute().query.error"
+              v-if="useRoute().query.error === 'CredentialsSignin'"
               class="mt-2 text-right text-red-600"
             >
               Email or password is incorrect
