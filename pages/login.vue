@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ogImage from "/og-image.webp"
+import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline"
 
 useHead({
   title: "Login - ChordHub",
@@ -67,6 +68,18 @@ const onLoginWithFacebook = async () => {
   onLoading.value = false
 }
 
+const isPasswordMasked = ref(true)
+const onToggleMaskChange = () => {
+  const passwordInput = document.getElementById("password") as HTMLInputElement
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text"
+    isPasswordMasked.value = false
+  } else {
+    passwordInput.type = "password"
+    isPasswordMasked.value = true
+  }
+}
+
 /**
  * Google Analytics
  */
@@ -96,7 +109,7 @@ gtag("set", "page_title", "Login")
           </div>
           <div>
             <div class="flex items-center justify-between"></div>
-            <div>
+            <div class="relative">
               <input
                 id="password"
                 name="password"
@@ -107,6 +120,13 @@ gtag("set", "page_title", "Login")
                 v-model.trim="form.password"
                 placeholder="Password"
               />
+              <div
+                class="absolute inset-y-0 right-0 flex items-center hover:cursor-pointer"
+                @click="onToggleMaskChange"
+              >
+                <EyeIcon v-if="isPasswordMasked" class="mr-2 h-6 w-6" />
+                <EyeSlashIcon v-else class="mr-2 h-6 w-6" />
+              </div>
             </div>
             <div class="mt-1 text-right text-sm">
               <a href="#" class="font-semibold">Forgot password?</a>
