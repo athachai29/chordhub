@@ -2,6 +2,11 @@
 import { useAvatar } from "@/stores/avatar"
 
 const { status, data, signOut } = useAuth()
+const {
+  currentRoute: {
+    value: { path },
+  },
+} = useRouter()
 
 const onGoToLoginPage = () => {
   useRouter().push("/login")
@@ -26,39 +31,30 @@ const onGoToLoginPage = () => {
       </NuxtLink>
     </div>
     <div class="m-2 flex items-center">
-      <NuxtLink
-        v-if="status !== 'unauthenticated'"
-        class="flex gap-2"
-        to="/profile"
-      >
-        {{ data?.user?.name || data?.user?.email }}
+      <div v-if="status !== 'unauthenticated'" class="flex gap-2">
+        <NuxtLink class="truncate" to="/profile">
+          {{ data?.user?.name || data?.user?.email }}
+        </NuxtLink>
         <img
           class="inline-block h-6 w-6 rounded-full bg-white"
           :src="useAvatar().url"
           alt="user avatars"
         />
-      </NuxtLink>
-      <!-- <div class="underline">{{ data?.user?.name }}</div> -->
-      <button
-        v-if="
-          status === 'unauthenticated' &&
-          useRouter().currentRoute.value.path !== '/login'
-        "
-        class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-        @click="onGoToLoginPage"
-      >
-        Log in
-      </button>
-      <button
-        v-else-if="
-          status === 'authenticated' &&
-          useRouter().currentRoute.value.path !== '/login'
-        "
-        class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-        @click="() => signOut({ callbackUrl: '/' })"
-      >
-        Log out
-      </button>
+      </div>
+      <div class="border-2 border-black px-4 py-2">
+        <button
+          v-if="status === 'unauthenticated' && path !== '/login'"
+          @click="onGoToLoginPage"
+        >
+          Log in
+        </button>
+        <button
+          v-else-if="status === 'authenticated' && path !== '/login'"
+          @click="() => signOut({ callbackUrl: '/' })"
+        >
+          Log out
+        </button>
+      </div>
     </div>
   </nav>
 
