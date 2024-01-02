@@ -110,7 +110,7 @@ gtag("set", "page_title", "Editor")
     </div>
     <textarea
       v-if="!isPreview"
-      class="mt-2 resize-none whitespace-nowrap border-2 border-black p-4 font-mono"
+      class="mt-2 resize-none whitespace-pre border-2 border-black p-4 font-mono"
       name="editor"
       id="editor"
       rows="20"
