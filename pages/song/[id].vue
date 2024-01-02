@@ -2,8 +2,6 @@
 import ogImage from "/og-image.webp"
 import { HeartIcon } from "@heroicons/vue/24/outline"
 
-const { status } = useAuth()
-
 useHead({
   // FIXME: It's still not dynamic when redirect from results page
   titleTemplate() {
@@ -70,8 +68,7 @@ onFetch()
 
 // BEGIN: Favorite Button Section
 const onAddToFav = async () => {
-  if (status.value === "unauthenticated") {
-    // console.log(useRouter())
+  if (useAuth().status.value === "unauthenticated") {
     navigateTo("/login")
     return
   }
