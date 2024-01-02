@@ -20,6 +20,22 @@ definePageMeta({
   },
 })
 
+// BEGIN: Password masking logic
+const isPasswordMasked = ref(true)
+
+const onToggleMaskChange = () => {
+  const passwordInput = document.getElementById("password") as HTMLInputElement
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text"
+    isPasswordMasked.value = false
+  } else {
+    passwordInput.type = "password"
+    isPasswordMasked.value = true
+  }
+}
+// END: Password masking logic
+
+// BEGIN: Login logic
 const form = ref({
   email: "",
   password: "",
@@ -67,18 +83,7 @@ const onLoginWithFacebook = async () => {
   await useAuth().signIn("facebook")
   onLoading.value = false
 }
-
-const isPasswordMasked = ref(true)
-const onToggleMaskChange = () => {
-  const passwordInput = document.getElementById("password") as HTMLInputElement
-  if (passwordInput.type === "password") {
-    passwordInput.type = "text"
-    isPasswordMasked.value = false
-  } else {
-    passwordInput.type = "password"
-    isPasswordMasked.value = true
-  }
-}
+// END: Login logic
 
 /**
  * Google Analytics
@@ -172,7 +177,7 @@ gtag("set", "page_title", "Login")
           </div>
         </form>
         <div class="mt-10 text-center text-sm text-gray-500">
-          <NuxtLink to="/register"> Not have an account? </NuxtLink>
+          <NuxtLink to="/register">Not have an account?</NuxtLink>
         </div>
       </div>
     </main>
