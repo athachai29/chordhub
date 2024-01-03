@@ -10,7 +10,7 @@ import CustomAdapter from "~/server/models/nextauth/customAdapter"
  * @see https://next-auth.js.org/configuration/options#options
  */
 export default NuxtAuthHandler({
-  adapter: CustomAdapter(dbConnect, { Accounts, Users }),
+  adapter: CustomAdapter(dbConnect, { Users, Accounts }),
   pages: {
     signIn: "/login",
     signOut: "/logout",
@@ -19,34 +19,15 @@ export default NuxtAuthHandler({
     // newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   callbacks: {
-    async signIn({
-      user,
-      account,
-      profile,
-      email,
-      credentials,
-    }: {
-      user: any
-      account: {
-        provider: string
-      }
-      profile: any
-      email: any
-      credentials: any
-    }) {
-      try {
-        // TODO: Should do something for collecting user data here?
-        if (account.provider === "credentials") {
-          // console.log("signIn", { user, account, profile, email, credentials })
-        }
-        if (account.provider === "google") {
-          // console.log({ account, profile })
-        }
-
+    async signIn({ user, account, profile, email, credentials }: any) {
+      const isAllowedToSignIn = true
+      if (isAllowedToSignIn) {
         return true
-      } catch (err) {
-        console.error(err)
+      } else {
+        // Return false to display a default error message
         return false
+        // Or you can return a URL to redirect to:
+        // return '/unauthorized'
       }
     },
     async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
@@ -56,63 +37,25 @@ export default NuxtAuthHandler({
       else if (new URL(url).origin === baseUrl) return url
       return baseUrl
     },
-    async jwt({
-      token,
-      user,
-      account,
-      profile,
-      isNewUser,
-    }: {
-      token: {
-        id: string
-        role: string
+    async jwt({ token, account, profile }: any) {
+      // Persist the OAuth access_token and or the user id to the token right after signin
+      if (account) {
+        token.accessToken = account.access_token
+        token.id = profile.id
       }
-      user: any
-      account: any
-      profile: any
-      isNewUser: boolean
-    }) {
-      try {
-        if (user) {
-          token.id = user.id
-          token.role = user.role
-        }
-
-        return token
-      } catch (err) {
-        console.error(err)
-        return token
-      }
+      return token
     },
-    async session({
-      session,
-      user,
-      token,
-    }: {
-      session: {
-        user: {
-          id: string
-          role: string
-        }
-      }
-      user: any
-      token: any
-    }) {
-      try {
-        if (token) {
-          session.user.id = token.id
-          session.user.role = token.role
-        }
+    async session({ session, token, user }: any) {
+      // Send properties to the client, like an access_token and user id from a provider.
+      session.accessToken = token.accessToken
+      session.user.id = token.id
 
-        return session
-      } catch (err) {
-        console.error(err)
-        return session
-      }
+      return session
     },
   },
   secret: useRuntimeConfig().authSecret,
   providers: [
+    // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
     CredentialsProvider.default({
       async authorize(credentials: any, req: any) {
         try {
@@ -136,10 +79,12 @@ export default NuxtAuthHandler({
         }
       },
     }),
+    // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
     GoogleProvider.default({
       clientId: useRuntimeConfig().googleClientId,
       clientSecret: useRuntimeConfig().googleClientSecret,
     }),
+    // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
     FacebookProvider.default({
       clientId: useRuntimeConfig().facebookClientId,
       clientSecret: useRuntimeConfig().facebookClientSecret,

@@ -38,6 +38,10 @@ const schema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    emailVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true, strict: true, strictQuery: true },
 )

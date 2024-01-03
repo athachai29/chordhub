@@ -1,50 +1,108 @@
+import dbConnect from "~/server/utils/db"
+import { users as Users, accounts as Accounts } from "~/server/models"
+import type { Adapter } from "next-auth/adapters"
+
 /** @return { import("next-auth/adapters").Adapter } */
-export default (client, options = {}) => {
+export default (
+  client: typeof dbConnect,
+  options: {
+    Users: typeof Users
+    Accounts: typeof Accounts
+  },
+) => {
   return {
-    async createUser(user) {
-      return await options.Users.create(user)
+    async createUser(user: any) {
+      const res = await options.Users.create(user)
+      return {
+        ...res,
+        id: res._id,
+      }
     },
-    async getUser(id) {
+    async getUser(id: string) {
       return
     },
-    async getUserByEmail(email) {
+    async getUserByEmail(email: string) {
       return
     },
-    async getUserByAccount({ providerAccountId, provider }) {
+    async getUserByAccount({
+      providerAccountId,
+      provider,
+    }: {
+      providerAccountId: string
+      provider: string
+    }) {
       const account = await options.Accounts.findOne({ providerAccountId })
       if (!account) return null
       const user = await options.Users.findById(account.userId)
       if (!user) return null
       return user
     },
-    async updateUser(user) {
+    async updateUser(user: object) {
       return
     },
-    async deleteUser(userId) {
+    async deleteUser(userId: string) {
       return
     },
-    async linkAccount(account) {
+    async linkAccount(account: {
+      providerId: string
+      providerAccountId: string
+      userId: string
+    }) {
       return await options.Accounts.create(account)
     },
-    async unlinkAccount({ providerAccountId, provider }) {
+    async unlinkAccount({
+      providerAccountId,
+      provider,
+    }: {
+      providerAccountId: string
+      provider: string
+    }) {
       return
     },
-    async createSession({ sessionToken, userId, expires }) {
+    async createSession({
+      sessionToken,
+      userId,
+      expires,
+    }: {
+      sessionToken: string
+      userId: string
+      expires: Date
+    }) {
       return
     },
-    async getSessionAndUser(sessionToken) {
+    async getSessionAndUser(sessionToken: string) {
       return
     },
-    async updateSession({ sessionToken }) {
+    async updateSession({
+      sessionToken,
+      expires,
+    }: {
+      sessionToken: string
+      expires: Date
+    }) {
       return
     },
-    async deleteSession(sessionToken) {
+    async deleteSession(sessionToken: string) {
       return
     },
-    async createVerificationToken({ identifier, expires, token }) {
+    async createVerificationToken({
+      identifier,
+      expires,
+      token,
+    }: {
+      identifier: string
+      expires: Date
+      token: string
+    }) {
       return
     },
-    async useVerificationToken({ identifier, token }) {
+    async useVerificationToken({
+      identifier,
+      token,
+    }: {
+      identifier: string
+      token: string
+    }) {
       return
     },
   }
