@@ -83,7 +83,7 @@ export default defineEventHandler(async (event) => {
       success: true,
       data: [...songs, ...artist].sort((a, b) => b.textScore - a.textScore),
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error(error)
 
     return {
