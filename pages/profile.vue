@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import ogImage from "/og-image.webp"
 import { useAvatar } from "@/stores/avatar"
 
-const { data } = useAuth()
+const title = ref("Profile - ChordHub")
 
-useHead({
-  title: "Profile - ChordHub",
-  meta: [
-    { name: "description", content: "Any song you can play." },
-    {
-      property: "og:image",
-      content: ogImage,
-    },
-  ],
+useSeoMeta({
+  title: title,
+  description: `${useRuntimeConfig().public.siteDescription}`,
+
+  ogTitle: title,
+  ogUrl: `${useRuntimeConfig().public.siteUrl}${useRoute().path}`,
+
+  twitterTitle: title,
 })
+
+const { data } = useAuth()
 
 /**
  * Google Analytics

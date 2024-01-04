@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import ogImage from "/og-image.webp"
+const title = ref("Success - ChordHub")
 
-useHead({
-  title: "Success - ChordHub",
-  meta: [
-    { name: "description", content: "Any song you can play." },
-    {
-      property: "og:image",
-      content: ogImage,
-    },
-  ],
+useSeoMeta({
+  title: title,
+  description: `${useRuntimeConfig().public.siteDescription}`,
+
+  ogTitle: title,
+  ogUrl: `${useRuntimeConfig().public.siteUrl}${useRoute().path}`,
+
+  twitterTitle: title,
 })
 
 definePageMeta({ auth: false })

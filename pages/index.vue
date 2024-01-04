@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import ogImage from "/og-image.webp"
+const title = ref("ChordHub")
 
-// TODO: Add description in title for display google search result
+useSeoMeta({
+  title: title,
+  description: `${useRuntimeConfig().public.siteDescription}`,
 
-useHead({
-  title: "ChordHub",
-  meta: [
-    { name: "description", content: "Any song you can play." },
-    {
-      property: "og:image",
-      content: ogImage,
-    },
-  ],
+  ogTitle: title,
+  ogUrl: `${useRuntimeConfig().public.siteUrl}${useRoute().path}`,
+
+  twitterTitle: title,
 })
 
 definePageMeta({ auth: false })

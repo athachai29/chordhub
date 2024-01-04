@@ -23,6 +23,9 @@ export default defineNuxtConfig({
     public: {
       buyMeACoffeeUrl: "",
       dicebearApiUrl: "",
+      siteUrl: "",
+      siteDescription: "",
+      siteSocialNetworkDescription: "",
     },
   },
   nitro: {

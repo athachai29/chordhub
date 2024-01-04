@@ -1,23 +1,20 @@
 <script setup lang="ts">
-import ogImage from "/og-image.webp"
-
-useHead({
-  title: "Request - ChordHub",
-  meta: [
-    { name: "description", content: "Any song you can play." },
-    {
-      property: "og:image",
-      content: ogImage,
-    },
-  ],
-})
-
 const { data } = useAuth()
 
 const title = ref(useRoute().query.title as string)
 const artist = ref("" as string)
 const source = ref("" as string)
 const note = ref("" as string)
+
+useSeoMeta({
+  title: title,
+  description: `${useRuntimeConfig().public.siteDescription}`,
+
+  ogTitle: title,
+  ogUrl: `${useRuntimeConfig().public.siteUrl}${useRoute().path}`,
+
+  twitterTitle: title,
+})
 
 const onSubmit = async () => {
   await useFetch("/api/songs/requests", {

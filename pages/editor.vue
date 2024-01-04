@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import ogImage from "/og-image.webp"
+const title = ref("Editor - ChordHub")
 
-useHead({
-  title: "Editor - ChordHub",
-  meta: [
-    { name: "description", content: "Any song you can play." },
-    {
-      property: "og:image",
-      content: ogImage,
-    },
-  ],
+useSeoMeta({
+  title: title,
+  description: `${useRuntimeConfig().public.siteDescription}`,
+
+  ogTitle: title,
+  ogUrl: `${useRuntimeConfig().public.siteUrl}${useRoute().path}`,
+
+  twitterTitle: title,
 })
 
 type Song = {

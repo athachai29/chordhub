@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import ogImage from "/og-image.webp"
 import { isEmailValid, isPasswordValid } from "@/utils/validators"
 
-useHead({
-  title: "Register - ChordHub",
-  meta: [
-    { name: "description", content: "Any song you can play." },
-    {
-      property: "og:image",
-      content: ogImage,
-    },
-  ],
+const title = ref("Register - ChordHub")
+
+useSeoMeta({
+  title: title,
+  description: `${useRuntimeConfig().public.siteDescription}`,
+
+  ogTitle: title,
+  ogUrl: `${useRuntimeConfig().public.siteUrl}${useRoute().path}`,
+
+  twitterTitle: title,
 })
 
 definePageMeta({
