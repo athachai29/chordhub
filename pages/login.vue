@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import ogImage from "/og-image.webp"
 import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline"
 
-useHead({
-  title: "Login - ChordHub",
-  meta: [
-    { name: "description", content: "Any song you can play." },
-    {
-      property: "og:image",
-      content: ogImage,
-    },
-  ],
+const title = ref("Login - ChordHub")
+
+useSeoMeta({
+  title: title,
+  description: `${useRuntimeConfig().public.siteDescription}`,
+
+  ogTitle: title,
+  ogUrl: `${useRuntimeConfig().public.siteUrl}${useRoute().path}`,
+
+  twitterTitle: title,
 })
 
 definePageMeta({

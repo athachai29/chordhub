@@ -1,23 +1,32 @@
 <script setup lang="ts">
-import ogImage from "/og-image.webp"
 import { HeartIcon } from "@heroicons/vue/24/outline"
+
+const title = ref("Song - ChordHub")
 
 useHead({
   // FIXME: It's still not dynamic when redirect from results page
   titleTemplate() {
     if (result.value) {
-      return `${result.value.title} - ChordHub`
+      const formattedTitle = `${result.value.title} - ChordHub`
+      title.value = formattedTitle
+
+      return formattedTitle
     }
 
-    return `Song - ChordHub`
+    return title.value
   },
-  meta: [
-    { name: "description", content: "Any song you can play." },
-    {
-      property: "og:image",
-      content: ogImage,
-    },
-  ],
+})
+
+useSeoMeta({
+  title: title,
+  // TODO: Place the description of the song here
+  description: () =>
+    `${title.value} | ${useRuntimeConfig().public.siteDescription}`,
+
+  ogTitle: title,
+  ogUrl: `${useRuntimeConfig().public.siteUrl}${useRoute().path}`,
+
+  twitterTitle: title,
 })
 
 definePageMeta({
