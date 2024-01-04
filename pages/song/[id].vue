@@ -30,7 +30,7 @@ const onAddToFav = async () => {
     return
   }
 
-  await useFetch(`/api/users/favorites/${result.value.data._id}`, {
+  $fetch(`/api/users/favorites/${result.value.data._id}`, {
     method: "PUT",
   })
 
@@ -38,7 +38,7 @@ const onAddToFav = async () => {
 }
 
 const onRemoveFromFav = async () => {
-  await useFetch(`/api/users/favorites/${result.value.data._id}`, {
+  $fetch(`/api/users/favorites/${result.value.data._id}`, {
     method: "DELETE",
   })
 
