@@ -1,79 +1,27 @@
 <script setup lang="ts">
 import { HeartIcon } from "@heroicons/vue/24/outline"
 
-const title = ref("Song - ChordHub")
-
-useHead({
-  // FIXME: It's still not dynamic when redirect from results page
-  titleTemplate() {
-    if (result.value) {
-      const formattedTitle = `${result.value.title} - ChordHub`
-      title.value = formattedTitle
-
-      return formattedTitle
-    }
-
-    return title.value
-  },
-})
-
-useSeoMeta({
-  title: title,
-  // TODO: Place the description of the song here
-  description: () =>
-    `${title.value} | ${useRuntimeConfig().public.siteDescription}`,
-
-  ogTitle: title,
-  ogUrl: `${useRuntimeConfig().public.siteUrl}${useRoute().path}`,
-
-  twitterTitle: title,
-})
-
 definePageMeta({
   auth: false,
-  validate: (route) => {
-    if (!route.params.id) {
-      return false
-    }
-
-    return true
-  },
+  validate: (route) => !!route.params.id,
 })
 
-type Song = {
-  _id: string
-  title: string
-  artist: string
-  sheet: string[]
-  _artist: {
-    thaiName: string
-    engName: string
-  }
-  params: {
-    key: string
-    ost: string
-    capo: number
-  }
-  songId: string
-} | null
+const { data: result, refresh }: any = await useFetch(
+  `/api/songs/${useRoute().params.id}`,
+)
 
-type UserProps = {
-  isFav: boolean
-} | null
+useSeoMeta({
+  title: () => `${result.value.data.title} - ChordHub`,
+  description: () =>
+    `${result.value.data.title} ${result.value.data._artist.thaiName} ${
+      result.value.data._artist.engName
+    } | ${useRuntimeConfig().public.siteDescription}`,
 
-const result = ref(null as Song)
-const userProps = ref(null as UserProps)
+  ogTitle: () => `${result.value.data.title} - ChordHub`,
+  ogUrl: `${useRuntimeConfig().public.siteUrl}${useRoute().path}`,
 
-const onFetch = async () => {
-  const { data }: any = await useFetch(`/api/songs/${useRoute().params.id}`)
-
-  result.value = data.value.data
-  result.value!.sheet = data.value.data.sheet
-
-  userProps.value = data.value.userProps
-}
-
-onFetch()
+  twitterTitle: () => `${result.value.data.title} - ChordHub`,
+})
 
 // BEGIN: Favorite Button Section
 const onAddToFav = async () => {
@@ -82,19 +30,19 @@ const onAddToFav = async () => {
     return
   }
 
-  await useFetch(`/api/users/favorites/${result.value?._id}`, {
+  $fetch(`/api/users/favorites/${result.value.data._id}`, {
     method: "PUT",
   })
 
-  onFetch()
+  refresh()
 }
 
 const onRemoveFromFav = async () => {
-  await useFetch(`/api/users/favorites/${result.value?._id}`, {
+  $fetch(`/api/users/favorites/${result.value.data._id}`, {
     method: "DELETE",
   })
 
-  onFetch()
+  refresh()
 }
 // END: Favorite Button Section
 
@@ -110,18 +58,20 @@ gtag("set", "page_title", "Song")
     v-if="result"
     class="my-6 flex flex-col px-8 pt-16 md:my-12 md:px-16 md:pt-8"
   >
-    <div class="text-xl md:text-2xl">{{ result.title }}</div>
+    <div class="text-xl md:text-2xl">{{ result.data.title }}</div>
     <div>
-      {{ result._artist.thaiName || result._artist.engName }}
+      {{ result.data._artist.thaiName || result.data._artist.engName }}
     </div>
-    <div class="mt-2">Key: {{ result.params.key }}</div>
-    <div v-if="result.params.capo !== 0">Capo: {{ result.params.capo }}</div>
-    <Sheet :rawSheet="result.sheet" />
+    <div class="mt-2">Key: {{ result.data.params.key }}</div>
+    <div v-if="result.data.params.capo !== 0">
+      Capo: {{ result.data.params.capo }}
+    </div>
+    <Sheet :rawSheet="result.data.sheet" />
     <div class="flex flex-row gap-4">
       <!-- Begin: Favorite Section -->
       <div>
         <button
-          v-if="!userProps!.isFav"
+          v-show="!result.userProps.isFav"
           @click="onAddToFav"
           class="flex flex-row hover:underline"
         >
@@ -131,7 +81,7 @@ gtag("set", "page_title", "Song")
           </div>
         </button>
         <button
-          v-else
+          v-show="result.userProps.isFav"
           @click="onRemoveFromFav"
           class="flex flex-row hover:underline"
         >
@@ -144,10 +94,9 @@ gtag("set", "page_title", "Song")
       <!-- End: Favorite Section -->
       <NuxtLink
         class="hover:underline"
-        :to="{ name: 'editor', query: { id: result.songId } }"
+        :to="{ name: 'editor', query: { id: result.data.songId } }"
         >Found mistake?</NuxtLink
       >
     </div>
   </div>
-  <!-- FIXME: Fix wanring in browser console (Hydration node mismatch) -->
 </template>
