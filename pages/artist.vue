@@ -13,13 +13,7 @@ useSeoMeta({
 
 definePageMeta({
   auth: false,
-  validate: (route) => {
-    if (!route.query.id) {
-      return false
-    }
-
-    return true
-  },
+  validate: (route) => !!route.query.id,
 })
 
 type Song = {
@@ -34,16 +28,12 @@ type Song = {
   songId: string
 }
 
-const results = ref([] as Song[])
-
-const onFetch = async () => {
-  const { data }: any = await useFetch(
-    `/api/songs/${useRoute().query.id}/artists`,
-  )
-  results.value = data.value.data
-}
-
-onFetch()
+const { data: results }: any = await useFetch(
+  `/api/songs/${useRoute().query.id}/artists`,
+  {
+    transform: (res: any) => res.data,
+  },
+)
 
 const onSelectedSong = (song: Song) => {
   navigateTo({
