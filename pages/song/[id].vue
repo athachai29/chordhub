@@ -10,17 +10,18 @@ const { data: result, refresh }: any = await useFetch(
   `/api/songs/${useRoute().params.id}`,
 )
 
+const title = ref(`${result.value.data?.title || "Song"} - ChordHub`)
+const config = useRuntimeConfig()
+
 useSeoMeta({
-  title: () => `${result.value.data.title} - ChordHub`,
+  title: () => title.value,
   description: () =>
-    `${result.value.data.title} ${result.value.data._artist.thaiName} ${
-      result.value.data._artist.engName
-    } | ${useRuntimeConfig().public.siteDescription}`,
+    `${result.value.data?.title} ${result.value.data?._artist?.thaiName} ${result.value.data?._artist?.engName} | ${config.public.siteDescription}`,
 
-  ogTitle: () => `${result.value.data.title} - ChordHub`,
-  ogUrl: `${useRuntimeConfig().public.siteUrl}${useRoute().path}`,
+  ogTitle: () => title.value,
+  ogUrl: `${config.public.siteUrl}${useRoute().path}`,
 
-  twitterTitle: () => `${result.value.data.title} - ChordHub`,
+  twitterTitle: () => title.value,
 })
 
 // BEGIN: Favorite Button Section
@@ -55,7 +56,7 @@ gtag("set", "page_title", "Song")
 
 <template>
   <div
-    v-if="result"
+    v-if="result.data"
     class="my-6 flex flex-col px-8 pt-16 md:my-12 md:px-16 md:pt-8"
   >
     <div class="text-xl md:text-2xl">{{ result.data.title }}</div>
@@ -98,5 +99,8 @@ gtag("set", "page_title", "Song")
         >Found mistake?</NuxtLink
       >
     </div>
+  </div>
+  <div v-else class="my-6 flex flex-col px-8 pt-16">
+    <div class="text-xl md:text-2xl">{{ result.error }}</div>
   </div>
 </template>
