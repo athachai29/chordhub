@@ -11,7 +11,7 @@ const { data: result, refresh }: any = await useFetch(
 )
 
 const title = ref(`${result.value.data?.title || "Song"} - ChordHub`)
-const config = useRuntimeConfig()
+const config = useRuntimeConfig() // Defined to prevent errors at runtime on production
 
 useSeoMeta({
   title: () => title.value,
