@@ -49,7 +49,7 @@ gtag("set", "page_title", "Artist")
 </script>
 
 <template>
-  <div class="mb-6 flex flex-col px-4 md:mb-12 md:mt-24 md:px-16">
+  <div class="mb-6 mt-24 flex flex-col px-4 md:mb-12 md:px-16">
     <ul class="flex w-3/5 flex-col gap-2">
       <li
         v-for="(result, index) in results"
