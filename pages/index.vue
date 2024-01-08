@@ -62,18 +62,20 @@ if (data.value?.user?.email) {
       <div class="select-none text-5xl">ChordHub</div>
     </div>
     <div class="mb-4 flex justify-center">
-      <div class="relative w-11/12">
-        <input
-          id="search-bar"
-          type="text"
-          class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-          placeholder="Search with Song or Artist"
-          v-model.trim="keyword"
-        />
-        <div
-          class="absolute inset-y-0 right-0 flex items-center hover:cursor-pointer"
-        >
-          <MagnifyingGlassIcon class="mr-4 h-6 w-6" />
+      <div class="w-11/12 lg:w-6/12">
+        <div class="relative">
+          <input
+            id="search-bar"
+            type="text"
+            class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
+            placeholder="Search with Song or Artist"
+            v-model.trim="keyword"
+          />
+          <div
+            class="absolute inset-y-0 right-0 flex items-center hover:cursor-pointer"
+          >
+            <MagnifyingGlassIcon class="mr-4 h-6 w-6" />
+          </div>
         </div>
       </div>
     </div>

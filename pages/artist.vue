@@ -50,7 +50,7 @@ gtag("set", "page_title", "Artist")
 
 <template>
   <div class="mb-6 mt-24 flex flex-col px-4 md:mb-12 md:px-16">
-    <ul class="flex w-3/5 flex-col gap-2">
+    <ul class="flex flex-col gap-2 lg:w-3/5">
       <li
         v-for="(result, index) in results"
         :key="index"
