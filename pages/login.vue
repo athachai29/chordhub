@@ -119,7 +119,6 @@ gtag("set", "page_title", "Login")
             </div>
           </div>
           <div>
-            <div class="flex items-center justify-between"></div>
             <div class="relative">
               <input
                 id="password"
