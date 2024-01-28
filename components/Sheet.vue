@@ -23,7 +23,7 @@ onMounted(() => {
 <template>
   <ul class="my-6 font-sans text-xl">
     <li v-for="(line, index) in sheet" :key="index">
-      <div class="mb-5" v-html="line"></div>
+      <div class="mb-8" v-html="line"></div>
     </li>
   </ul>
 </template>
