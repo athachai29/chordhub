@@ -1,15 +1,10 @@
-import dbConnect from "~/server/utils/db"
 import { users as Users, accounts as Accounts } from "~/server/models"
-import type { Adapter } from "next-auth/adapters"
 
 /** @return { import("next-auth/adapters").Adapter } */
-export default (
-  client: typeof dbConnect,
-  options: {
-    Users: typeof Users
-    Accounts: typeof Accounts
-  },
-) => {
+export default (options: {
+  Users: typeof Users
+  Accounts: typeof Accounts
+}) => {
   return {
     async createUser(user: any) {
       const res = await options.Users.create(user)
