@@ -1,3 +1,6 @@
 export default defineEventHandler((event) => {
-  // console.log("New request: " + getRequestURL(event))
+  const method = getMethod(event)
+  const { path } = event
+
+  console.log(`${method} ${path}`)
 })

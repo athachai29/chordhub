@@ -6,10 +6,16 @@ abstract class SheetFormatter {
   }
 
   private applyChordStyling(part: string) {
-    return part
-      .replaceAll("][", "&nbsp;&nbsp;&nbsp;&nbsp;")
-      .replaceAll("[", "<span class='chord'><span class='inner'>")
-      .replaceAll("]", "</span></span>")
+    return (
+      part
+        // Bold every first letter chord
+        .replaceAll(/\[[a-zA-Z0-9/#]+\]/g, (match) => {
+          return `[<b>${match[1]}</b>${match.slice(2, -1)}]`
+        })
+        .replaceAll("][", "&nbsp;&nbsp;&nbsp;&nbsp;")
+        .replaceAll("[", "<span class='chord'><span class='inner'>")
+        .replaceAll("]", "</span></span>")
+    )
   }
 
   public isNotLyric(part: string) {
