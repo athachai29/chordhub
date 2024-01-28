@@ -1,3 +1,5 @@
+import { textVide } from "text-vide"
+
 abstract class SheetFormatter {
   private notLyricKeywords = ["INTRO", "INSTRUC", "INSTRU", "|"]
 
@@ -6,10 +8,13 @@ abstract class SheetFormatter {
   }
 
   private applyChordStyling(part: string) {
-    return part
+    const partWithChordStyles = part
       .replaceAll("][", "&nbsp;&nbsp;&nbsp;&nbsp;")
       .replaceAll("[", "<span class='chord'><span class='inner'>")
       .replaceAll("]", "</span></span>")
+    const partWithChordStylesAndBionicReading = textVide(partWithChordStyles)
+
+    return partWithChordStylesAndBionicReading
   }
 
   public isNotLyric(part: string) {

@@ -6790,6 +6790,11 @@ terser@^5.17.4:
     commander "^2.20.0"
     source-map-support "~0.5.20"
 
+text-vide@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/text-vide/-/text-vide-1.8.1.tgz#aac91ee1f034076d824ac69f2c8ce92e792f0c5d"
+  integrity sha512-oAekt3GUVVvNg0BtzsXQ3TYhV1tXAdO5YDFWxquBpjOuuxxXZhGPR1nz8hxjYhx9w+OJmMIdE59ArSdTJe86JQ==
+
 thenify-all@^1.0.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/thenify-all/-/thenify-all-1.6.0.tgz#1a1918d402d8fc3f98fbf234db0bcc8cc10e9726"
