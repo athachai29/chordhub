@@ -151,6 +151,5 @@ gtag("set", "page_title", "Submit")
 .chord .inner {
   position: relative;
   top: -1.25em;
-  font-family: "Roboto Mono", monospace;
 }
 </style>

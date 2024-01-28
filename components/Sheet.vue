@@ -37,6 +37,5 @@ onMounted(() => {
   position: relative;
   top: -1.25em;
   left: -1.25em;
-  font-family: "Roboto Mono", monospace;
 }
 </style>
