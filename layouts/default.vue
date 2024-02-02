@@ -14,6 +14,15 @@ useSeoMeta({
   twitterCard: "summary_large_image",
   twitterImage: coverImage,
 })
+
+useHead({
+  meta: [
+    {
+      name: "impact-site-verification",
+      content: "d2390621-b3ff-4fe4-bc1a-34eb26ac279b",
+    },
+  ],
+})
 </script>
 
 <template>
