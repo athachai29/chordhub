@@ -31,7 +31,12 @@ export default defineNuxtConfig({
   nitro: {
     plugins: ["~/server/index.ts"],
   },
-  modules: ["@pinia/nuxt", "@sidebase/nuxt-auth", "nuxt-gtag"],
+  modules: [
+    "@pinia/nuxt",
+    "@sidebase/nuxt-auth",
+    "nuxt-gtag",
+    "@nuxtjs/sitemap",
+  ],
   auth: {
     enableGlobalAppMiddleware: true,
     origin: process.env.AUTH_ORIGIN,
@@ -39,5 +44,19 @@ export default defineNuxtConfig({
   },
   gtag: {
     initialConsent: true,
+  },
+  sitemap: {
+    sources: ["/api/__sitemap__/urls"],
+    exclude: [
+      '/artist/**',
+      '/editor/**',
+      '/login',
+      '/profile',
+      '/register',
+      '/request',
+      '/results',
+      '/submit',
+      '/success',
+    ]
   },
 })
