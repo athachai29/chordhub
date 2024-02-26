@@ -13,6 +13,8 @@ const onGoToLoginPage = () => {
 }
 
 // const menu = ref(null)
+
+const avatar = useAvatar()
 </script>
 
 <template>
@@ -37,7 +39,7 @@ const onGoToLoginPage = () => {
         </NuxtLink>
         <img
           class="inline-block h-6 w-6 rounded-full bg-white"
-          :src="useAvatar().url"
+          :src="avatar.url"
           alt="user avatars"
         />
       </div>

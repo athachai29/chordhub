@@ -31,9 +31,13 @@ const onAddToFav = async () => {
     return
   }
 
-  $fetch(`/api/users/favorites/${result.value.data._id}`, {
-    method: "PUT",
-  })
+  try {
+    $fetch(`/api/users/favorites/${result.value.data._id}`, {
+      method: "PUT",
+    })
+  } catch (error) {
+    console.error(error)
+  }
 
   refresh()
 }
