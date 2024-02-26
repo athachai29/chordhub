@@ -5,15 +5,12 @@ export default defineEventHandler(async (event) => {
    * Because getToken() can't read cookies from the request, we have to parse them manually
    */
   const cookies = parseCookies(event)
-  console.debug("Cookies", cookies)
-  event.node.req.headers.authorization = `Bearer ${cookies["next-auth.session-token"]}`
-  console.debug("Headers", event.node.req.headers)
+  event.node.req.headers.authorization = `Bearer ${cookies["next-auth.session-token"] || cookies["__Secure-next-auth.session-token"]}`
   const user = await getToken({
     req: event.node.req,
     secret: useRuntimeConfig().authSecret,
     logger: console,
   })
-  console.debug("User", user)
 
   /**
    * If the user is not authenticated, return early
