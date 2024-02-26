@@ -1,9 +1,5 @@
 export default defineEventHandler((event) => {
-  const {
-    method,
-    path,
-    node: { req },
-  } = event
+  const { method, path } = event
 
-  console.debug(`${method} ${path} ${JSON.stringify(req.headers)}`)
+  console.debug(`${method} ${path}`)
 })
