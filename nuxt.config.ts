@@ -48,15 +48,15 @@ export default defineNuxtConfig({
   sitemap: {
     sources: ["/api/__sitemap__/urls"],
     exclude: [
-      '/artist/**',
-      '/editor/**',
-      '/login',
-      '/profile',
-      '/register',
-      '/request',
-      '/results',
-      '/submit',
-      '/success',
-    ]
+      "/artist/**",
+      "/editor/**",
+      "/login",
+      "/profile",
+      "/register",
+      "/request",
+      "/results",
+      "/submit",
+      "/success",
+    ],
   },
 })
