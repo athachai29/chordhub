@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { MagnifyingGlassIcon } from "@heroicons/vue/24/outline"
-
 const title = ref("ChordHub")
 
 useSeoMeta({
@@ -58,39 +56,25 @@ if (data.value?.user?.email) {
 
 <template>
   <form @submit.prevent="onSearch">
-    <div class="mb-2 mt-80 flex justify-center">
-      <div class="select-none text-5xl">ChordHub</div>
+    <!-- BEGIN: LOGO -->
+    <div class="mb-4 mt-80 flex justify-center lg:mb-4">
+      <div class="select-none text-5xl font-semibold md:text-7xl">ChordHub</div>
     </div>
-    <div class="mb-4 flex justify-center">
-      <div class="w-11/12 lg:w-6/12">
-        <div class="relative">
-          <input
-            id="search-bar"
-            type="text"
-            class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-            placeholder="Search with Song or Artist"
-            v-model.trim="keyword"
-          />
-          <div
-            class="absolute inset-y-0 right-0 flex items-center hover:cursor-pointer"
-          >
-            <MagnifyingGlassIcon class="mr-4 h-6 w-6" />
-          </div>
-        </div>
-      </div>
+    <!-- END: LOGO -->
+    <!-- BEGIN: SEARCH BAR -->
+    <div class="mb-6 flex justify-center">
+      <BaseSearchBar
+        id="search-bar"
+        class="w-11/12 md:w-8/12 lg:w-4/12"
+        placeholder="Search with Song or Artist"
+        v-model.trim="keyword"
+        @on-search="onSearch"
+      />
     </div>
+    <!-- END: SEARCH BAR -->
     <div class="flex justify-center">
-      <button
-        type="submit"
-        class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-      >
-        Search
-      </button>
-      <!-- <button
-        class="ml-2 border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-      >
-        Trends
-      </button> -->
+      <BaseButton type="submit">Search</BaseButton>
+      <BaseButton class="ml-2">Trends</BaseButton>
     </div>
   </form>
 </template>
