@@ -28,15 +28,20 @@ export default defineNuxtConfig({
       siteSocialNetworkDescription: "",
     },
   },
-  nitro: {
-    plugins: ["~/server/index.ts"],
-  },
   modules: [
     "@pinia/nuxt",
     "@sidebase/nuxt-auth",
     "nuxt-gtag",
     "@nuxtjs/sitemap",
   ],
+  components: [
+    "~/components",
+    { path: "~/components/layout", prefix: "Layout" },
+    { path: "~/components/base", prefix: "Base" },
+  ],
+  nitro: {
+    plugins: ["~/server/index.ts"],
+  },
   auth: {
     enableGlobalAppMiddleware: true,
     origin: process.env.AUTH_ORIGIN,
