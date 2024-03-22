@@ -71,7 +71,7 @@ gtag("set", "page_title", "Song")
     <div v-if="result.data.params.capo !== 0">
       Capo: {{ result.data.params.capo }}
     </div>
-    <Sheet :rawSheet="result.data.sheet" />
+    <LayoutSheet :rawSheet="result.data.sheet" />
     <div class="flex flex-row gap-4">
       <!-- Begin: Favorite Section -->
       <div>

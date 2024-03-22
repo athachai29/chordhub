@@ -84,33 +84,27 @@ gtag("event", "search", {
 </script>
 
 <template>
-  <!-- BEGIN: SEARCH BAR -->
   <div class="my-6 flex flex-col px-4 pt-16 md:my-12 md:px-16 md:pt-8">
     <form @submit.prevent="onSearch">
+      <!-- BEGIN: SEARCH BAR -->
       <div class="flex">
-        <input
+        <BaseSearchBar
           id="search-bar"
-          type="text"
-          class="placeholder-svg mr-4 w-1/2 rounded-none border border-black bg-transparent px-4 py-2 focus:outline-none lg:w-1/3"
+          class="w-11/12 md:w-8/12 lg:w-4/12"
           placeholder="Search with Song or Artist"
           v-model.trim="keyword"
+          @on-search="onSearch"
         />
-        <button
-          type="submit"
-          class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-        >
-          Search
-        </button>
       </div>
+      <!-- END: SEARCH BAR -->
     </form>
   </div>
-  <!-- END: SEARCH BAR -->
   <!-- BEGIN: RESULTS -->
   <div class="mb-6 flex flex-col px-4 md:mb-12 md:px-16">
     <div class="flex flex-row justify-between">
       <h1 v-if="isLoading" class="text-3xl">Searching...</h1>
       <div v-if="!isLoading">
-        <h1 v-if="results?.length > 0">
+        <h1 class="mb-2" v-if="results?.length > 0">
           Found {{ results.length }} results for "{{ resultForKeyword }}"
         </h1>
         <div v-else>
@@ -134,11 +128,11 @@ gtag("event", "search", {
         </div>
       </div>
     </div>
-    <ul class="flex flex-col gap-2 lg:w-3/5">
+    <ul class="flex flex-col gap-2 lg:w-2/5">
       <li
         v-for="(result, index) in results || []"
         :key="index"
-        class="border-2 border-black p-4 hover:cursor-pointer hover:bg-black hover:text-white"
+        class="rounded-lg border-2 border-black p-4 hover:cursor-pointer hover:bg-black hover:text-white"
       >
         <div
           v-if="result.resultType === 'song'"

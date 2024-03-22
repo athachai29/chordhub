@@ -106,29 +106,27 @@ gtag("set", "page_title", "Login")
         <form class="space-y-6" @submit.prevent="onLogin">
           <div>
             <div class="mt-2">
-              <input
+              <BaseInput
                 id="email"
                 name="email"
                 type="email"
                 autocomplete="email"
                 required
-                class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-                v-model.trim="form.email"
                 placeholder="Email"
+                v-model.trim="form.email"
               />
             </div>
           </div>
           <div>
             <div class="relative">
-              <input
+              <BaseInput
                 id="password"
                 name="password"
                 type="password"
-                autocomplete="current-password"
+                autocomplete="password"
                 required
-                class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-                v-model.trim="form.password"
                 placeholder="Password"
+                v-model.trim="form.password"
               />
               <div
                 class="absolute inset-y-0 right-0 flex items-center hover:cursor-pointer"
@@ -143,14 +141,14 @@ gtag("set", "page_title", "Login")
             </div>
           </div>
           <div>
-            <button
-              id="login-button"
+            <BaseButton
               type="submit"
-              class="w-full border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
               :disabled="onLoginLoading"
+              class="w-full"
+              btn-style="primary"
             >
               {{ onLoginLoading ? "Logging in..." : "Log in" }}
-            </button>
+            </BaseButton>
             <div
               v-if="useRoute().query.error === 'CredentialsSignin'"
               class="mt-2 text-right text-red-600"
@@ -165,22 +163,28 @@ gtag("set", "page_title", "Login")
           </div>
           <div>
             <!-- Disabled facebook button for now -->
-            <!-- <button
-              type="submit"
-              class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#3b5998] hover:text-white"
+            <!-- <BaseButton
+              id="login-facebook-button"
+              class="mt-2 w-full"
               @click="() => onLoginWithFacebook()"
               :disabled="onFacebookLoginLoading"
             >
-              {{ onFacebookLoginLoading ? "Logging in..." : "Facebook" }}
-            </button> -->
-            <button
+              {{
+                onFacebookLoginLoading
+                  ? "Logging in..."
+                  : "Log in with Facebook"
+              }}
+            </BaseButton> -->
+            <BaseButton
               id="login-google-button"
-              class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#dd4b39] hover:text-white"
+              class="mt-2 w-full"
               @click="() => onLoginWithGoogle()"
               :disabled="onGoogleLoginLoading"
             >
-              {{ onGoogleLoginLoading ? "Logging in..." : "Google" }}
-            </button>
+              {{
+                onGoogleLoginLoading ? "Logging in..." : "Log in with Google"
+              }}
+            </BaseButton>
           </div>
         </form>
         <div class="mt-10 text-center text-sm text-gray-500">
