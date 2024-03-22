@@ -10,7 +10,7 @@ const { data: result, refresh }: any = await useFetch(
   `/api/songs/${useRoute().params.id}`,
 )
 
-const title = ref(`${result.value.data?.title || "Song"} - ChordHub`)
+const title = ref(`คอร์ดเพลง${result.value.data?.title || "Song"} - ChordHub`)
 const config = useRuntimeConfig() // Defined here to prevent errors at runtime on production
 
 useSeoMeta({

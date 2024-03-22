@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const title = ref("ChordHub")
+const title = ref("Home - ChordHub")
 
 useSeoMeta({
   title: title,
@@ -39,19 +39,9 @@ const onSearch = () => {
  * Google Analytics
  */
 const gtag = useGtag()
-gtag("set", "page_title", "Home")
 if (data.value?.user?.email) {
   gtag("set", "user_id", data.value?.user?.email)
 }
-
-// gtag("event", "screen_view", {
-//   app_name: "ChordHub",
-//   screen_name: "Search",
-// })
-
-// useTrackEvent("login", {
-//   method: "Google",
-// })
 </script>
 
 <template>
