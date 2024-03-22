@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/** Google Analytics */
+const gtag = useGtag()
+
 const title = ref("Results - ChordHub")
 
 useSeoMeta({
@@ -54,6 +57,11 @@ const onSearch = () => {
 
   onFetch()
   resultForKeyword.value = keyword.value.trim()
+
+  gtag("event", "search", {
+    search_term: resultForKeyword.value,
+  })
+
   navigateTo({
     path: "/results",
     query: { search: keyword.value.trim() },
@@ -73,14 +81,7 @@ const onSelectedArtist = (artist: Result) => {
   })
 }
 
-/**
- * Google Analytics
- */
-const gtag = useGtag()
 gtag("set", "page_title", "Results")
-gtag("event", "search", {
-  search_term: keyword.value,
-})
 </script>
 
 <template>
