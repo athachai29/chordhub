@@ -115,7 +115,7 @@ gtag("set", "page_title", "Editor")
       rows="20"
       v-model="draftSheet"
     ></textarea>
-    <Sheet v-else :rawSheet="previewSheet" />
+    <LayoutSheet v-else :rawSheet="previewSheet" />
   </div>
 </template>
 

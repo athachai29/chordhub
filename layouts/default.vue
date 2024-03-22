@@ -27,10 +27,10 @@ useHead({
 
 <template>
   <div class="flex h-screen flex-col">
-    <Header></Header>
+    <LayoutHeader></LayoutHeader>
     <main class="flex flex-grow flex-col">
       <slot></slot>
     </main>
-    <Footer></Footer>
+    <LayoutFooter></LayoutFooter>
   </div>
 </template>
