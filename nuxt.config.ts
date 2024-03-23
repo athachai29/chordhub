@@ -33,7 +33,18 @@ export default defineNuxtConfig({
     "@sidebase/nuxt-auth",
     "nuxt-gtag",
     "@nuxtjs/sitemap",
+    "@nuxtjs/i18n",
   ],
+  i18n: {
+    // vueI18n: "./i18n.config.ts", // if you are using custom path, default
+    // locales: [
+    //   {
+    //     code: "th",
+    //     iso: "th-TH",
+    //   },
+    // ],
+    // baseUrl: 'https://my-nuxt-app.com',
+  },
   components: [
     "~/components",
     { path: "~/components/layout", prefix: "Layout" },
