@@ -13,6 +13,7 @@
   "devDependencies": {
     "@heroicons/vue": "^2.0.18",
     "@nuxt/devtools": "latest",
+    "@nuxtjs/i18n": "^8.2.0",
     "@nuxtjs/sitemap": "^5.1.0",
     "@pinia/nuxt": "^0.4.11",
     "@sidebase/nuxt-auth": "0.5.0",
@@ -35,5 +36,8 @@
   },
   "dependencies": {
     "next-auth": "4.22.3"
+  },
+  "resolutions": {
+    "string-width": "4.2.3"
   }
 }
