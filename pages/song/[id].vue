@@ -63,7 +63,7 @@ gtag("set", "page_title", "Song")
     v-if="result.data"
     class="my-6 flex flex-col px-8 pt-16 md:my-12 md:px-16 md:pt-8"
   >
-    <div class="text-xl md:text-2xl">{{ result.data.title }}</div>
+    <div class="text-xl md:text-2xl">คอร์ดเพลง{{ result.data.title }}</div>
     <div>
       {{ result.data._artist.thaiName || result.data._artist.engName }}
     </div>
