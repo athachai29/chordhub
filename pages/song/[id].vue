@@ -67,7 +67,7 @@ gtag("set", "page_title", "Song")
     <div>
       {{ result.data._artist.thaiName || result.data._artist.engName }}
     </div>
-    <div class="mt-2">Key: {{ result.data.params.key }}</div>
+    <!-- <div class="mt-2">Key: {{ result.data.params.key }}</div> -->
     <div v-if="result.data.params.capo !== 0">
       Capo: {{ result.data.params.capo }}
     </div>
