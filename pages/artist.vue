@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const title = ref("Artist - ChordHub")
 
 useSeoMeta({
@@ -37,7 +39,7 @@ const { data: results }: any = await useFetch(
 
 const onSelectedSong = (song: Song) => {
   navigateTo({
-    path: `/song/${(song as Song).songId}`,
+    path: localePath(`/song/${(song as Song).songId}`),
   })
 }
 

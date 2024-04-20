@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { HeartIcon } from "@heroicons/vue/24/outline"
 
+const localePath = useLocalePath()
+
 definePageMeta({
   auth: false,
   validate: (route) => !!route.params.id,
@@ -99,7 +101,12 @@ gtag("set", "page_title", "Song")
       <!-- End: Favorite Section -->
       <NuxtLink
         class="hover:underline"
-        :to="{ name: 'editor', query: { id: result.data.songId } }"
+        :to="
+          localePath({
+            name: 'editor',
+            query: { id: result.data.songId },
+          })
+        "
         >Found mistake?</NuxtLink
       >
     </div>

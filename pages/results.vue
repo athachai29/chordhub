@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 /** Google Analytics */
 const gtag = useGtag()
 
@@ -63,20 +65,20 @@ const onSearch = () => {
   })
 
   navigateTo({
-    path: "/results",
+    path: localePath("/results"),
     query: { search: keyword.value.trim() },
   })
 }
 
 const onSelectedSong = (song: Result) => {
   navigateTo({
-    path: `/song/${(song as Song).songId}`,
+    path: localePath(`/song/${(song as Song).songId}`),
   })
 }
 
 const onSelectedArtist = (artist: Result) => {
   navigateTo({
-    path: "/artist",
+    path: localePath("/artist"),
     query: { id: (artist as Artist).artistId },
   })
 }
@@ -115,14 +117,24 @@ gtag("set", "page_title", "Results")
           <div class="flex gap-4">
             <NuxtLink
               class="text-blue-600 hover:underline"
-              :to="{ name: 'request', query: { title: resultForKeyword } }"
+              :to="
+                localePath({
+                  name: 'request',
+                  query: { title: resultForKeyword },
+                })
+              "
             >
               Request this song
             </NuxtLink>
             or
             <NuxtLink
               class="text-blue-600 hover:underline"
-              :to="{ name: 'submit', query: { title: resultForKeyword } }"
+              :to="
+                localePath({
+                  name: 'submit',
+                  query: { title: resultForKeyword },
+                })
+              "
               >Submit your version</NuxtLink
             >
           </div>

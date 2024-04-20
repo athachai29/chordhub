@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline"
 
+const localePath = useLocalePath()
+
 const title = ref("Login - ChordHub")
 
 useSeoMeta({
@@ -188,7 +190,9 @@ gtag("set", "page_title", "Login")
           </div>
         </form>
         <div class="mt-10 text-center text-sm text-gray-500">
-          <NuxtLink to="/register">Not have an account?</NuxtLink>
+          <NuxtLink :to="localePath('/register')"
+            >Not have an account?</NuxtLink
+          >
         </div>
       </div>
     </main>

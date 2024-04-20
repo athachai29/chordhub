@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useAvatar } from "@/stores/avatar"
 
+const localePath = useLocalePath()
+
 const { status, data, signOut } = useAuth()
 const {
   currentRoute: {
@@ -22,7 +24,7 @@ const avatar = useAvatar()
     class="fixed left-0 top-0 z-10 flex w-full justify-between bg-black text-white"
   >
     <div class="p-4 text-4xl">
-      <NuxtLink class="flex text-2xl font-semibold" to="/">
+      <NuxtLink class="flex text-2xl font-semibold" :to="localePath('/')">
         <!-- TODO: Add the ChordHub logos here -->
         <!-- <img
           src="https://flowbite.com/docs/images/logo.svg"
@@ -34,7 +36,7 @@ const avatar = useAvatar()
     </div>
     <div class="m-2 flex items-center">
       <div v-if="status !== 'unauthenticated'" class="flex gap-2">
-        <NuxtLink class="truncate" to="/profile">
+        <NuxtLink class="truncate" :to="localePath('/profile')">
           {{ data?.user?.name || data?.user?.email }}
         </NuxtLink>
         <img

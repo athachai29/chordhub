@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { isEmailValid, isPasswordValid } from "@/utils/validators"
 
+const localePath = useLocalePath()
+
 const title = ref("Register - ChordHub")
 
 useSeoMeta({
@@ -197,7 +199,9 @@ gtag("set", "page_title", "Login")
           </div>
         </form>
         <div class="mt-10 text-center text-sm text-gray-500">
-          <NuxtLink to="/login">Already have an account? Login</NuxtLink>
+          <NuxtLink :to="localePath('/login')"
+            >Already have an account? Login</NuxtLink
+          >
         </div>
       </div>
     </main>

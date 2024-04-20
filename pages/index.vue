@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const title = ref("Home - ChordHub")
 
 useSeoMeta({
@@ -26,7 +28,7 @@ const onSearch = () => {
   if (keyword.value.trim() === "") return
 
   navigateTo({
-    path: "/results",
+    path: localePath("/results"),
     query: { search: keyword.value.trim() },
   })
 }
