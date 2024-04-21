@@ -3,7 +3,7 @@ import { useAvatar } from "@/stores/avatar"
 
 const localePath = useLocalePath()
 
-const { status, data, signOut } = useAuth()
+const { status, data } = useAuth()
 const {
   currentRoute: {
     value: { path },
@@ -53,19 +53,6 @@ const avatar = useAvatar()
           @click="onGoToLoginPage"
         >
           {{ $t("general.button_login") }}
-        </button>
-        <button
-          v-else-if="status === 'authenticated' && path !== '/login'"
-          @click="
-            () =>
-              signOut({
-                callbackUrl: `${
-                  (useRouter().options.history.state.current as string) || '/'
-                }`,
-              })
-          "
-        >
-          {{ $t("component_header.button_logout") }}
         </button>
       </div>
     </div>

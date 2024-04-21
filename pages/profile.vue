@@ -13,7 +13,12 @@ useSeoMeta({
   twitterTitle: title,
 })
 
-const { data } = useAuth()
+const { status, data, signOut } = useAuth()
+const {
+  currentRoute: {
+    value: { path },
+  },
+} = useRouter()
 
 /**
  * Google Analytics
@@ -28,5 +33,21 @@ gtag("set", "page_title", "Profile")
     <img class="mt-2 w-24" :src="useAvatar().url" alt="User avatars" />
     <div>{{ data?.user?.name }}</div>
     <div>{{ data?.user?.email }}</div>
+    <div>
+      <button
+        class="text-red-500"
+        v-if="status === 'authenticated' && path !== '/login'"
+        @click="
+          () =>
+            signOut({
+              callbackUrl: `${
+                (useRouter().options.history.state.current as string) || '/'
+              }`,
+            })
+        "
+      >
+        {{ $t("component_header.button_logout") }}
+      </button>
+    </div>
   </div>
 </template>
