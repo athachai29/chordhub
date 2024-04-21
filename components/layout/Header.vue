@@ -50,7 +50,7 @@ const avatar = useAvatar()
           v-if="status === 'unauthenticated' && path !== '/login'"
           @click="onGoToLoginPage"
         >
-          {{ $t("general.login") }}
+          {{ $t("general.button_login") }}
         </button>
         <button
           v-else-if="status === 'authenticated' && path !== '/login'"
