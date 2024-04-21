@@ -3,6 +3,8 @@ import { isEmailValid, isPasswordValid } from "@/utils/validators"
 
 const localePath = useLocalePath()
 
+const gtag = useGtag()
+
 const title = ref("Register - ChordHub")
 
 useSeoMeta({
@@ -67,9 +69,6 @@ const onRegisterWithCredentials = async () => {
     return
   }
 
-  /**
-   * Google Analytics
-   */
   gtag("event", "register", { method: "Credentials" })
 
   const credentials = {
@@ -90,16 +89,9 @@ const onRegisterWithCredentials = async () => {
 }
 
 const onRegisterWithGoogle = async () => {
-  /**
-   * Google Analytics
-   */
   gtag("event", "register", { method: "Google" })
 }
 
-/**
- * Google Analytics
- */
-const gtag = useGtag()
 gtag("set", "page_title", "Login")
 </script>
 
@@ -188,12 +180,6 @@ gtag("set", "page_title", "Login")
             <div class="flex-grow border-t"></div>
           </div>
           <div>
-            <!-- <button
-              type="submit"
-              class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#3b5998] hover:text-white"
-            >
-              Continue with Facebook
-            </button> -->
             <button
               class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#dd4b39] hover:text-white"
               @click="() => onRegisterWithGoogle()"
