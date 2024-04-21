@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const title = ref("Submit - ChordHub")
 
 useSeoMeta({
@@ -52,7 +54,9 @@ const formatter = (sheet: string[]) => {
 }
 
 const onSubmit = async () => {
-  useRouter().push({ name: "success" })
+  navigateTo({
+    path: localePath("/success"),
+  })
 }
 
 /**
