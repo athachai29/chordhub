@@ -89,12 +89,9 @@ gtag("set", "page_title", "Request")
         ></textarea>
       </div>
       <div class="w-1/3 text-right">
-        <button
-          type="submit"
-          class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-        >
+        <BaseButton type="submit">
           {{ $t("general.button_submit") }}
-        </button>
+        </BaseButton>
       </div>
     </form>
   </div>
