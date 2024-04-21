@@ -44,7 +44,7 @@ export default {
     button_continue_with: "ดำเนินการต่อด้วย {provider}",
     button_create_account: "สร้างบัญชี",
     header_create_new_account: "สร้างบัญชีใหม่",
-    label_or_register_with: "สร้างบัญชีด้วย",
+    label_or_register_with: "หรือ สร้างบัญชีด้วย",
     link_already_have_account: "มีบัญชีอยู่แล้ว? เข้าสู่ระบบ",
     placeholder_confirm_password: "ยืนยันรหัสผ่าน",
   },
