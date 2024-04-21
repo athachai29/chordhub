@@ -47,47 +47,48 @@ gtag("set", "page_title", "Request")
   <div class="my-6 flex flex-col px-4 pt-16 md:my-12 md:px-16 md:pt-8">
     <div class="text-2xl">{{ $t("page_request.header_request_new_song") }}</div>
     <form class="flex flex-col gap-4" @submit.prevent="onSubmit">
-      <div>
+      <div class="w-1/3">
         <label for="title">{{ $t("general.label_title") }}</label>
-        <input
-          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-          type="text"
+        <BaseInput
+          id="title"
           name="title"
-          v-model.trim="title"
-          required
-        />
-      </div>
-      <div>
-        <label for="artist">{{ $t("general.label_artist") }}</label>
-        <input
-          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="text"
-          name="artist"
-          v-model.trim="artist"
           required
+          v-model.trim="title"
         />
       </div>
-      <div>
+      <div class="w-1/3">
+        <label for="artist">{{ $t("general.label_artist") }}</label>
+        <BaseInput
+          id="artist"
+          name="artist"
+          type="text"
+          required
+          v-model.trim="artist"
+        />
+      </div>
+      <div class="w-1/3">
         <label for="source">{{
           $t("general.label_source", { examples: "Youtube, Spotify" })
         }}</label>
-        <input
-          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-          type="url"
+        <BaseInput
+          id="source"
           name="source"
+          type="url"
+          required
           v-model.trim="source"
         />
       </div>
-      <div>
+      <div class="w-1/3">
         <label for="note">{{ $t("general.label_note") }}</label>
         <textarea
-          class="w-full resize-none rounded-none border border-black px-4 py-2 focus:outline-none"
+          class="w-full resize-none rounded-lg border border-2 border-black px-4 py-2 focus:outline-none"
           name="note"
           rows="2"
           v-model.trim="note"
         ></textarea>
       </div>
-      <div class="text-right">
+      <div class="w-1/3 text-right">
         <button
           type="submit"
           class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
