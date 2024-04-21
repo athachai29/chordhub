@@ -32,6 +32,7 @@ export default {
     button_forgot_password: "Forgot password",
     button_login_with: "Log in with {provider}",
     button_not_have_account: "Not have an account?",
+    header_login: "Log in",
     label_or_login_with: "or Log in with",
     message_email_or_password_incorrect: "Email or password is incorrect",
     message_logging_in: "Logging in...",

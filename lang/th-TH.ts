@@ -32,6 +32,7 @@ export default {
     button_forgot_password: "ลืมรหัสผ่าน",
     button_login_with: "เข้าสู่ระบบด้วย {provider}",
     button_not_have_account: "ยังไม่มีบัญชี?",
+    header_login: "เข้าสู่ระบบ",
     label_or_login_with: "หรือ เข้าสู่ระบบด้วย",
     message_email_or_password_incorrect: "อีเมลหรือรหัสผ่านไม่ถูกต้อง",
     message_logging_in: "กำลังเข้าสู่ระบบ...",

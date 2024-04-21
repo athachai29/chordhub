@@ -103,7 +103,9 @@ gtag("set", "page_title", "Login")
 <template>
   <div class="flex h-screen flex-col">
     <main class="flex flex-grow flex-col justify-center px-6 py-12 lg:px-8">
-      <h1 class="mt-10 text-center text-2xl">{{ $t("general.login") }}</h1>
+      <h1 class="mt-10 text-center text-2xl">
+        {{ $t("page_login.header_login") }}
+      </h1>
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" @submit.prevent="onLogin">
           <div>
@@ -154,7 +156,7 @@ gtag("set", "page_title", "Login")
               {{
                 onLoginLoading
                   ? $t("page_login.logging_in")
-                  : $t("general.login")
+                  : $t("general.button_login")
               }}
             </BaseButton>
             <div
