@@ -52,11 +52,11 @@ gtag("set", "page_title", "Artist")
 
 <template>
   <div class="mb-6 mt-24 flex flex-col px-4 md:mb-12 md:px-16">
-    <ul class="flex flex-col gap-2 lg:w-3/5">
+    <ul class="flex flex-col gap-2 lg:w-2/5">
       <li
         v-for="(result, index) in results"
         :key="index"
-        class="border-2 border-black p-4 hover:cursor-pointer hover:bg-black hover:text-white"
+        class="rounded-lg border-2 border-black p-4 hover:cursor-pointer hover:bg-black hover:text-white"
         @click="() => onSelectedSong(result)"
       >
         <div>
