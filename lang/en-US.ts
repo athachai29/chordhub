@@ -13,6 +13,7 @@ export default {
     label_artist: "Artist",
     label_note: "Note",
     label_or: "or",
+    label_song: "Song",
     label_source: "Source URL (eg. {examples})",
     label_title: "Title",
     placeholder_email: "Email",
@@ -52,7 +53,6 @@ export default {
     header_request_new_song: "Request new song",
   },
   page_results: {
-    label_song: "Song",
     link_request_song: "Request this song",
     link_submit_song: "Submit your version",
     message_found: 'Found {total} results for "{keyword}"',

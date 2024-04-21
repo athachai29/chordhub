@@ -62,7 +62,7 @@ gtag("set", "page_title", "Artist")
         <div>
           <div class="flex justify-between">
             <div class="md:text-2xl">{{ result.title }}</div>
-            <div class="text-xs">{{ $t("general.song") }}</div>
+            <div class="text-xs">{{ $t("general.label_song") }}</div>
           </div>
           <div class="md:text-xl">
             {{ result._artist.thaiName || result._artist.engName }}

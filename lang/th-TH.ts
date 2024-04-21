@@ -13,6 +13,7 @@ export default {
     label_artist: "ศิลปิน",
     label_note: "หมายเหตุ",
     label_or: "หรือ",
+    label_song: "เพลง",
     label_source: "แหล่งที่มา (เช่น {examples})",
     label_title: "ชื่อเพลง",
     placeholder_email: "อีเมล",
@@ -52,7 +53,6 @@ export default {
     header_request_new_song: "ขอเพลงใหม่",
   },
   page_results: {
-    label_song: "เพลง",
     link_request_song: "ขอเพลงนี้",
     link_submit_song: "เผยแพร่เวอร์ชั่นของคุณ",
     message_found: 'พบ {total} รายการ สำหรับ "{keyword}"',

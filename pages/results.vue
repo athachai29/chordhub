@@ -162,7 +162,7 @@ gtag("set", "page_title", "Results")
         >
           <div class="flex justify-between">
             <div class="md:text-2xl">{{ (result as Song).title }}</div>
-            <div class="text-xs">{{ $t("page_results.label_song") }}</div>
+            <div class="text-xs">{{ $t("general.label_song") }}</div>
           </div>
           <div class="md:text-xl">
             {{
