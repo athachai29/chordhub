@@ -11,7 +11,9 @@ const {
 } = useRouter()
 
 const onGoToLoginPage = () => {
-  useRouter().push("/login")
+  navigateTo({
+    path: localePath("/login"),
+  })
 }
 
 // const menu = ref(null)
