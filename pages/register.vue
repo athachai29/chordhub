@@ -106,7 +106,9 @@ gtag("set", "page_title", "Login")
 <template>
   <div class="flex h-screen flex-col">
     <main class="flex flex-grow flex-col justify-center px-6 py-12 lg:px-8">
-      <h1 class="mt-10 text-center text-2xl">Create new account</h1>
+      <h1 class="mt-10 text-center text-2xl">
+        {{ $t("page_register.header_create_new_account") }}
+      </h1>
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" @submit.prevent="onRegisterWithCredentials">
           <div>
@@ -119,7 +121,7 @@ gtag("set", "page_title", "Login")
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
                 v-model.trim="form.email"
-                placeholder="Email"
+                :placeholder="$t('general.placeholder_email')"
                 @blur="() => onEmailChecking()"
               />
             </div>
@@ -139,7 +141,7 @@ gtag("set", "page_title", "Login")
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
                 v-model.trim="form.password"
-                placeholder="Password"
+                :placeholder="$t('general.placeholder_password')"
               />
             </div>
             <div class="text-right text-xs text-red-600">
@@ -157,7 +159,7 @@ gtag("set", "page_title", "Login")
                 required
                 class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
                 v-model.trim="form.confirmPassword"
-                placeholder="Confirm password"
+                :placeholder="$t('page_register.placeholder_confirm_password')"
               />
             </div>
             <div class="text-right text-xs text-red-600">
@@ -169,7 +171,7 @@ gtag("set", "page_title", "Login")
               type="submit"
               class="w-full border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
             >
-              Create account
+              {{ $t("page_register.button_create_account") }}
             </button>
             <div
               v-if="useRoute().query.error"
@@ -180,7 +182,9 @@ gtag("set", "page_title", "Login")
           </div>
           <div class="relative flex items-center py-5">
             <div class="flex-grow border-t"></div>
-            <span class="mx-4 flex-shrink">or</span>
+            <span class="mx-4 flex-shrink">{{
+              $t("page_register.label_or_register_with")
+            }}</span>
             <div class="flex-grow border-t"></div>
           </div>
           <div>
@@ -194,14 +198,16 @@ gtag("set", "page_title", "Login")
               class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#dd4b39] hover:text-white"
               @click="() => onRegisterWithGoogle()"
             >
-              Continue with Google
+              {{
+                $t("page_register.button_continue_with", { provider: "Google" })
+              }}
             </button>
           </div>
         </form>
         <div class="mt-10 text-center text-sm text-gray-500">
-          <NuxtLink :to="localePath('/login')"
-            >Already have an account? Login</NuxtLink
-          >
+          <NuxtLink :to="localePath('/login')">{{
+            $t("page_register.link_already_have_account")
+          }}</NuxtLink>
         </div>
       </div>
     </main>

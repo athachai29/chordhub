@@ -103,7 +103,7 @@ gtag("set", "page_title", "Login")
 <template>
   <div class="flex h-screen flex-col">
     <main class="flex flex-grow flex-col justify-center px-6 py-12 lg:px-8">
-      <h1 class="mt-10 text-center text-2xl">Log in to your account</h1>
+      <h1 class="mt-10 text-center text-2xl">{{ $t("general.login") }}</h1>
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" @submit.prevent="onLogin">
           <div>
@@ -114,7 +114,7 @@ gtag("set", "page_title", "Login")
                 type="email"
                 autocomplete="email"
                 required
-                placeholder="Email"
+                :placeholder="$t('general.placeholder_email')"
                 v-model.trim="form.email"
               />
             </div>
@@ -127,7 +127,7 @@ gtag("set", "page_title", "Login")
                 type="password"
                 autocomplete="password"
                 required
-                placeholder="Password"
+                :placeholder="$t('general.placeholder_password')"
                 v-model.trim="form.password"
               />
               <div
@@ -139,7 +139,9 @@ gtag("set", "page_title", "Login")
               </div>
             </div>
             <div class="mt-1 text-right text-sm">
-              <a href="#" class="font-semibold">Forgot password?</a>
+              <a href="#" class="font-semibold">{{
+                $t("page_login.button_forgot_password")
+              }}</a>
             </div>
           </div>
           <div>
@@ -149,18 +151,24 @@ gtag("set", "page_title", "Login")
               class="w-full"
               btn-style="primary"
             >
-              {{ onLoginLoading ? "Logging in..." : "Log in" }}
+              {{
+                onLoginLoading
+                  ? $t("page_login.logging_in")
+                  : $t("general.login")
+              }}
             </BaseButton>
             <div
               v-if="useRoute().query.error === 'CredentialsSignin'"
               class="mt-2 text-right text-red-600"
             >
-              Email or password is incorrect
+              {{ $t("page_login.message_email_or_password_incorrect") }}
             </div>
           </div>
           <div class="relative flex items-center py-5">
             <div class="flex-grow border-t"></div>
-            <span class="mx-4 flex-shrink">or Log in with</span>
+            <span class="mx-4 flex-shrink">{{
+              $t("page_login.label_or_login_with")
+            }}</span>
             <div class="flex-grow border-t"></div>
           </div>
           <div>
@@ -184,15 +192,17 @@ gtag("set", "page_title", "Login")
               :disabled="onGoogleLoginLoading"
             >
               {{
-                onGoogleLoginLoading ? "Logging in..." : "Log in with Google"
+                onGoogleLoginLoading
+                  ? $t("page_login.message_logging_in")
+                  : $t("page_login.button_login_with", { provider: "Google" })
               }}
             </BaseButton>
           </div>
         </form>
         <div class="mt-10 text-center text-sm text-gray-500">
-          <NuxtLink :to="localePath('/register')"
-            >Not have an account?</NuxtLink
-          >
+          <NuxtLink :to="localePath('/register')">{{
+            $t("page_login.button_not_have_account")
+          }}</NuxtLink>
         </div>
       </div>
     </main>

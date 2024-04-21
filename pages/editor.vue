@@ -89,7 +89,7 @@ gtag("set", "page_title", "Editor")
           class="mr-2 border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
           @click="onPreview"
         >
-          Edit / Preview
+          {{ $t("page_editor.button_editor_preview") }}
         </button>
       </div>
       <div class="flex gap-2">
@@ -97,13 +97,13 @@ gtag("set", "page_title", "Editor")
           class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
           @click="onSaveDraft"
         >
-          Save Draft
+          {{ $t("page_editor.button_save_draft") }}
         </button>
         <button
           class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
           @click="onSubmit"
         >
-          Submit
+          {{ $t("general.button_submit") }}
         </button>
       </div>
     </div>

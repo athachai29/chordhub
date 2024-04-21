@@ -64,10 +64,10 @@ gtag("set", "page_title", "Submit")
 
 <template>
   <div class="my-6 flex flex-col px-4 pt-16 md:my-12 md:px-16 md:pt-8">
-    <div class="text-2xl">Submit new song</div>
+    <div class="text-2xl">{{ $t("page_submit.header_submit_new_song") }}</div>
     <form class="flex flex-col gap-4" @submit.prevent="onSubmit">
       <div>
-        <label for="title">Title</label>
+        <label for="title">{{ $t("general.label_title") }}</label>
         <input
           class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="text"
@@ -77,7 +77,7 @@ gtag("set", "page_title", "Submit")
         />
       </div>
       <div>
-        <label for="artist">Artist</label>
+        <label for="artist">{{ $t("general.label_artist") }}</label>
         <input
           class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="text"
@@ -87,7 +87,9 @@ gtag("set", "page_title", "Submit")
         />
       </div>
       <div>
-        <label for="source">Source URL (eg. Youtube, Spotify)</label>
+        <label for="source">{{
+          $t("general.label_source", { examples: "Youtube, Spotify" })
+        }}</label>
         <input
           class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="url"
@@ -96,7 +98,7 @@ gtag("set", "page_title", "Submit")
         />
       </div>
       <div>
-        <label for="note">Note</label>
+        <label for="note">{{ $t("general.label_note") }}</label>
         <textarea
           class="w-full resize-none border border-black px-4 py-2 focus:outline-none"
           name="note"
@@ -123,20 +125,20 @@ gtag("set", "page_title", "Submit")
           class="mr-2 border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
           @click="onPreview"
         >
-          Preview
+          {{ $t("page_submit.button_preview") }}
         </button>
         <button
           v-else
           class="mr-2 border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
           @click="() => (isPreview = !isPreview)"
         >
-          Edit
+          {{ $t("page_submit.button_edit") }}
         </button>
         <button
           class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
           @click="onSubmit"
         >
-          Submit
+          {{ $t("general.button_submit") }}
         </button>
       </div>
     </form>

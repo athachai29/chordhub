@@ -108,11 +108,20 @@ gtag("set", "page_title", "Results")
       <h1 v-if="isLoading" class="text-3xl">Searching...</h1>
       <div v-if="!isLoading">
         <h1 class="mb-2" v-if="results?.length > 0">
-          Found {{ results.length }} results for "{{ resultForKeyword }}"
+          {{
+            $t("page_results.message_found", {
+              total: results.length,
+              keyword: resultForKeyword,
+            })
+          }}
         </h1>
         <div v-else>
           <div class="mb-4 text-3xl">
-            No results for "{{ resultForKeyword }}"
+            {{
+              $t("page_results.message_not_found", {
+                keyword: resultForKeyword,
+              })
+            }}
           </div>
           <div class="flex gap-4">
             <NuxtLink
@@ -124,9 +133,9 @@ gtag("set", "page_title", "Results")
                 })
               "
             >
-              Request this song
+              {{ $t("page_results.link_request_song") }}
             </NuxtLink>
-            or
+            {{ $t("general.label_or") }}
             <NuxtLink
               class="text-blue-600 hover:underline"
               :to="
@@ -135,7 +144,7 @@ gtag("set", "page_title", "Results")
                   query: { title: resultForKeyword },
                 })
               "
-              >Submit your version</NuxtLink
+              >{{ $t("page_results.link_submit_song") }}</NuxtLink
             >
           </div>
         </div>
@@ -153,7 +162,7 @@ gtag("set", "page_title", "Results")
         >
           <div class="flex justify-between">
             <div class="md:text-2xl">{{ (result as Song).title }}</div>
-            <div class="text-xs">Song</div>
+            <div class="text-xs">{{ $t("page_results.label_song") }}</div>
           </div>
           <div class="md:text-xl">
             {{
@@ -170,7 +179,7 @@ gtag("set", "page_title", "Results")
           <div class="md:text-2xl">
             {{ (result as Artist).engName || (result as Artist).thaiName }}
           </div>
-          <div class="text-xs">Artist</div>
+          <div class="text-xs">{{ $t("general.label_artist") }}</div>
         </div>
       </li>
     </ul>

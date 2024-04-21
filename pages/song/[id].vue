@@ -65,7 +65,9 @@ gtag("set", "page_title", "Song")
     v-if="result.data"
     class="my-6 flex flex-col px-8 pt-16 md:my-12 md:px-16 md:pt-8"
   >
-    <div class="text-xl md:text-2xl">คอร์ดเพลง{{ result.data.title }}</div>
+    <div class="text-xl md:text-2xl">
+      {{ $t("page_song.prefix_header") }}{{ result.data.title }}
+    </div>
     <div>
       {{ result.data._artist.thaiName || result.data._artist.engName }}
     </div>
@@ -82,7 +84,7 @@ gtag("set", "page_title", "Song")
           @click="onAddToFav"
           class="flex flex-row hover:underline"
         >
-          <div>Add to favorites</div>
+          <div>{{ $t("page_song.button_add_favorite") }}</div>
           <div>
             <HeartIcon class="h-6 w-6" />
           </div>
@@ -92,7 +94,7 @@ gtag("set", "page_title", "Song")
           @click="onRemoveFromFav"
           class="flex flex-row hover:underline"
         >
-          <div>Remove from favorites</div>
+          <div>{{ $t("page_song.button_remove_favorite") }}</div>
           <div>
             <HeartIcon class="h-6 w-6 fill-current text-black" />
           </div>
@@ -107,7 +109,7 @@ gtag("set", "page_title", "Song")
             query: { id: result.data.songId },
           })
         "
-        >Found mistake?</NuxtLink
+        >{{ $t("page_song.button_found_mistake") }}</NuxtLink
       >
     </div>
   </div>
