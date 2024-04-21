@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const { data } = useAuth()
 
 const title = ref(useRoute().query.title as string)
@@ -33,7 +35,9 @@ const onSubmit = async () => {
     }),
   })
 
-  useRouter().push({ name: "success" })
+  navigateTo({
+    path: localePath("/success"),
+  })
 }
 
 /**
