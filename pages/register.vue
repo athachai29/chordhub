@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { isEmailValid, isPasswordValid } from "@/utils/validators"
+import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline"
+
+const localePath = useLocalePath()
+
+const gtag = useGtag()
 
 const title = ref("Register - ChordHub")
 
@@ -43,6 +48,38 @@ const onEmailChecking = async () => {
   form.value.isEmailExist = res.data.value?.data?.exists || false
 }
 
+// BEGIN: Password masking logic
+const isPasswordMasked = ref(true)
+
+const onTogglePasswordMaskChange = () => {
+  const passwordInput = document.getElementById("password") as HTMLInputElement
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text"
+    isPasswordMasked.value = false
+  } else {
+    passwordInput.type = "password"
+    isPasswordMasked.value = true
+  }
+}
+// END: Password masking logic
+
+// BEGIN: Confirm Password masking logic
+const isConfirmPasswordMasked = ref(true)
+
+const onToggleConfirmPasswordMaskChange = () => {
+  const passwordInput = document.getElementById(
+    "confirmPassword",
+  ) as HTMLInputElement
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text"
+    isConfirmPasswordMasked.value = false
+  } else {
+    passwordInput.type = "password"
+    isConfirmPasswordMasked.value = true
+  }
+}
+// END: Password masking logic
+
 const onValidatePassword = computed(() => {
   return form.value.password && !isPasswordValid(form.value.password)
     ? "Password must be at least 8 characters"
@@ -65,9 +102,6 @@ const onRegisterWithCredentials = async () => {
     return
   }
 
-  /**
-   * Google Analytics
-   */
   gtag("event", "register", { method: "Credentials" })
 
   const credentials = {
@@ -88,39 +122,31 @@ const onRegisterWithCredentials = async () => {
 }
 
 const onRegisterWithGoogle = async () => {
-  /**
-   * Google Analytics
-   */
   gtag("event", "register", { method: "Google" })
 }
 
-/**
- * Google Analytics
- */
-const gtag = useGtag()
 gtag("set", "page_title", "Login")
 </script>
 
 <template>
   <div class="flex h-screen flex-col">
     <main class="flex flex-grow flex-col justify-center px-6 py-12 lg:px-8">
-      <h1 class="mt-10 text-center text-2xl">Create new account</h1>
+      <h1 class="mt-10 text-center text-2xl">
+        {{ $t("page_register.header_create_new_account") }}
+      </h1>
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" @submit.prevent="onRegisterWithCredentials">
           <div>
-            <div>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autocomplete="email"
-                required
-                class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-                v-model.trim="form.email"
-                placeholder="Email"
-                @blur="() => onEmailChecking()"
-              />
-            </div>
+            <BaseInput
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              :placeholder="$t('general.placeholder_email')"
+              v-model.trim="form.email"
+              @blur="() => onEmailChecking()"
+            />
             <div class="text-right text-xs text-red-600">
               {{ onValidateEmail }}
               {{ form.isEmailExist ? "Email already exists" : "" }}
@@ -129,16 +155,24 @@ gtag("set", "page_title", "Login")
           <div>
             <div class="flex items-center justify-between"></div>
             <div>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autocomplete="current-password"
-                required
-                class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-                v-model.trim="form.password"
-                placeholder="Password"
-              />
+              <div class="relative">
+                <BaseInput
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  required
+                  :placeholder="$t('general.placeholder_password')"
+                  v-model.trim="form.password"
+                />
+                <div
+                  class="absolute inset-y-0 right-0 flex items-center hover:cursor-pointer"
+                  @click="onTogglePasswordMaskChange()"
+                >
+                  <EyeIcon v-if="isPasswordMasked" class="mr-2 h-6 w-6" />
+                  <EyeSlashIcon v-else class="mr-2 h-6 w-6" />
+                </div>
+              </div>
             </div>
             <div class="text-right text-xs text-red-600">
               {{ onValidatePassword }}
@@ -146,29 +180,32 @@ gtag("set", "page_title", "Login")
           </div>
           <div>
             <div class="flex items-center justify-between"></div>
-            <div>
-              <input
+            <div class="relative">
+              <BaseInput
                 id="confirmPassword"
                 name="password"
                 type="password"
                 autocomplete="current-password"
                 required
-                class="block w-full rounded-none border border-black px-4 py-2 focus:outline-none"
+                :placeholder="$t('page_register.placeholder_confirm_password')"
                 v-model.trim="form.confirmPassword"
-                placeholder="Confirm password"
               />
+              <div
+                class="absolute inset-y-0 right-0 flex items-center hover:cursor-pointer"
+                @click="onToggleConfirmPasswordMaskChange()"
+              >
+                <EyeIcon v-if="isConfirmPasswordMasked" class="mr-2 h-6 w-6" />
+                <EyeSlashIcon v-else class="mr-2 h-6 w-6" />
+              </div>
             </div>
             <div class="text-right text-xs text-red-600">
               {{ onConfirmPassword }}
             </div>
           </div>
           <div>
-            <button
-              type="submit"
-              class="w-full border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-            >
-              Create account
-            </button>
+            <BaseButton type="submit" class="w-full" btn-style="primary">
+              {{ $t("page_register.button_create_account") }}
+            </BaseButton>
             <div
               v-if="useRoute().query.error"
               class="mt-2 text-right text-red-600"
@@ -178,26 +215,27 @@ gtag("set", "page_title", "Login")
           </div>
           <div class="relative flex items-center py-5">
             <div class="flex-grow border-t"></div>
-            <span class="mx-4 flex-shrink">or</span>
+            <span class="mx-4 flex-shrink">{{
+              $t("page_register.label_or_register_with")
+            }}</span>
             <div class="flex-grow border-t"></div>
           </div>
           <div>
-            <!-- <button
-              type="submit"
-              class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#3b5998] hover:text-white"
-            >
-              Continue with Facebook
-            </button> -->
-            <button
-              class="mt-2 w-full border-2 border-black px-4 py-2 hover:bg-[#dd4b39] hover:text-white"
+            <BaseButton
+              id="register-google-button"
+              class="mt-2 w-full"
               @click="() => onRegisterWithGoogle()"
             >
-              Continue with Google
-            </button>
+              {{
+                $t("page_register.button_continue_with", { provider: "Google" })
+              }}
+            </BaseButton>
           </div>
         </form>
         <div class="mt-10 text-center text-sm text-gray-500">
-          <NuxtLink to="/login">Already have an account? Login</NuxtLink>
+          <NuxtLink :to="localePath('/login')">{{
+            $t("page_register.link_already_have_account")
+          }}</NuxtLink>
         </div>
       </div>
     </main>

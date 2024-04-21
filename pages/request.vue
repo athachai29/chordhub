@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const { data } = useAuth()
 
 const title = ref(useRoute().query.title as string)
@@ -33,7 +35,9 @@ const onSubmit = async () => {
     }),
   })
 
-  useRouter().push({ name: "success" })
+  navigateTo({
+    path: localePath("/success"),
+  })
 }
 
 /**
@@ -45,53 +49,53 @@ gtag("set", "page_title", "Request")
 
 <template>
   <div class="my-6 flex flex-col px-4 pt-16 md:my-12 md:px-16 md:pt-8">
-    <div class="text-2xl">Request new song</div>
+    <div class="text-2xl">{{ $t("page_request.header_request_new_song") }}</div>
     <form class="flex flex-col gap-4" @submit.prevent="onSubmit">
-      <div>
-        <label for="title">Title</label>
-        <input
-          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-          type="text"
+      <div class="w-1/3">
+        <label for="title">{{ $t("general.label_title") }}</label>
+        <BaseInput
+          id="title"
           name="title"
-          v-model.trim="title"
-          required
-        />
-      </div>
-      <div>
-        <label for="artist">Artist</label>
-        <input
-          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="text"
-          name="artist"
-          v-model.trim="artist"
           required
+          v-model.trim="title"
         />
       </div>
-      <div>
-        <label for="source">Source URL (eg. Youtube, Spotify)</label>
-        <input
-          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-          type="url"
+      <div class="w-1/3">
+        <label for="artist">{{ $t("general.label_artist") }}</label>
+        <BaseInput
+          id="artist"
+          name="artist"
+          type="text"
+          required
+          v-model.trim="artist"
+        />
+      </div>
+      <div class="w-1/3">
+        <label for="source">{{
+          $t("general.label_source", { examples: "Youtube, Spotify" })
+        }}</label>
+        <BaseInput
+          id="source"
           name="source"
+          type="url"
+          required
           v-model.trim="source"
         />
       </div>
-      <div>
-        <label for="note">Note</label>
+      <div class="w-1/3">
+        <label for="note">{{ $t("general.label_note") }}</label>
         <textarea
-          class="w-full resize-none rounded-none border border-black px-4 py-2 focus:outline-none"
+          class="w-full resize-none rounded-lg border border-2 border-black px-4 py-2 focus:outline-none"
           name="note"
           rows="2"
           v-model.trim="note"
         ></textarea>
       </div>
-      <div class="text-right">
-        <button
-          type="submit"
-          class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-        >
-          Submit Request
-        </button>
+      <div class="w-1/3 text-right">
+        <BaseButton type="submit">
+          {{ $t("general.button_submit") }}
+        </BaseButton>
       </div>
     </form>
   </div>

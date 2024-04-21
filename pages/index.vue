@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const title = ref("Home - ChordHub")
 
 useSeoMeta({
@@ -26,7 +28,7 @@ const onSearch = () => {
   if (keyword.value.trim() === "") return
 
   navigateTo({
-    path: "/results",
+    path: localePath("/results"),
     query: { search: keyword.value.trim() },
   })
 }
@@ -56,15 +58,15 @@ if (data.value?.user?.email) {
       <BaseSearchBar
         id="search-bar"
         class="w-11/12 md:w-8/12 lg:w-4/12"
-        placeholder="Search with Song or Artist"
+        :placeholder="$t('page_home.placeholder_search_bar')"
         v-model.trim="keyword"
         @on-search="onSearch"
       />
     </div>
     <!-- END: SEARCH BAR -->
     <div class="flex justify-center">
-      <BaseButton type="submit">Search</BaseButton>
-      <BaseButton class="ml-2">Trends</BaseButton>
+      <BaseButton type="submit">{{ $t("page_home.button_search") }}</BaseButton>
+      <BaseButton class="ml-2">{{ $t("page_home.button_trends") }}</BaseButton>
     </div>
   </form>
 </template>

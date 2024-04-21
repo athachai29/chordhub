@@ -85,31 +85,22 @@ gtag("set", "page_title", "Editor")
     </div>
     <div class="flex justify-between">
       <div>
-        <button
-          class="mr-2 border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-          @click="onPreview"
-        >
-          Edit / Preview
-        </button>
+        <BaseButton @click="onPreview">
+          {{ $t("page_editor.button_editor_preview") }}
+        </BaseButton>
       </div>
       <div class="flex gap-2">
-        <button
-          class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-          @click="onSaveDraft"
-        >
-          Save Draft
-        </button>
-        <button
-          class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-          @click="onSubmit"
-        >
-          Submit
-        </button>
+        <BaseButton @click="onSaveDraft">
+          {{ $t("page_editor.button_save_draft") }}
+        </BaseButton>
+        <BaseButton @click="onSubmit">
+          {{ $t("general.button_submit") }}
+        </BaseButton>
       </div>
     </div>
     <textarea
       v-if="!isPreview"
-      class="mt-2 resize-none whitespace-pre border-2 border-black p-4 font-mono"
+      class="mt-2 resize-none whitespace-pre rounded-lg border-2 border-black p-4 font-mono"
       name="editor"
       id="editor"
       rows="20"

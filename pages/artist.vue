@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const title = ref("Artist - ChordHub")
 
 useSeoMeta({
@@ -37,7 +39,7 @@ const { data: results }: any = await useFetch(
 
 const onSelectedSong = (song: Song) => {
   navigateTo({
-    path: `/song/${(song as Song).songId}`,
+    path: localePath(`/song/${(song as Song).songId}`),
   })
 }
 
@@ -50,17 +52,17 @@ gtag("set", "page_title", "Artist")
 
 <template>
   <div class="mb-6 mt-24 flex flex-col px-4 md:mb-12 md:px-16">
-    <ul class="flex flex-col gap-2 lg:w-3/5">
+    <ul class="flex flex-col gap-2 lg:w-2/5">
       <li
         v-for="(result, index) in results"
         :key="index"
-        class="border-2 border-black p-4 hover:cursor-pointer hover:bg-black hover:text-white"
+        class="rounded-lg border-2 border-black p-4 hover:cursor-pointer hover:bg-black hover:text-white"
         @click="() => onSelectedSong(result)"
       >
         <div>
           <div class="flex justify-between">
             <div class="md:text-2xl">{{ result.title }}</div>
-            <div class="text-xs">Song</div>
+            <div class="text-xs">{{ $t("general.label_song") }}</div>
           </div>
           <div class="md:text-xl">
             {{ result._artist.thaiName || result._artist.engName }}

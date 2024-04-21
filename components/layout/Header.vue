@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useAvatar } from "@/stores/avatar"
 
-const { status, data, signOut } = useAuth()
+const localePath = useLocalePath()
+
+const { status, data } = useAuth()
 const {
   currentRoute: {
     value: { path },
@@ -9,7 +11,9 @@ const {
 } = useRouter()
 
 const onGoToLoginPage = () => {
-  useRouter().push("/login")
+  navigateTo({
+    path: localePath("/login"),
+  })
 }
 
 // const menu = ref(null)
@@ -22,7 +26,7 @@ const avatar = useAvatar()
     class="fixed left-0 top-0 z-10 flex w-full justify-between bg-black text-white"
   >
     <div class="p-4 text-4xl">
-      <NuxtLink class="flex text-2xl font-semibold" to="/">
+      <NuxtLink class="flex text-2xl font-semibold" :to="localePath('/')">
         <!-- TODO: Add the ChordHub logos here -->
         <!-- <img
           src="https://flowbite.com/docs/images/logo.svg"
@@ -34,7 +38,7 @@ const avatar = useAvatar()
     </div>
     <div class="m-2 flex items-center">
       <div v-if="status !== 'unauthenticated'" class="flex gap-2">
-        <NuxtLink class="truncate" to="/profile">
+        <NuxtLink class="truncate" :to="localePath('/profile')">
           {{ data?.user?.name || data?.user?.email }}
         </NuxtLink>
         <img
@@ -48,20 +52,7 @@ const avatar = useAvatar()
           v-if="status === 'unauthenticated' && path !== '/login'"
           @click="onGoToLoginPage"
         >
-          Log in
-        </button>
-        <button
-          v-else-if="status === 'authenticated' && path !== '/login'"
-          @click="
-            () =>
-              signOut({
-                callbackUrl: `${
-                  (useRouter().options.history.state.current as string) || '/'
-                }`,
-              })
-          "
-        >
-          Log out
+          {{ $t("general.button_login") }}
         </button>
       </div>
     </div>

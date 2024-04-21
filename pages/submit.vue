@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const title = ref("Submit - ChordHub")
 
 useSeoMeta({
@@ -52,7 +54,9 @@ const formatter = (sheet: string[]) => {
 }
 
 const onSubmit = async () => {
-  useRouter().push({ name: "success" })
+  navigateTo({
+    path: localePath("/success"),
+  })
 }
 
 /**
@@ -64,41 +68,44 @@ gtag("set", "page_title", "Submit")
 
 <template>
   <div class="my-6 flex flex-col px-4 pt-16 md:my-12 md:px-16 md:pt-8">
-    <div class="text-2xl">Submit new song</div>
+    <div class="text-2xl">{{ $t("page_submit.header_submit_new_song") }}</div>
     <form class="flex flex-col gap-4" @submit.prevent="onSubmit">
-      <div>
-        <label for="title">Title</label>
-        <input
-          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-          type="text"
+      <div class="w-1/3">
+        <label for="title">{{ $t("general.label_title") }}</label>
+        <BaseInput
+          id="title"
           name="title"
-          v-model.trim="query.title"
-          required
-        />
-      </div>
-      <div>
-        <label for="artist">Artist</label>
-        <input
-          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
           type="text"
-          name="artist"
-          v-model.trim="query.artist"
           required
+          v-model.trim="query.title"
         />
       </div>
-      <div>
-        <label for="source">Source URL (eg. Youtube, Spotify)</label>
-        <input
-          class="w-full rounded-none border border-black px-4 py-2 focus:outline-none"
-          type="url"
+      <div class="w-1/3">
+        <label for="artist">{{ $t("general.label_artist") }}</label>
+        <BaseInput
+          id="artist"
+          name="artist"
+          type="text"
+          required
+          v-model.trim="query.artist"
+        />
+      </div>
+      <div class="w-1/3">
+        <label for="source">{{
+          $t("general.label_source", { examples: "Youtube, Spotify" })
+        }}</label>
+        <BaseInput
+          id="source"
           name="source"
+          type="url"
+          required
           v-model.trim="query.source"
         />
       </div>
-      <div>
-        <label for="note">Note</label>
+      <div class="w-1/3">
+        <label for="note">{{ $t("general.label_note") }}</label>
         <textarea
-          class="w-full resize-none border border-black px-4 py-2 focus:outline-none"
+          class="w-full resize-none rounded-lg border-2 border-black px-4 py-2 focus:outline-none"
           name="note"
           rows="2"
           v-model="query.note"
@@ -106,7 +113,7 @@ gtag("set", "page_title", "Submit")
       </div>
       <textarea
         v-if="!isPreview"
-        class="mt-2 resize-none whitespace-nowrap border border-black p-4 font-mono focus:outline-none"
+        class="mt-2 resize-none whitespace-nowrap rounded-lg border-2 border-black p-4 font-mono focus:outline-none"
         name="editor"
         id="editor"
         rows="20"
@@ -118,26 +125,15 @@ gtag("set", "page_title", "Submit")
         </li>
       </ul>
       <div class="mt-2 text-right">
-        <button
-          v-if="!isPreview"
-          class="mr-2 border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-          @click="onPreview"
-        >
-          Preview
-        </button>
-        <button
-          v-else
-          class="mr-2 border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-          @click="() => (isPreview = !isPreview)"
-        >
-          Edit
-        </button>
-        <button
-          class="border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-          @click="onSubmit"
-        >
-          Submit
-        </button>
+        <BaseButton v-if="!isPreview" class="mr-2" @click="onPreview">
+          {{ $t("page_submit.button_preview") }}
+        </BaseButton>
+        <BaseButton v-else class="mr-2" @click="() => (isPreview = !isPreview)">
+          {{ $t("page_submit.button_edit") }}
+        </BaseButton>
+        <BaseButton type="submit">
+          {{ $t("general.button_submit") }}
+        </BaseButton>
       </div>
     </form>
   </div>

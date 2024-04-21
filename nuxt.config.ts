@@ -36,13 +36,22 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
   ],
   i18n: {
-    // vueI18n: "./i18n.config.ts", // if you are using custom path, default
-    // locales: [
-    //   {
-    //     code: "th",
-    //     iso: "th-TH",
-    //   },
-    // ],
+    strategy: "prefix",
+    locales: [
+      {
+        code: "th",
+        iso: "th-TH",
+        file: "th-TH.ts",
+      },
+      {
+        code: "en",
+        iso: "en-US",
+        file: "en-US.ts",
+      },
+    ],
+    lazy: true,
+    langDir: "lang/",
+    defaultLocale: "th",
     // baseUrl: 'https://my-nuxt-app.com',
   },
   components: [
