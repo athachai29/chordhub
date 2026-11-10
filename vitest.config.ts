@@ -12,6 +12,10 @@ export default defineConfig({
         find: /^#imports$/,
         replacement: root + "test/support/stubs/imports.ts",
       },
+      {
+        find: /^#auth$/,
+        replacement: root + "test/support/stubs/nuxt-auth.ts",
+      },
     ],
   },
   test: {

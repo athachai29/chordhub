@@ -8,16 +8,13 @@ export default (options: {
   return {
     async createUser(user: any) {
       const res = await options.Users.create(user)
-      return {
-        ...res,
-        id: res._id,
-      }
+      return { ...res.toObject(), id: String(res._id) }
     },
     async getUser(id: string) {
       return
     },
     async getUserByEmail(email: string) {
-      return
+      return await options.Users.findOne({ email })
     },
     async getUserByAccount({
       providerAccountId,
@@ -26,7 +23,10 @@ export default (options: {
       providerAccountId: string
       provider: string
     }) {
-      const account = await options.Accounts.findOne({ providerAccountId })
+      const account = await options.Accounts.findOne({
+        provider,
+        providerAccountId,
+      })
       if (!account) return null
       const user = await options.Users.findById(account.userId)
       if (!user) return null
