@@ -44,9 +44,9 @@ const isLoading = ref(false)
 
 const onFetch = async () => {
   isLoading.value = true
-  const { data }: any = await useFetch(
-    `/api/songs/search/?query=${keyword.value}`,
-  )
+  const { data }: any = await useFetch("/api/songs/search", {
+    query: { query: keyword.value },
+  })
 
   results.value = data.value.data
   isLoading.value = false
