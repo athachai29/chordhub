@@ -1,22 +1,23 @@
 import { songs as Songs, artists as Artists } from "~~/server/models"
+import {
+  PUBLIC_SONG_FILTER,
+  PUBLIC_ARTIST_FIELDS,
+} from "~~/server/utils/public-songs"
 
 export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event)
 
   const artist = await Artists.findOne({ artistId: id })
 
-  const song = await Songs.find({
-    _artist: artist?._id,
-    "flags.status": "ACTIVE",
-    "flags.isPrivate": { $ne: true },
-  }).populate("_artist")
-
-  if (!song) {
-    return {
-      success: false,
-      error: "Song not found",
-    }
+  // Unknown artist: don't query with `_artist: undefined`.
+  if (!artist) {
+    return { success: true, data: [] }
   }
+
+  const song = await Songs.find(
+    { _artist: artist._id, ...PUBLIC_SONG_FILTER },
+    "songId title updatedAt _artist",
+  ).populate("_artist", PUBLIC_ARTIST_FIELDS)
 
   return {
     success: true,

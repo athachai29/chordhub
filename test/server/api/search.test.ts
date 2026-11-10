@@ -8,6 +8,7 @@ import {
 } from "vitest"
 import { songs as Songs, artists as Artists } from "~~/server/models"
 import { callHandler } from "~~/test/support/http"
+import { PUBLIC_SONG_FILTER } from "~~/server/utils/public-songs"
 import { useTestDb, seedArtist, seedSong } from "~~/test/support/db"
 import search from "~~/server/api/songs/search.get"
 
@@ -71,6 +72,27 @@ it("queries songIndex/artistIndex with these paths, limit 5", async () => {
   })
   expect(sp).toContainEqual({ $limit: 5 })
   expect(ap).toContainEqual({ $limit: 5 })
+})
+
+it("song pipeline keeps only public songs right after $search", async () => {
+  await q("ใจ")
+  expect(searchPipeline(songsAgg)[1]).toEqual({ $match: PUBLIC_SONG_FILTER })
+})
+
+it("substring search skips private and INACTIVE songs", async () => {
+  await seedSong({ songId: "pub", title: "ใจสั่งมา" })
+  await seedSong({
+    songId: "priv",
+    title: "ใจสั่งลับ",
+    flags: { status: "ACTIVE", isPrivate: true },
+  })
+  await seedSong({
+    songId: "off",
+    title: "ใจสั่งร่าง",
+    flags: { status: "INACTIVE" },
+  })
+  const res = await q("ใจสั่ง")
+  expect(res.body.data.map((r: any) => r.songId)).toEqual(["pub"])
 })
 
 it("normalizes the query before searching", async () => {

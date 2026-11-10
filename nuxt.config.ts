@@ -20,6 +20,15 @@ export default defineNuxtConfig({
     googleClientSecret: "",
     facebookClientId: "",
     facebookClientSecret: "",
+    // Anti-scraping guard for /api/songs*. mode: off | log | enforce.
+    scraperGuard: {
+      mode: "log",
+      perMinute: 30,
+      perDay: 500,
+      registerPerDay: 5,
+      ipHeader: "",
+      xffHopsFromRight: 0,
+    },
     // Keys within public, will be also exposed to the client-side
     public: {
       buyMeACoffeeUrl: "",

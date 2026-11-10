@@ -15,6 +15,14 @@ export const testRuntimeConfig = {
   googleClientSecret: "test",
   facebookClientId: "test",
   facebookClientSecret: "test",
+  scraperGuard: {
+    mode: "log",
+    perMinute: 30,
+    perDay: 500,
+    registerPerDay: 5,
+    ipHeader: "",
+    xffHopsFromRight: 0,
+  },
   public: {
     buyMeACoffeeUrl: "",
     dicebearApiUrl: "",

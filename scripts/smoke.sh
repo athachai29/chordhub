@@ -12,7 +12,7 @@ trap 'rm -f "$BODY"' EXIT
 # Fetch without following redirects; sets STATUS and LOC (scheme/host stripped).
 fetch() {
   local out
-  out="$(curl -s -o "$BODY" -w '%{http_code} %{redirect_url}' "$BASE$1")"
+  out="$(curl -s -A 'Mozilla/5.0 (chordhub-smoke)' -o "$BODY" -w '%{http_code} %{redirect_url}' "$BASE$1")"
   STATUS="${out%% *}"
   LOC="${out#* }"
   LOC="$(printf '%s' "$LOC" | sed -E 's#^https?://[^/]+##')"
@@ -45,10 +45,9 @@ fetch "/login?error=CredentialsSignin"; line "/login?error=CredentialsSignin"
 fetch "/th/profile"; line "/th/profile"
 fetch "/th/results?search=test"; line "/th/results?search=test"
 
-fetch "/api/songs"
-SONGS_STATUS="$STATUS"
-COUNT="$(json 'j=>Array.isArray(j.data)?j.data.length:""')"
-SONG_ID="$(json 'j=>(j.data&&j.data[0]&&j.data[0].songId)||""')"
+# The catalogue API is gone; take a song id from the first sitemap song URL.
+fetch "/__sitemap__/th-TH.xml"
+SONG_ID="$(grep -oE '<loc>[^<]*</loc>' "$BODY" | sed -E 's#</?loc>##g' | grep '/song/' | sed -nE 's#.*/song/([^/]+)$#\1#p' | head -1 || true)"
 
 if [ -n "$SONG_ID" ]; then
   fetch "/th/song/$SONG_ID"; line "/th/song/<first>" "title=$(html_title)"
@@ -57,7 +56,7 @@ fetch "/th/song/does-not-exist"; line "/th/song/does-not-exist"
 fetch "/th/no-such-page"; line "/th/no-such-page"
 
 fetch "/api/health"; line "/api/health"
-STATUS="$SONGS_STATUS"; LOC=""; line "/api/songs" "count=$COUNT"
+fetch "/api/songs"; line "/api/songs"
 
 fetch "/api/auth/providers"
 line "/api/auth/providers" "ids=$(json 'j=>Object.keys(j).sort().join(",")')"

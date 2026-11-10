@@ -1,17 +1,28 @@
-import { it, expect, vi, afterEach } from "vitest"
+import { it, expect } from "vitest"
+import { songs as Songs } from "~~/server/models"
+import { useTestDb, seedSong } from "~~/test/support/db"
+import sitemapUrls from "~~/server/api/__sitemap__/urls"
 
-afterEach(() => {
-  delete (globalThis as any).$fetch
-})
+useTestDb()
 
-it("sitemap urls are built from /api/songs", async () => {
-  const $fetch = vi.fn().mockResolvedValue({
-    data: [{ songId: "abc123", updatedAt: "2024-01-02T03:04:05.000Z" }],
+it("sitemap lists public songs straight from the DB", async () => {
+  await seedSong()
+  await seedSong({ songId: "inactive", flags: { status: "INACTIVE" } })
+  await seedSong({
+    songId: "private",
+    flags: { status: "ACTIVE", isPrivate: true },
   })
-  ;(globalThis as any).$fetch = $fetch
-  const urls = await (await import("~~/server/api/__sitemap__/urls")).default()
-  expect($fetch).toHaveBeenCalledWith("/api/songs")
-  expect(urls).toEqual([
-    { url: "/song/abc123", lastmod: new Date("2024-01-02T03:04:05.000Z") },
+  // Raw insert bypasses the schema default, like pre-isPrivate/imported data.
+  await Songs.collection.insertOne({
+    songId: "legacy",
+    title: "legacy",
+    flags: { status: "ACTIVE" },
+    updatedAt: new Date("2024-01-02T03:04:05.000Z"),
+  })
+  const urls = (await (sitemapUrls as any)()) as any[]
+  expect(urls.map((u: any) => u.url).sort()).toEqual([
+    "/song/abc123",
+    "/song/legacy",
   ])
+  expect(urls.every((u: any) => u.lastmod instanceof Date)).toBe(true)
 })

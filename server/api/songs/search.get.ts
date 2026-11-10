@@ -1,4 +1,5 @@
 import { songs as songModel, artists as artistModel } from "~~/server/models"
+import { PUBLIC_SONG_FILTER } from "~~/server/utils/public-songs"
 import { normalizeThai } from "#shared/utils/thai"
 
 const LIMIT = 5
@@ -63,7 +64,12 @@ export default defineEventHandler(async (event) => {
      * "ใจสั่งมา" there.
      */
     const songSubstringPipeline = [
-      { $match: { $or: [{ title: regex }, { "params.ost": regex }] } },
+      {
+        $match: {
+          ...PUBLIC_SONG_FILTER,
+          $or: [{ title: regex }, { "params.ost": regex }],
+        },
+      },
       {
         $addFields: {
           matchRank: { $min: [matchRank("$title", query), 2] },
@@ -128,6 +134,7 @@ export default defineEventHandler(async (event) => {
           },
         },
       },
+      { $match: PUBLIC_SONG_FILTER },
       {
         $lookup: {
           from: "artists",

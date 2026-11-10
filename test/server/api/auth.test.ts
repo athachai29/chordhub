@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest"
 import { users as Users } from "~~/server/models"
 import { callHandler } from "~~/test/support/http"
 import { useTestDb, seedUser } from "~~/test/support/db"
-import register from "~~/server/api/auth/register"
+import register from "~~/server/api/auth/register.post"
 import checkEmail from "~~/server/api/auth/check-email"
 import authOptions from "~~/server/api/auth/[...]"
 
