@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isEmailValid, isPasswordValid } from "@/utils/validators"
+import { isEmailValid, isPasswordValid } from "#shared/utils/validators"
 import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline"
 
 const route = useRoute()

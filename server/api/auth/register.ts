@@ -1,5 +1,5 @@
-import Users from "~/server/models/users"
-import { isEmailValid, isPasswordValid } from "~/utils/validators"
+import Users from "~~/server/models/users"
+import { isEmailValid, isPasswordValid } from "#shared/utils/validators"
 
 const fail = (event: any, status: number, message: string) => {
   setResponseStatus(event, status)

@@ -6,8 +6,8 @@ const root = fileURLToPath(new URL(".", import.meta.url))
 export default defineConfig({
   resolve: {
     alias: [
-      { find: /^~\//, replacement: root },
-      { find: /^@\//, replacement: root },
+      { find: /^~~\//, replacement: root },
+      { find: /^#shared\//, replacement: root + "shared/" },
       {
         find: /^#imports$/,
         replacement: root + "test/support/stubs/imports.ts",

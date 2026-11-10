@@ -1,4 +1,4 @@
-import { users as Users, accounts as Accounts } from "~/server/models"
+import { users as Users, accounts as Accounts } from "~~/server/models"
 
 /** @return { import("next-auth/adapters").Adapter } */
 export default (options: {

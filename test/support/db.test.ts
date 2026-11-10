@@ -1,6 +1,6 @@
 import { it, expect } from "vitest"
-import { artists } from "~/server/models"
-import { seedArtist, seedSong, useTestDb } from "~/test/support/db"
+import { artists } from "~~/server/models"
+import { seedArtist, seedSong, useTestDb } from "~~/test/support/db"
 
 useTestDb()
 

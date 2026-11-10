@@ -1,4 +1,4 @@
-import { checkAuthOrigin } from "~/server/utils/auth-origin"
+import { checkAuthOrigin } from "~~/server/utils/auth-origin"
 
 export default defineNitroPlugin(() => {
   const message = checkAuthOrigin(process.env.AUTH_ORIGIN, !import.meta.dev)

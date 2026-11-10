@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { checkAuthOrigin } from "~/server/utils/auth-origin"
+import { checkAuthOrigin } from "~~/server/utils/auth-origin"
 
 describe("checkAuthOrigin", () => {
   it("accepts the full auth URL", () => {

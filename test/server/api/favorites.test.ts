@@ -1,11 +1,11 @@
 import { beforeEach, it, expect } from "vitest"
-import { users as Users } from "~/server/models"
-import { callHandler } from "~/test/support/http"
-import { useTestDb, seedSong, seedUser } from "~/test/support/db"
-import listFav from "~/server/api/users/favorites/index.get"
-import getFav from "~/server/api/users/favorites/[id].get"
-import putFav from "~/server/api/users/favorites/[id].put"
-import delFav from "~/server/api/users/favorites/[id].delete"
+import { users as Users } from "~~/server/models"
+import { callHandler } from "~~/test/support/http"
+import { useTestDb, seedSong, seedUser } from "~~/test/support/db"
+import listFav from "~~/server/api/users/favorites/index.get"
+import getFav from "~~/server/api/users/favorites/[id].get"
+import putFav from "~~/server/api/users/favorites/[id].put"
+import delFav from "~~/server/api/users/favorites/[id].delete"
 
 useTestDb()
 

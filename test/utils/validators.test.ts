@@ -1,5 +1,5 @@
 import { it, expect } from "vitest"
-import { isEmailValid, isPasswordValid } from "~/utils/validators"
+import { isEmailValid, isPasswordValid } from "#shared/utils/validators"
 
 it.each([
   ["a@b.co", true],

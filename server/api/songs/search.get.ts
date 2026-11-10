@@ -1,5 +1,5 @@
-import { songs as songModel, artists as artistModel } from "~/server/models"
-import { normalizeThai } from "~/utils/thai"
+import { songs as songModel, artists as artistModel } from "~~/server/models"
+import { normalizeThai } from "#shared/utils/thai"
 
 export default defineEventHandler(async (event) => {
   try {

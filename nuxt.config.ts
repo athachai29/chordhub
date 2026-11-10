@@ -58,9 +58,6 @@ export default defineNuxtConfig({
     { path: "~/components/layout", prefix: "Layout" },
     { path: "~/components/base", prefix: "Base" },
   ],
-  nitro: {
-    plugins: ["~/server/index.ts"],
-  },
   auth: {
     baseURL: "/api/auth",
     provider: { type: "authjs" },

@@ -1,8 +1,8 @@
 import { it, expect } from "vitest"
 import { eventHandler } from "h3"
 import { encode } from "next-auth/jwt"
-import { callHandler } from "~/test/support/http"
-import mw from "~/server/middleware/auth"
+import { callHandler } from "~~/test/support/http"
+import mw from "~~/server/middleware/auth"
 
 const echo = eventHandler((e) => ({ auth: e.context.auth ?? null }))
 

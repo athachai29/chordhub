@@ -6,9 +6,9 @@ import {
   afterEach,
   type MockInstance,
 } from "vitest"
-import { songs as Songs, artists as Artists } from "~/server/models"
-import { callHandler } from "~/test/support/http"
-import search from "~/server/api/songs/search.get"
+import { songs as Songs, artists as Artists } from "~~/server/models"
+import { callHandler } from "~~/test/support/http"
+import search from "~~/server/api/songs/search.get"
 
 let songsAgg: MockInstance
 let artistsAgg: MockInstance

@@ -1,10 +1,10 @@
 import { it, expect } from "vitest"
 import mongoose from "mongoose"
-import { songs as Songs } from "~/server/models"
-import { callHandler } from "~/test/support/http"
-import { useTestDb, seedSong, seedUser } from "~/test/support/db"
-import putSong from "~/server/api/songs/[id].put"
-import postRequest from "~/server/api/songs/requests.post"
+import { songs as Songs } from "~~/server/models"
+import { callHandler } from "~~/test/support/http"
+import { useTestDb, seedSong, seedUser } from "~~/test/support/db"
+import putSong from "~~/server/api/songs/[id].put"
+import postRequest from "~~/server/api/songs/requests.post"
 
 useTestDb()
 

@@ -1,5 +1,5 @@
-import Users from "~/server/models/users"
-import { getUserId, unauthorized } from "~/server/utils/auth"
+import Users from "~~/server/models/users"
+import { getUserId, unauthorized } from "~~/server/utils/auth"
 
 export default defineEventHandler(async (event) => {
   const userId = getUserId(event)

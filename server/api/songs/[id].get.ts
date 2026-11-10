@@ -1,4 +1,4 @@
-import { users as Users, songs as Songs } from "~/server/models"
+import { users as Users, songs as Songs } from "~~/server/models"
 
 export default defineEventHandler(async (event) => {
   const { sub: userId } = event.context.auth ?? {}
