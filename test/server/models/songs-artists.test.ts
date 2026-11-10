@@ -35,7 +35,7 @@ it("keeps flags.manualUpdated", async () => {
     ...base,
     flags: { manualUpdated: true },
   })
-  expect((await Songs.findById(_id).lean())!.flags.manualUpdated).toBe(true)
+  expect((await Songs.findById(_id).lean())!.flags!.manualUpdated).toBe(true)
 })
 it("rejects unknown flags.status", async () => {
   await expect(

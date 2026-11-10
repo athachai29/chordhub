@@ -61,6 +61,17 @@ it("GET /api/songs lists only ACTIVE public songs, without sheets", async () => 
   expect(body.data[0]).toHaveProperty("updatedAt")
 })
 
+it("GET /api/songs treats a legacy song without flags.isPrivate as public", async () => {
+  // Raw insert bypasses the schema default, like pre-isPrivate/imported data.
+  await Songs.collection.insertOne({
+    songId: "legacy",
+    title: "legacy",
+    flags: { status: "ACTIVE" },
+  })
+  const { body } = await callHandler(listSongs)
+  expect(body.data.map((x: any) => x.songId)).toEqual(["legacy"])
+})
+
 it("GET /api/songs/:artistId/artists lists that artist's ACTIVE public songs", async () => {
   const a2 = await seedArtist({ artistId: "art2" })
   const s = await seedSong()
@@ -70,11 +81,22 @@ it("GET /api/songs/:artistId/artists lists that artist's ACTIVE public songs", a
     _artist: s._artist,
     flags: { status: "INACTIVE" },
   })
+  await seedSong({
+    songId: "priv",
+    _artist: s._artist,
+    flags: { status: "ACTIVE", isPrivate: true },
+  })
+  // Legacy song without flags.isPrivate (raw insert skips the default) is public.
+  await Songs.collection.insertOne({
+    songId: "legacy",
+    _artist: s._artist,
+    flags: { status: "ACTIVE" },
+  })
   expect(
-    (await callHandler(artistSongs, { params: { id: "art1" } })).body.data.map(
-      (x: any) => x.songId,
-    ),
-  ).toEqual(["abc123"])
+    (await callHandler(artistSongs, { params: { id: "art1" } })).body.data
+      .map((x: any) => x.songId)
+      .sort(),
+  ).toEqual(["abc123", "legacy"])
   expect(
     (await callHandler(artistSongs, { params: { id: "missing" } })).body,
   ).toEqual({ success: true, data: [] })

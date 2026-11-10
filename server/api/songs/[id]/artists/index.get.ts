@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const song = await Songs.find({
     _artist: artist?._id,
     "flags.status": "ACTIVE",
-    "flags.isPrivate": false,
+    "flags.isPrivate": { $ne: true },
   }).populate("_artist")
 
   if (!song) {

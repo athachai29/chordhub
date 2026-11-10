@@ -5,7 +5,10 @@ import { seedUser, useTestDb } from "~/test/support/db"
 useTestDb()
 
 it("hashes password; verifyPassword checks it", async () => {
-  const u = await seedUser()
+  // verifyPassword comes from mongoose-bcrypt and is not on the inferred type.
+  const u = (await seedUser()) as Awaited<ReturnType<typeof seedUser>> & {
+    verifyPassword(password: string, hash?: string): Promise<boolean>
+  }
   expect(u.password).not.toBe("secret123")
   expect(await u.verifyPassword("secret123", u.password)).toBe(true)
   expect(await u.verifyPassword("wrong-pass", u.password)).toBe(false)
