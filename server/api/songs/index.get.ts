@@ -1,4 +1,4 @@
-import Songs from "~/server/models/songs"
+import Songs from "~~/server/models/songs"
 
 export default defineEventHandler(async () => {
   const sheets = await Songs.find(

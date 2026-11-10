@@ -1,8 +1,8 @@
 import { it, expect } from "vitest"
 import mongoose from "mongoose"
-import Requests from "~/server/models/requests"
-import Logs from "~/server/models/logs"
-import { useTestDb } from "~/test/support/db"
+import Requests from "~~/server/models/requests"
+import Logs from "~~/server/models/logs"
+import { useTestDb } from "~~/test/support/db"
 
 useTestDb()
 

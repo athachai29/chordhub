@@ -1,5 +1,5 @@
 import { it, expect } from "vitest"
-import { normalizeThai } from "~/utils/thai"
+import { normalizeThai } from "#shared/utils/thai"
 
 it.each([
   ["ทํา", "ทำ"], // ทํา → ทำ

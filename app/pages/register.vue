@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { isEmailValid, isPasswordValid } from "@/utils/validators"
+import { isEmailValid, isPasswordValid } from "#shared/utils/validators"
 import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline"
+
+const route = useRoute()
 
 const localePath = useLocalePath()
 
-const gtag = useGtag()
+const { gtag } = useGtag()
 
 const title = ref("Register - ChordHub")
 
@@ -206,11 +208,8 @@ gtag("set", "page_title", "Login")
             <BaseButton type="submit" class="w-full" btn-style="primary">
               {{ $t("page_register.button_create_account") }}
             </BaseButton>
-            <div
-              v-if="useRoute().query.error"
-              class="mt-2 text-right text-red-600"
-            >
-              {{ useRoute().query.error }}
+            <div v-if="route.query.error" class="mt-2 text-right text-red-600">
+              {{ route.query.error }}
             </div>
           </div>
           <div class="relative flex items-center py-5">

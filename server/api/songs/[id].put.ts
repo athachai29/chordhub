@@ -1,6 +1,6 @@
-import Songs from "~/server/models/songs"
-import Users from "~/server/models/users"
-import { forbidden, getUserId, unauthorized } from "~/server/utils/auth"
+import Songs from "~~/server/models/songs"
+import Users from "~~/server/models/users"
+import { forbidden, getUserId, unauthorized } from "~~/server/utils/auth"
 
 export default defineEventHandler(async (event) => {
   const userId = getUserId(event)

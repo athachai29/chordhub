@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps(["rawSheet"])
 
-import { IFormat, IIFormat, ZFormat } from "~/utils/sheet-formatter"
+import { IFormat, IIFormat, ZFormat } from "#shared/utils/sheet-formatter"
 
 const iFormat = new IFormat()
 const iiFormat = new IIFormat()

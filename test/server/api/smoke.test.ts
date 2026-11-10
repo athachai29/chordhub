@@ -1,9 +1,9 @@
 import { it, expect } from "vitest"
-import { callHandler } from "~/test/support/http"
+import { callHandler } from "~~/test/support/http"
 
 it("GET /api/health", async () => {
   expect(
-    await callHandler((await import("~/server/api/health")).default),
+    await callHandler((await import("~~/server/api/health")).default),
   ).toEqual({
     status: 200,
     body: { status: "ok", message: "Service is running" },
@@ -12,7 +12,7 @@ it("GET /api/health", async () => {
 
 it("GET /api returns package version", async () => {
   expect(
-    (await callHandler((await import("~/server/api/index")).default)).body,
+    (await callHandler((await import("~~/server/api/index")).default)).body,
   ).toMatchObject({
     success: true,
     data: { message: "CHORDHUB API SERVICE", version: "0.0.7" },
@@ -21,7 +21,7 @@ it("GET /api returns package version", async () => {
 
 it("unknown /api/* route is 404", async () => {
   expect(
-    (await callHandler((await import("~/server/api/[...]")).default)).status,
+    (await callHandler((await import("~~/server/api/[...]")).default)).status,
   ).toBe(404)
 })
 

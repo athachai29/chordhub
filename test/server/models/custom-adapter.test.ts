@@ -1,7 +1,7 @@
 import { it, expect } from "vitest"
-import { users as Users, accounts as Accounts } from "~/server/models"
-import CustomAdapter from "~/server/models/nextauth/customAdapter"
-import { useTestDb, seedUser } from "~/test/support/db"
+import { users as Users, accounts as Accounts } from "~~/server/models"
+import CustomAdapter from "~~/server/models/nextauth/customAdapter"
+import { useTestDb, seedUser } from "~~/test/support/db"
 
 useTestDb()
 

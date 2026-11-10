@@ -1,7 +1,7 @@
 import { it, expect } from "vitest"
 import mongoose from "mongoose"
-import { songs as Songs, artists as Artists } from "~/server/models"
-import { useTestDb } from "~/test/support/db"
+import { songs as Songs, artists as Artists } from "~~/server/models"
+import { useTestDb } from "~~/test/support/db"
 
 useTestDb()
 

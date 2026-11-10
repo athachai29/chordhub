@@ -1,6 +1,6 @@
 import { it, expect } from "vitest"
-import { users as Users } from "~/server/models"
-import { seedUser, useTestDb } from "~/test/support/db"
+import { users as Users } from "~~/server/models"
+import { seedUser, useTestDb } from "~~/test/support/db"
 
 useTestDb()
 

@@ -56,7 +56,7 @@ const onRemoveFromFav = async () => {
 /**
  * Google Analytics
  */
-const gtag = useGtag()
+const { gtag } = useGtag()
 gtag("set", "page_title", "Song")
 </script>
 

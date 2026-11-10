@@ -58,18 +58,25 @@ const onSubmit = async () => {
   // TODO: Send the request to an admin and wait for approval
 
   submitFailed.value = false
-  const { data, error } = await useFetch<{ success: boolean }>(
-    `/api/songs/${result.value?.songId}`,
-    {
-      method: "PUT",
-      body: JSON.stringify({
-        newSheet: draftSheet.value!.split("\n"),
-      }),
-    },
-  )
-
-  // 401/403/400 surface as error; "Song not found" is a 200 with success: false
-  if (error.value || !data.value?.success) {
+  // $fetch, not useFetch: Nuxt 4 reuses a cached successful useFetch with the
+  // same key, so re-saving an earlier sheet would never reach the server.
+  try {
+    const res = await $fetch<{ success: boolean }>(
+      `/api/songs/${result.value?.songId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          newSheet: draftSheet.value!.split("\n"),
+        }),
+      },
+    )
+    // "Song not found" is a 200 with success: false
+    if (!res.success) {
+      submitFailed.value = true
+      return
+    }
+  } catch {
+    // 401/403/400 throw
     submitFailed.value = true
     return
   }
@@ -80,7 +87,7 @@ const onSubmit = async () => {
 /**
  * Google Analytics
  */
-const gtag = useGtag()
+const { gtag } = useGtag()
 gtag("set", "page_title", "Editor")
 </script>
 

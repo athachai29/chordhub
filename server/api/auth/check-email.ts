@@ -1,4 +1,4 @@
-import Users from "~/server/models/users"
+import Users from "~~/server/models/users"
 
 export default defineEventHandler(async (event) => {
   const { email } = await readBody(event)

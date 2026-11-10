@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto"
 import mongoose from "mongoose"
 import { afterAll, afterEach, beforeAll } from "vitest"
-import { artists, songs, users } from "~/server/models"
+import { artists, songs, users } from "~~/server/models"
 
 export function useTestDb(): void {
   beforeAll(async () => {

@@ -2,6 +2,7 @@
 import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline"
 
 const localePath = useLocalePath()
+const route = useRoute()
 
 const title = ref("Login - ChordHub")
 
@@ -96,7 +97,7 @@ const onLoginWithFacebook = async () => {
 /**
  * Google Analytics
  */
-const gtag = useGtag()
+const { gtag } = useGtag()
 gtag("set", "page_title", "Login")
 </script>
 
@@ -160,7 +161,7 @@ gtag("set", "page_title", "Login")
               }}
             </BaseButton>
             <div
-              v-if="useRoute().query.error === 'CredentialsSignin'"
+              v-if="route.query.error === 'CredentialsSignin'"
               class="mt-2 text-right text-red-600"
             >
               {{ $t("page_login.message_email_or_password_incorrect") }}

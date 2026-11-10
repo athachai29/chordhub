@@ -1,10 +1,10 @@
 import { it, expect } from "vitest"
-import { songs as Songs } from "~/server/models"
-import { callHandler } from "~/test/support/http"
-import { useTestDb, seedArtist, seedSong, seedUser } from "~/test/support/db"
-import getSong from "~/server/api/songs/[id].get"
-import listSongs from "~/server/api/songs/index.get"
-import artistSongs from "~/server/api/songs/[id]/artists/index.get"
+import { songs as Songs } from "~~/server/models"
+import { callHandler } from "~~/test/support/http"
+import { useTestDb, seedArtist, seedSong, seedUser } from "~~/test/support/db"
+import getSong from "~~/server/api/songs/[id].get"
+import listSongs from "~~/server/api/songs/index.get"
+import artistSongs from "~~/server/api/songs/[id]/artists/index.get"
 
 useTestDb()
 

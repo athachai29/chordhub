@@ -2,6 +2,7 @@
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: "2026-11-11",
   devtools: { enabled: true },
   css: ["~/assets/css/app.css"],
   postcss: {
@@ -40,18 +41,19 @@ export default defineNuxtConfig({
     locales: [
       {
         code: "th",
-        iso: "th-TH",
+        language: "th-TH",
         file: "th-TH.ts",
       },
       {
         code: "en",
-        iso: "en-US",
+        language: "en-US",
         file: "en-US.ts",
       },
     ],
-    lazy: true,
-    langDir: "lang/",
     defaultLocale: "th",
+    // v8 redirected every unprefixed route; v10 defaults to "root" only,
+    // which 404s next-auth's unprefixed /login sign-in page.
+    detectBrowserLanguage: { redirectOn: "no prefix" },
     // baseUrl: 'https://my-nuxt-app.com',
   },
   components: [
@@ -59,16 +61,19 @@ export default defineNuxtConfig({
     { path: "~/components/layout", prefix: "Layout" },
     { path: "~/components/base", prefix: "Base" },
   ],
-  nitro: {
-    plugins: ["~/server/index.ts"],
-  },
   auth: {
-    enableGlobalAppMiddleware: true,
-    origin: process.env.AUTH_ORIGIN,
-    basePath: "/api/auth",
+    baseURL: "/api/auth",
+    provider: { type: "authjs" },
+    globalAppMiddleware: true,
   },
-  gtag: {
-    initialConsent: true,
+  routeRules: {
+    // @nuxtjs/sitemap 5 served the per-locale children at these paths.
+    "/th-TH-sitemap.xml": {
+      redirect: { to: "/__sitemap__/th-TH.xml", statusCode: 301 },
+    },
+    "/en-US-sitemap.xml": {
+      redirect: { to: "/__sitemap__/en-US.xml", statusCode: 301 },
+    },
   },
   sitemap: {
     sources: ["/api/__sitemap__/urls"],

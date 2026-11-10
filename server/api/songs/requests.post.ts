@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
-import Requests from "~/server/models/requests"
-import { getUserId, unauthorized } from "~/server/utils/auth"
+import Requests from "~~/server/models/requests"
+import { getUserId, unauthorized } from "~~/server/utils/auth"
 
 export default defineEventHandler(async (event) => {
   const userId = getUserId(event)

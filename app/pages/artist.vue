@@ -46,7 +46,7 @@ const onSelectedSong = (song: Song) => {
 /**
  * Google Analytics
  */
-const gtag = useGtag()
+const { gtag } = useGtag()
 gtag("set", "page_title", "Artist")
 </script>
 

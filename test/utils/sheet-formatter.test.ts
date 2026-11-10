@@ -1,5 +1,5 @@
 import { it, expect } from "vitest"
-import { IFormat, IIFormat, ZFormat } from "~/utils/sheet-formatter"
+import { IFormat, IIFormat, ZFormat } from "#shared/utils/sheet-formatter"
 
 const A = (x: string) =>
   "<span class='chord'><span class='inner'>" + x + "</span></span>"

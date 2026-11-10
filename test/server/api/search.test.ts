@@ -6,9 +6,9 @@ import {
   afterEach,
   type MockInstance,
 } from "vitest"
-import { songs as Songs, artists as Artists } from "~/server/models"
-import { callHandler } from "~/test/support/http"
-import search from "~/server/api/songs/search.get"
+import { songs as Songs, artists as Artists } from "~~/server/models"
+import { callHandler } from "~~/test/support/http"
+import search from "~~/server/api/songs/search.get"
 
 let songsAgg: MockInstance
 let artistsAgg: MockInstance
@@ -40,8 +40,8 @@ it("queries songIndex/artistIndex with these paths, limit 5", async () => {
   songsAgg.mockResolvedValue([])
   artistsAgg.mockResolvedValue([])
   await q("ใจ")
-  const sp = songsAgg.mock.calls[0][0],
-    ap = artistsAgg.mock.calls[0][0]
+  const sp = songsAgg.mock.calls[0]![0],
+    ap = artistsAgg.mock.calls[0]![0]
   expect(sp[0].$search).toEqual({
     index: "songIndex",
     text: { query: "ใจ", path: ["title", "sheet", "params.ost"] },
@@ -58,7 +58,7 @@ it("normalizes the query before searching", async () => {
   songsAgg.mockResolvedValue([])
   artistsAgg.mockResolvedValue([])
   await q("  ทํา ")
-  expect(songsAgg.mock.calls[0][0][0].$search.text.query).toBe("ทำ")
+  expect(songsAgg.mock.calls[0]![0][0].$search.text.query).toBe("ทำ")
 })
 
 it.each(["/", "/?query=", "/?query=%20%20"])(

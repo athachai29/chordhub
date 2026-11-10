@@ -1,4 +1,4 @@
-import { songs as Songs, artists as Artists } from "~/server/models"
+import { songs as Songs, artists as Artists } from "~~/server/models"
 
 export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event)

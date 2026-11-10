@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const config = useRuntimeConfig()
+</script>
 
 <template>
   <footer class="flex items-center gap-4 p-6 text-black">
@@ -20,7 +22,7 @@
       }}</a>
     </div>
     <div>
-      <a :href="useRuntimeConfig().public.buyMeACoffeeUrl" target="_blank"
+      <a :href="config.public.buyMeACoffeeUrl" target="_blank"
         ><img
           src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png"
           width="128px"

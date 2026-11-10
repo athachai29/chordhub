@@ -1,6 +1,6 @@
 import { getToken } from "#auth"
 
-import Users from "~/server/models/users"
+import Users from "~~/server/models/users"
 
 export default defineEventHandler(async (event) => {
   const token = await getToken({ event })

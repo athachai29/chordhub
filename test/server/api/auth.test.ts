@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from "vitest"
-import { users as Users } from "~/server/models"
-import { callHandler } from "~/test/support/http"
-import { useTestDb, seedUser } from "~/test/support/db"
-import register from "~/server/api/auth/register"
-import checkEmail from "~/server/api/auth/check-email"
-import authOptions from "~/server/api/auth/[...]"
+import { users as Users } from "~~/server/models"
+import { callHandler } from "~~/test/support/http"
+import { useTestDb, seedUser } from "~~/test/support/db"
+import register from "~~/server/api/auth/register"
+import checkEmail from "~~/server/api/auth/check-email"
+import authOptions from "~~/server/api/auth/[...]"
 
 // In the Nitro bundle `import P from "next-auth/providers/x"` is the CJS
 // module.exports, so [...].ts calls `P.default(...)`. Vitest interops the
