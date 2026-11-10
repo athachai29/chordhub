@@ -35,10 +35,15 @@ const availableLocales = computed(() => {
 </script>
 
 <template>
+  <!-- TODO: ref https://stackoverflow.com/users/10487414/athachai?tab=profile -->
   <div class="my-6 flex flex-col px-4 pt-16 md:my-12 md:px-16 md:pt-8">
     <div class="text-2xl">{{ $t("page_profile.header_profile") }}</div>
-    <img class="mt-2 w-24" :src="useAvatar().url" alt="User avatars" />
-    <div>{{ data?.user?.name }}</div>
+    <div class="grid auto-cols-max grid-flow-col gap-4">
+      <div class="rounded-md bg-gray-400">
+        <img class="mt-2 w-24" :src="useAvatar().url" alt="User avatars" />
+      </div>
+      <div class="text-left">{{ data?.user?.name }}</div>
+    </div>
     <div>{{ data?.user?.email }}</div>
     <div>
       <NuxtLink
