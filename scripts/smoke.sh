@@ -39,6 +39,9 @@ for p in /th /en; do
 done
 
 fetch "/th/login"; line "/th/login" "title=$(html_title)"
+# next-auth's pages.signIn is the unprefixed /login; i18n must redirect it.
+fetch "/login"; line "/login"
+fetch "/login?error=CredentialsSignin"; line "/login?error=CredentialsSignin"
 fetch "/th/profile"; line "/th/profile"
 fetch "/th/results?search=test"; line "/th/results?search=test"
 

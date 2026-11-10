@@ -2,6 +2,8 @@
 /th -> 200 lang= title=Home - ChordHub gtag=no
 /en -> 200 lang= title=Home - ChordHub gtag=no
 /th/login -> 200 title=Login - ChordHub
+/login -> 302 loc=/th/login
+/login?error=CredentialsSignin -> 302 loc=/th/login?error=CredentialsSignin
 /th/profile -> 302 loc=/api/auth/signin?callbackUrl=%2Fth%2Fprofile
 /th/results?search=test -> 200
 /th/song/<first> -> 200 title=คอร์ดเพลงขอเวลาลืม - ChordHub

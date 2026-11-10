@@ -51,6 +51,9 @@ export default defineNuxtConfig({
       },
     ],
     defaultLocale: "th",
+    // v8 redirected every unprefixed route; v10 defaults to "root" only,
+    // which 404s next-auth's unprefixed /login sign-in page.
+    detectBrowserLanguage: { redirectOn: "no prefix" },
     // baseUrl: 'https://my-nuxt-app.com',
   },
   components: [
