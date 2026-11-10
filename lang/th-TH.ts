@@ -23,6 +23,8 @@ export default {
   page_editor: {
     button_editor_preview: "แก้ไข / ดูตัวอย่าง",
     button_save_draft: "บันทึกเป็นร่าง",
+    message_submit_failed:
+      "ยังไม่ได้บันทึกการแก้ไข ขณะนี้เฉพาะผู้ดูแลระบบเท่านั้นที่บันทึกคอร์ดได้",
   },
   page_home: {
     button_search: "ค้นหา",
