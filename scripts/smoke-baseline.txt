@@ -14,7 +14,7 @@
 /api/auth/csrf -> 200
 /api/no-such-route -> 404
 /sitemap.xml -> 307 loc=/sitemap_index.xml
-/sitemap_index.xml -> 200 children=/th-TH-sitemap.xml,/en-US-sitemap.xml
-/th-TH-sitemap.xml -> 200 locs=11422 excluded=0
-/en-US-sitemap.xml -> 200 locs=1 excluded=0
+/sitemap_index.xml -> 200 children=/__sitemap__/th-TH.xml,/__sitemap__/en-US.xml
+/__sitemap__/th-TH.xml -> 200 locs=11422 excluded=0
+/__sitemap__/en-US.xml -> 200 locs=1 excluded=0
 /robots.txt -> 200 body=User-agent: *|Allow: /|Disallow: /_nuxt/

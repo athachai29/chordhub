@@ -69,6 +69,15 @@ export default defineNuxtConfig({
   gtag: {
     initialConsent: true,
   },
+  routeRules: {
+    // @nuxtjs/sitemap 5 served the per-locale children at these paths.
+    "/th-TH-sitemap.xml": {
+      redirect: { to: "/__sitemap__/th-TH.xml", statusCode: 301 },
+    },
+    "/en-US-sitemap.xml": {
+      redirect: { to: "/__sitemap__/en-US.xml", statusCode: 301 },
+    },
+  },
   sitemap: {
     sources: ["/api/__sitemap__/urls"],
     exclude: [
