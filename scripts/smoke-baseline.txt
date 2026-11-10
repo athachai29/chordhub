@@ -1,0 +1,20 @@
+/ -> 302 loc=/th
+/th -> 200 lang= title=Home - ChordHub gtag=no
+/en -> 200 lang= title=Home - ChordHub gtag=no
+/th/login -> 200 title=Login - ChordHub
+/th/profile -> 302 loc=/api/auth/signin?callbackUrl=%2Fth%2Fprofile
+/th/results?search=test -> 200
+/th/song/<first> -> 200 title=คอร์ดเพลงขอเวลาลืม - ChordHub
+/th/song/does-not-exist -> 200
+/th/no-such-page -> 404
+/api/health -> 200
+/api/songs -> 200 count=11421
+/api/auth/providers -> 200 ids=credentials,facebook,google
+/api/auth/session -> 200 body={}
+/api/auth/csrf -> 200
+/api/no-such-route -> 404
+/sitemap.xml -> 307 loc=/sitemap_index.xml
+/sitemap_index.xml -> 200 children=/th-TH-sitemap.xml,/en-US-sitemap.xml
+/th-TH-sitemap.xml -> 200 locs=11422 excluded=0
+/en-US-sitemap.xml -> 200 locs=1 excluded=0
+/robots.txt -> 200 body=User-agent: *|Allow: /|Disallow: /_nuxt/
