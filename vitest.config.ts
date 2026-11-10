@@ -8,6 +8,10 @@ export default defineConfig({
     alias: [
       { find: /^~\//, replacement: root },
       { find: /^@\//, replacement: root },
+      {
+        find: /^#imports$/,
+        replacement: root + "test/support/stubs/imports.ts",
+      },
     ],
   },
   test: {

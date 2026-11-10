@@ -1,7 +1,10 @@
 import Songs from "~/server/models/songs"
 
 export default defineEventHandler(async () => {
-  const sheets = await Songs.find({})
+  const sheets = await Songs.find(
+    { "flags.status": "ACTIVE", "flags.isPrivate": false },
+    "songId title updatedAt",
+  )
 
   return {
     success: true,

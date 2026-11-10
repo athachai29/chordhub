@@ -5,7 +5,11 @@ export default defineEventHandler(async (event) => {
 
   const artist = await Artists.findOne({ artistId: id })
 
-  const song = await Songs.find({ _artist: artist?._id }).populate("_artist")
+  const song = await Songs.find({
+    _artist: artist?._id,
+    "flags.status": "ACTIVE",
+    "flags.isPrivate": false,
+  }).populate("_artist")
 
   if (!song) {
     return {
