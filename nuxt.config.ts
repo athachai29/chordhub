@@ -66,9 +66,6 @@ export default defineNuxtConfig({
     provider: { type: "authjs" },
     globalAppMiddleware: true,
   },
-  gtag: {
-    initialConsent: true,
-  },
   routeRules: {
     // @nuxtjs/sitemap 5 served the per-locale children at these paths.
     "/th-TH-sitemap.xml": {

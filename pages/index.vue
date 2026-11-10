@@ -40,7 +40,7 @@ const onSearch = () => {
 /**
  * Google Analytics
  */
-const gtag = useGtag()
+const { gtag } = useGtag()
 if (data.value?.user?.email) {
   gtag("set", "user_id", data.value?.user?.email)
 }

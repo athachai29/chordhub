@@ -24,7 +24,7 @@ const {
 /**
  * Google Analytics
  */
-const gtag = useGtag()
+const { gtag } = useGtag()
 gtag("set", "page_title", "Profile")
 
 const { locale, locales } = useI18n()

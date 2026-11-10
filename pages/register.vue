@@ -6,7 +6,7 @@ const route = useRoute()
 
 const localePath = useLocalePath()
 
-const gtag = useGtag()
+const { gtag } = useGtag()
 
 const title = ref("Register - ChordHub")
 

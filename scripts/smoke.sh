@@ -29,7 +29,7 @@ line() {
 
 html_lang() { grep -oE '<html[^>]* lang="[^"]*"' "$BODY" | head -1 | sed -E 's/.*lang="([^"]*)"/\1/' || true; }
 html_title() { grep -oE '<title>[^<]*</title>' "$BODY" | head -1 | sed -E 's#</?title>##g' || true; }
-has_gtag() { grep -q 'googletagmanager.com/gtag/js' "$BODY" && echo yes || echo no; }
+has_gtag() { grep -qE 'src="https://www\.googletagmanager\.com/gtag/js' "$BODY" && echo yes || echo no; }
 json() { node -e "const b=require('fs').readFileSync('$BODY','utf8');let j;try{j=JSON.parse(b)}catch{process.stdout.write('');process.exit(0)}process.stdout.write(String(($1)(j)))"; }
 
 fetch "/"; line "/"

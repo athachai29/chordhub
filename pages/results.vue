@@ -2,7 +2,7 @@
 const localePath = useLocalePath()
 
 /** Google Analytics */
-const gtag = useGtag()
+const { gtag } = useGtag()
 
 const title = ref("Results - ChordHub")
 

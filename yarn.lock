@@ -1578,7 +1578,7 @@
     which "^6.0.1"
     ws "^8.22.0"
 
-"@nuxt/kit@3.21.11", "@nuxt/kit@^3.6.5":
+"@nuxt/kit@3.21.11":
   version "3.21.11"
   resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-3.21.11.tgz#983c40f57ce222149dce212485c64bc56f663cc8"
   integrity sha512-0Xi3tgwN77w43Q8GCPIrvWmF1J7Peehkts44E0uKNIml9lB8WoUn8YxyUjxBv47XtVR86NWoWALAT+/IEMHJEA==
@@ -1605,7 +1605,7 @@
     unctx "^2.5.0"
     untyped "^2.0.0"
 
-"@nuxt/kit@^4.3.0", "@nuxt/kit@^4.3.1", "@nuxt/kit@^4.5.1", "@nuxt/kit@^4.5.2", "@nuxt/kit@^4.6.0", "@nuxt/kit@^4.6.1", "@nuxt/kit@^4.6.4":
+"@nuxt/kit@^4.1.3", "@nuxt/kit@^4.3.0", "@nuxt/kit@^4.3.1", "@nuxt/kit@^4.5.1", "@nuxt/kit@^4.5.2", "@nuxt/kit@^4.6.0", "@nuxt/kit@^4.6.1", "@nuxt/kit@^4.6.4":
   version "4.6.4"
   resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-4.6.4.tgz#d33b4fcb063af56f4e0f607ef77485b7e2a191de"
   integrity sha512-S7JqP/CCJejDNGADlCIct/SHEPf+Jz3Chrxq7GDgyRPRkRD2flbxoanGq4bkib9kD9QBXJlF4TuCsqqL9a7COw==
@@ -4361,7 +4361,7 @@ define-lazy-prop@^3.0.0:
   resolved "https://registry.yarnpkg.com/define-lazy-prop/-/define-lazy-prop-3.0.0.tgz#dbb19adfb746d7fc6d734a06b72f4a00d021255f"
   integrity sha512-N+MeXYoqr3pOgn8xfyRPREN7gHakLYjhsHhWGT3fWAiL4IkAt0iDw14QiiEm2bE30c5XX5q0FtAA3CK5f9/BUg==
 
-defu@^6.1.2, defu@^6.1.4:
+defu@^6.1.4:
   version "6.1.4"
   resolved "https://registry.yarnpkg.com/defu/-/defu-6.1.4.tgz#4e0c9cf9ff68fe5f3d7f2765cc1a012dfdcb0479"
   integrity sha512-mEQCMmwJu317oSz8CwdIOdwf3xMif1ttiM8LTufzc3g6kR+9Pe236twL8j3IYT1F7GfRgGcW6MWxzZjLIkuHIg==
@@ -6212,14 +6212,15 @@ nuxt-define@^1.0.0:
   resolved "https://registry.yarnpkg.com/nuxt-define/-/nuxt-define-1.0.0.tgz#987f97719d76c31719522ce7a359bc49c361cb46"
   integrity sha512-CYZ2WjU+KCyCDVzjYUM4eEpMF0rkPmkpiFrybTqqQCRpUbPt2h3snswWIpFPXTi+osRCY6Og0W/XLAQgDL4FfQ==
 
-nuxt-gtag@^0.5.7:
-  version "0.5.9"
-  resolved "https://registry.yarnpkg.com/nuxt-gtag/-/nuxt-gtag-0.5.9.tgz#f1d094647815c72f024b58aa2a0ee9dc709548be"
-  integrity sha512-rT6HaGzECmIAbc4fyyl0KzQWd8YwMoNBbXcSTYCwZ5WEZiPGViBicz8NP5j8Olgj6JLqD1EZiGEfAVyFNGNhuA==
+nuxt-gtag@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/nuxt-gtag/-/nuxt-gtag-4.1.0.tgz#13b879e0aed7646d5aec7a9a39f2dbd9ac7f6b21"
+  integrity sha512-2TL7RUA8N8NYGbY4UZ9IqKyMZMgO9cCGu6yqadUU8RF+Y81PXI+k+1giIA11XXStaJoGXaXeNsBUIJXn1tUy3A==
   dependencies:
-    "@nuxt/kit" "^3.6.5"
-    defu "^6.1.2"
-    pathe "^1.1.1"
+    "@nuxt/kit" "^4.1.3"
+    defu "^6.1.4"
+    pathe "^2.0.3"
+    ufo "^1.6.1"
 
 nuxt-site-config-kit@3.2.21:
   version "3.2.21"
