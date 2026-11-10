@@ -1,5 +1,13 @@
 abstract class SheetFormatter {
-  private notLyricKeywords = ["INTRO", "INSTRUC", "INSTRU", "|"]
+  private static BR_SENTINEL = "\u0000BR\u0000"
+
+  private escapeHtml(part: string): string {
+    return part
+      .replaceAll(/<br\s*\/?>/gi, SheetFormatter.BR_SENTINEL)
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll(SheetFormatter.BR_SENTINEL, "<br>")
+  }
 
   private removeSquareBrackets(part: string) {
     return part.replaceAll("[", "").replaceAll("]", " ").replaceAll("|", "| ")
@@ -19,13 +27,20 @@ abstract class SheetFormatter {
   }
 
   public isNotLyric(part: string) {
-    return this.notLyricKeywords.some((keyword) => part.includes(keyword))
+    return (
+      // Any case, but only as the part's first word ("Intro : [G]")
+      /^[^A-Za-z]*(INTRO|INSTRU(C|MENT(AL)?)?)\b/i.test(part) ||
+      // Uppercase anywhere, as v1 did ("( REPEAT INTRO ) [G]")
+      /\b(INTRO|INSTRU(C|MENT(AL)?)?)\b/.test(part) ||
+      part.includes("|")
+    )
   }
 
   public parser(sheet: string[]): string[] {
     let newSheet = [] as string[]
 
     sheet.forEach((element) => {
+      element = this.escapeHtml(element)
       element = this.isNotLyric(element)
         ? this.removeSquareBrackets(element)
         : this.applyChordStyling(element)
