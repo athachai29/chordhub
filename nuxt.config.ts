@@ -62,9 +62,9 @@ export default defineNuxtConfig({
     plugins: ["~/server/index.ts"],
   },
   auth: {
-    enableGlobalAppMiddleware: true,
-    origin: process.env.AUTH_ORIGIN,
-    basePath: "/api/auth",
+    baseURL: "/api/auth",
+    provider: { type: "authjs" },
+    globalAppMiddleware: true,
   },
   gtag: {
     initialConsent: true,

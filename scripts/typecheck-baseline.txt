@@ -1,3 +1,4 @@
 server/api/__sitemap__/urls.ts: error TS2305: Module '"#imports"' has no exported member 'asSitemapUrl'.
 server/api/__sitemap__/urls.ts: error TS2305: Module '"#imports"' has no exported member 'defineSitemapEventHandler'.
 server/api/__sitemap__/urls.ts: error TS7006: Parameter 'item' implicitly has an 'any' type.
+server/api/auth/[...].ts: error TS2322: Type '{ createUser(user: any): Promise<{ id: string; createdAt: NativeDate; updatedAt: NativeDate; image: string; email: string; favorites: ObjectId[]; emailVerified: boolean; name?: string | undefined; password?: string | undefined; role?: "ADMIN" | ... 2 more ... | undefined; _id: ObjectId; }>; ... 12 more ...; useVerif...' is not assignable to type 'Adapter'.
