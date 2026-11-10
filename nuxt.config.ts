@@ -2,6 +2,7 @@
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: "2026-11-11",
   devtools: { enabled: true },
   css: ["~/assets/css/app.css"],
   postcss: {
@@ -40,17 +41,15 @@ export default defineNuxtConfig({
     locales: [
       {
         code: "th",
-        iso: "th-TH",
+        language: "th-TH",
         file: "th-TH.ts",
       },
       {
         code: "en",
-        iso: "en-US",
+        language: "en-US",
         file: "en-US.ts",
       },
     ],
-    lazy: true,
-    langDir: "lang/",
     defaultLocale: "th",
     // baseUrl: 'https://my-nuxt-app.com',
   },

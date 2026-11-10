@@ -14,11 +14,12 @@ useSeoMeta({
 })
 
 const { status, data, signOut } = useAuth()
+const router = useRouter()
 const {
   currentRoute: {
     value: { path },
   },
-} = useRouter()
+} = router
 
 /**
  * Google Analytics
@@ -62,7 +63,7 @@ const availableLocales = computed(() => {
           () =>
             signOut({
               callbackUrl: `${
-                (useRouter().options.history.state.current as string) || '/'
+                (router.options.history.state.current as string) || '/'
               }`,
             })
         "
