@@ -8,9 +8,23 @@ definePageMeta({
   validate: (route) => !!route.params.id,
 })
 
-const { data: result, refresh }: any = await useFetch(
-  `/api/songs/${useRoute().params.id}`,
-)
+const {
+  data: result,
+  refresh,
+  error,
+}: any = await useFetch(`/api/songs/${useRoute().params.id}`, {
+  // A 429 must not be retried: the retry is counted again by the guard.
+  retry: false,
+})
+
+// Surface guard responses (429/403) instead of crashing on result.value.data
+if (error.value) {
+  throw createError({
+    statusCode: error.value.statusCode ?? 500,
+    statusMessage: error.value.statusMessage,
+    fatal: true,
+  })
+}
 
 const title = ref(`คอร์ดเพลง${result.value.data?.title || "Song"} - ChordHub`)
 const config = useRuntimeConfig() // Defined here to prevent errors at runtime on production

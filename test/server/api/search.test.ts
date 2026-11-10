@@ -8,6 +8,7 @@ import {
 } from "vitest"
 import { songs as Songs, artists as Artists } from "~~/server/models"
 import { callHandler } from "~~/test/support/http"
+import { PUBLIC_SONG_FILTER } from "~~/server/utils/public-songs"
 import search from "~~/server/api/songs/search.get"
 
 let songsAgg: MockInstance
@@ -52,6 +53,13 @@ it("queries songIndex/artistIndex with these paths, limit 5", async () => {
   })
   expect(sp).toContainEqual({ $limit: 5 })
   expect(ap).toContainEqual({ $limit: 5 })
+})
+
+it("song pipeline keeps only public songs right after $search", async () => {
+  songsAgg.mockResolvedValue([])
+  artistsAgg.mockResolvedValue([])
+  await q("ใจ")
+  expect(songsAgg.mock.calls[0]![0][1]).toEqual({ $match: PUBLIC_SONG_FILTER })
 })
 
 it("normalizes the query before searching", async () => {

@@ -35,13 +35,25 @@ const previewSheet = ref([] as string[])
 const submitFailed = ref(false)
 
 const onFetch = async () => {
-  const { data }: any = await useFetch(`/api/songs/${useRoute().query.id}`)
+  const { data, error }: any = await useFetch(
+    `/api/songs/${useRoute().query.id}`,
+    { retry: false },
+  )
+
+  if (error.value) {
+    throw createError({
+      statusCode: error.value.statusCode ?? 500,
+      statusMessage: error.value.statusMessage,
+      fatal: true,
+    })
+  }
 
   result.value = data.value.data
   draftSheet.value = result.value?.sheet.join("\n")
 }
 
-onFetch()
+// Awaited so a guard 429/403 thrown by onFetch reaches the error page
+await onFetch()
 
 const onPreview = () => {
   if (!isPreview.value) {

@@ -44,11 +44,13 @@ const isLoading = ref(false)
 
 const onFetch = async () => {
   isLoading.value = true
-  const { data }: any = await useFetch(
+  const { data, error }: any = await useFetch(
     `/api/songs/search/?query=${keyword.value}`,
+    { retry: false },
   )
 
-  results.value = data.value.data
+  // A guard 429/403 shows as no results instead of crashing the page
+  results.value = error.value ? [] : data.value?.data ?? []
   isLoading.value = false
 }
 

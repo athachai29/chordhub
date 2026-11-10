@@ -1,4 +1,5 @@
 import { songs as songModel, artists as artistModel } from "~~/server/models"
+import { PUBLIC_SONG_FILTER } from "~~/server/utils/public-songs"
 import { normalizeThai } from "#shared/utils/thai"
 
 export default defineEventHandler(async (event) => {
@@ -22,6 +23,7 @@ export default defineEventHandler(async (event) => {
           },
         },
       },
+      { $match: PUBLIC_SONG_FILTER },
       {
         $lookup: {
           from: "artists",
