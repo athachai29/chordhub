@@ -6,20 +6,18 @@ const schema = new mongoose.Schema(
   {
     _user: {
       type: mongoose.Types.ObjectId,
-      require: true,
+      required: true,
       ref: users,
     },
     title: {
       type: String,
-      require: true,
+      required: true,
     },
     artist: {
       type: String,
-      require: true,
     },
     source: {
       type: String,
-      require: true,
     },
     sheet: {
       type: Array,
@@ -31,7 +29,7 @@ const schema = new mongoose.Schema(
     type: {
       type: String,
       enum: ["NEW_SONG", "EDIT_SONG"],
-      require: true,
+      required: true,
     },
     status: {
       type: String,

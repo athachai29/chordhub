@@ -7,16 +7,14 @@ const schema = new mongoose.Schema(
   {
     email: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
     password: {
       type: String,
-      require: true,
     },
     name: {
       type: String,
-      require: true,
     },
     // flags: {
     //   isEmailConfirmed: {
