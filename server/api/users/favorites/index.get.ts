@@ -1,7 +1,9 @@
 import Users from "~/server/models/users"
+import { getUserId, unauthorized } from "~/server/utils/auth"
 
 export default defineEventHandler(async (event) => {
-  const { sub: userId } = event.context.auth
+  const userId = getUserId(event)
+  if (!userId) return unauthorized(event)
 
   const user = await Users.findById(userId, "favorites").populate({
     path: "favorites",

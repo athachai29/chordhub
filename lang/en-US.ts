@@ -23,6 +23,8 @@ export default {
   page_editor: {
     button_editor_preview: "Edit / Preview",
     button_save_draft: "Save as draft",
+    message_submit_failed:
+      "Your edit was not saved. Only admins can save sheet edits for now.",
   },
   page_home: {
     button_search: "Search",

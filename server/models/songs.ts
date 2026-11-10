@@ -6,17 +6,17 @@ const schema = new mongoose.Schema(
   {
     _artist: {
       type: mongoose.Types.ObjectId,
-      require: true,
+      required: true,
       ref: artistModel,
     },
     songId: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
     title: {
       type: String,
-      require: true,
+      required: true,
     },
     sheet: {
       type: Array,
@@ -43,6 +43,10 @@ const schema = new mongoose.Schema(
         default: "INACTIVE",
       },
       isPrivate: {
+        type: Boolean,
+        default: false,
+      },
+      manualUpdated: {
         type: Boolean,
         default: false,
       },

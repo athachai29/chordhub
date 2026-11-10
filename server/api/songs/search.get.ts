@@ -1,8 +1,13 @@
 import { songs as songModel, artists as artistModel } from "~/server/models"
+import { normalizeThai } from "~/utils/thai"
 
 export default defineEventHandler(async (event) => {
   try {
-    const { query } = getQuery(event)
+    const query = normalizeThai(String(getQuery(event).query ?? ""))
+
+    if (!query) {
+      return { success: true, data: [] }
+    }
 
     /**
      * Full text search

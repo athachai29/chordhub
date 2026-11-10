@@ -13,6 +13,7 @@ useSeoMeta({
 
 type Song = {
   _id: string
+  songId: string
   title: string
   artist: string
   sheet: string[]
@@ -31,6 +32,7 @@ const result = ref(null as Song)
 const isPreview = ref(false)
 const draftSheet = ref("" as string | undefined)
 const previewSheet = ref([] as string[])
+const submitFailed = ref(false)
 
 const onFetch = async () => {
   const { data }: any = await useFetch(`/api/songs/${useRoute().query.id}`)
@@ -55,12 +57,22 @@ const onSaveDraft = async () => {
 const onSubmit = async () => {
   // TODO: Send the request to an admin and wait for approval
 
-  await useFetch(`/api/songs/${result.value?._id}`, {
-    method: "PUT",
-    body: JSON.stringify({
-      newSheet: draftSheet.value!.split("\n"),
-    }),
-  })
+  submitFailed.value = false
+  const { data, error } = await useFetch<{ success: boolean }>(
+    `/api/songs/${result.value?.songId}`,
+    {
+      method: "PUT",
+      body: JSON.stringify({
+        newSheet: draftSheet.value!.split("\n"),
+      }),
+    },
+  )
+
+  // 401/403/400 surface as error; "Song not found" is a 200 with success: false
+  if (error.value || !data.value?.success) {
+    submitFailed.value = true
+    return
+  }
 
   useRouter().push({ name: "success" })
 }
@@ -98,6 +110,9 @@ gtag("set", "page_title", "Editor")
         </BaseButton>
       </div>
     </div>
+    <p v-if="submitFailed" class="mt-2 text-red-600">
+      {{ $t("page_editor.message_submit_failed") }}
+    </p>
     <textarea
       v-if="!isPreview"
       class="mt-2 resize-none whitespace-pre rounded-lg border-2 border-black p-4 font-mono"

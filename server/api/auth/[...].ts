@@ -36,12 +36,10 @@ export default NuxtAuthHandler({
       else if (new URL(url).origin === baseUrl) return url
       return baseUrl
     },
-    async jwt({ token, account, profile }: any) {
-      // Persist the OAuth access_token and or the user id to the token right after signin
-      if (account) {
-        token.accessToken = account.access_token
-        token.id = profile.id
-      }
+    async jwt({ token, user, account }: any) {
+      // On sign-in, persist the OAuth access_token and the Mongo user id
+      if (account) token.accessToken = account.access_token
+      if (user) token.id = String(user.id)
       return token
     },
     async session({ session, token, user }: any) {

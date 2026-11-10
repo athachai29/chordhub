@@ -1,5 +1,3 @@
-import mongoose from "mongoose"
-
 import { users as Users, songs as Songs } from "~/server/models"
 
 export default defineEventHandler(async (event) => {
@@ -7,16 +5,8 @@ export default defineEventHandler(async (event) => {
 
   const { id } = getRouterParams(event)
 
-  const session = await mongoose.startSession()
-  const song = await Songs.findOne({ songId: id })
-    .populate("_artist")
-    .session(session)
-  await Songs.updateOne(
-    { songId: id },
-    { $inc: { "stats.views": 1 } },
-    { session },
-  )
-  await session.endSession()
+  const song = await Songs.findOne({ songId: id }).populate("_artist")
+  await Songs.updateOne({ songId: id }, { $inc: { "stats.views": 1 } })
 
   if (!song) {
     return {

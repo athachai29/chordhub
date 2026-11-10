@@ -8,19 +8,19 @@ const schema = new mongoose.Schema(
         "PARENT_MERGED", // Parent song merged with child song
         "EDITED", // Song was edited
       ],
-      require: true,
+      required: true,
     },
     songId: {
       type: String,
-      require: true,
+      required: true,
     },
     userId: {
       type: String,
-      require: true,
+      required: true,
     },
     data: {
       type: Object,
-      require: true,
+      required: true,
     },
   },
   {
